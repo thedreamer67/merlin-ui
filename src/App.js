@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Workingpanel from './components/WorkingPanel';
 import SignUp from './components/pages/SignUp';
-import Library from './components/Library';
 import VideoPlayer from './components/VideoPlayer'
+import Timeline from './components/Timeline';
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         </div>
       </div>
       <div className='bottomPane'>
-        <h1>Timeline</h1>
+        <Timeline/>
       </div>
     </div>
     

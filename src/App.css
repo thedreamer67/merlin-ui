@@ -5,6 +5,11 @@
 	font-family: 'PT Sans', sans-serif;
 }
 
+body {
+	max-width: 100vw;
+	max-height: 100vh;
+}
+
 .sign-up {
 	display: flex;
 	height: 90vh;
@@ -16,19 +21,21 @@
 .topPane {
 	grid-column: 1;
 	grid-row: 1;
+  height: 60vh;
 }
 
 .bottomPane {
 	grid-column: 1;
 	grid-row: 2;
 	background-color: aqua;
+  height: 40vh;
 }
 
 .outersplitScreen {
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 60% 40%;
+	grid-template-rows: 1fr 1fr;
 }
 
 .leftPane {
