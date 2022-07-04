@@ -1,6 +1,5 @@
 .libraryPanel {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-template-rows: 10% 90%
 }
 
@@ -31,6 +30,7 @@
 }
 
 .libraryGrid {
+    margin-top: 0px;
     display: grid;
     grid-template-columns: 30% 30% 30%;
     gap: 25px 30px;
@@ -38,7 +38,8 @@
     justify-content: center;
     padding: 18px 1px;
     overflow: scroll;
-    max-height: 50vh;
+    overflow-x: hidden;
+    max-height: 40vh;
 }
 
 .libraryPreview {
