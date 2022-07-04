@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Workingpanel from './components/WorkingPanel';
 import SignUp from './components/pages/SignUp';
 import Library from './components/Library';
+import VideoPlayer from './components/VideoPlayer'
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
             <Workingpanel/>
           </div>
           <div className='rightPane'>
-            <h1>Movie Panel</h1>
+            <VideoPlayer/>
           </div>
         </div>
       </div>
@@ -37,4 +38,3 @@ function App() {
 }
 
 export default App;
-
