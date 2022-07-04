@@ -4,7 +4,6 @@ import Wpnavbar from './Wpnavbar'
 function Workingpanel(){
     return (
         <Wpnavbar/>  
-
     );
 }
 

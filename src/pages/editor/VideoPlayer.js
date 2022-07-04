@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactPlayer from 'react-player';
-import video from '../assets/dargo_interview_cut.mp4';
-import '../styles/VideoPlayer.css';
+import video from '../../assets/dargo_interview_cut.mp4';
+import './styles/VideoPlayer.css';
 
 const VideoPlayer = () => {
-	const [isPlaying, setIsPlaying] = useState(true);
-	const [played, setPlayed] = useState(0);
+	// const [isPlaying, setIsPlaying] = useState(true);
+	// const [played, setPlayed] = useState(0);
 
-	const handlePlayPause = () => {};
+	// const handlePlayPause = () => {};
 
-	const handleSeeking = () => {};
+	// const handleSeeking = () => {};
 
-	const handleFullscreen = () => {};
+	// const handleFullscreen = () => {};
 
 	// const toggleMute = () => {};
 

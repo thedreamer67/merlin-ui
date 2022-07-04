@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/Library.css'
+import './styles/Library.css'
 
-import pic from "../static/000031.jpg"
+import pic from "../../static/000031.jpg"
 
 function Library(){
     const [selectedFile, setSelectedFile] = useState(null)
@@ -56,14 +56,14 @@ function Library(){
         }
     };
 
-    const getmedia = () => {
-        //add url here to get from backend
-        axios.get(`somemediaurl`)
-        .then(res => {
-            const users = res.data;
-            this.setState({ users });
-        })
-    } 
+    // const getmedia = () => {
+    //     //add url here to get from backend
+    //     axios.get(`somemediaurl`)
+    //     .then(res => {
+    //         const users = res.data;
+    //         this.setState({ users });
+    //     })
+    // } 
 
     return(
         <div className='libraryPanel'>
@@ -74,55 +74,55 @@ function Library(){
             </div>
             <div className='libraryGrid'>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image1' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image2' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image3' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image4' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image5' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image6' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image7' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image8' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image9'src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image10' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image11' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image12' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
                 <div className='libraryPreview'>
-                    <img className='libraryImg' src={pic} />
+                    <img className='libraryImg' alt='image13' src={pic} />
                     <div className='libraryTitle'>file title.mp4</div>
                 </div>
             </div>       
