@@ -28,7 +28,7 @@
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 60% 40%;
 }
 
 .leftPane {
@@ -39,17 +39,20 @@
 .rightPane {
 	grid-column: 2;
 	grid-row: 1;
-	background-color: rebeccapurple;
+	margin: auto;
+	height: 100%;
+	/* background-color: rebeccapurple; */
 }
 
 .innersplitScreen {
-	height: 60vh;
+	height: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 50% 50%;
 	grid-template-rows: 1fr;
 }
 
-.player-wrapper {
+/* .player-wrapper {
 	position: relative;
-	/* padding: 1rem; */
-}
+	margin: auto;
+	/* padding: 1rem; 
+} */

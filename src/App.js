@@ -15,7 +15,7 @@ function App() {
 						<div className='leftPane'>
 							<Workingpanel />
 						</div>
-						<div className='player-wrapper'>
+						<div className='rightPane'>
 							<VideoPlayer />
 						</div>
 					</div>
