@@ -16,6 +16,7 @@
 .topPane {
 	grid-column: 1;
 	grid-row: 1;
+  max-height: 10vh;
 }
 
 .bottomPane {

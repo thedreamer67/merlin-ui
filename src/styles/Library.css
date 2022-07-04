@@ -37,8 +37,8 @@
     align-items: center;
     justify-content: center;
     padding: 18px 1px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: scroll;
+    max-height: 50vh;
 }
 
 .libraryPreview {
