@@ -12,3 +12,7 @@
 .controls {
 	margin-top: 10px;
 }
+
+#mediaButton {
+	cursor: pointer;
+}
