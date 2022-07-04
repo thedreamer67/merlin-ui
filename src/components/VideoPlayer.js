@@ -65,6 +65,10 @@ const VideoPlayer = () => {
 		setIsMuted((prev) => !prev);
 	};
 
+	const MediaButton = (props) => {
+		return <i id='mediaButton' className={props.class} onClick={props.func} />;
+	};
+
 	return (
 		<div className='video-component'>
 			<div>
@@ -83,35 +87,26 @@ const VideoPlayer = () => {
 			</div>
 
 			<section className='controls'>
-				<span id='mediaButton' style={{ marginRight: '5rem' }}>
-					{!isMuted && (
-						<i class='fa-solid fa-volume-high' onClick={toggleMute} />
-					)}
-					{isMuted && (
-						<i class='fa-solid fa-volume-xmark' onClick={toggleMute} />
-					)}
-				</span>
+				{!isMuted && (
+					<MediaButton class='fa-solid fa-volume-high' func={toggleMute} />
+				)}
+				{isMuted && (
+					<MediaButton class='fa-solid fa-volume-xmark' func={toggleMute} />
+				)}
+				<div className='media-controls'>
+					<MediaButton class='fa-solid fa-backward-step' func={handleRewind} />
 
-				<span id='mediaButton' style={{ marginRight: '0.5rem' }}>
-					<i className='fa-solid fa-backward-step' onClick={handleRewind} />
-				</span>
-
-				<span id='mediaButton' style={{ marginRight: '0.5rem' }}>
 					{isPlaying && (
-						<i className='fa-solid fa-pause' onClick={handlePlayPause} />
+						<MediaButton class='fa-solid fa-pause' func={handlePlayPause} />
 					)}
 					{!isPlaying && (
-						<i className='fa-solid fa-play' onClick={handlePlayPause} />
+						<MediaButton class='fa-solid fa-play' func={handlePlayPause} />
 					)}
-				</span>
 
-				<span id='mediaButton' style={{ marginRight: '5rem' }}>
-					<i className='fa-solid fa-forward-step' onClick={handleForward} />
-				</span>
+					<MediaButton class='fa-solid fa-forward-step' func={handleForward} />
+				</div>
 
-				<span id='mediaButton'>
-					<i class='fa-solid fa-expand' onClick={handleFullscreen} />
-				</span>
+				<MediaButton class='fa-solid fa-expand' func={handleFullscreen} />
 			</section>
 		</div>
 	);
