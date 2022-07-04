@@ -8,12 +8,12 @@ function App() {
   const [isEditor, setIsEditor] = useState(false);
 
   const handleStart = () => {
-    setIsEditor(true)
+    setIsEditor(!isEditor)
   }
 
   return (
     <div>
-      {!isEditor ? <Home handleStart={handleStart} /> : <Editor/>}
+      {!isEditor ? <Home handleStart={handleStart} /> : <Editor handleStart={handleStart}/>}
     </div>
   );
 }

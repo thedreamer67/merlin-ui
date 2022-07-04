@@ -7,10 +7,12 @@ import SignUp from '../signup';
 import VideoPlayer from './VideoPlayer'
 import React from 'react';
 
-function Editor() {
-  return (
+function Editor(props) {
+    const { handleStart } = props
+
+    return (
     <div>
-        <Navbar />
+        <Navbar handleStart={handleStart}/>
         <div className={styles.outersplitScreen}>
             <div className={styles.topPane}>
                 <div className={styles.innersplitScreen}>
@@ -27,7 +29,7 @@ function Editor() {
             </div>
         </div>
     </div>
-  );
+    );
 }
 
 export default Editor;
