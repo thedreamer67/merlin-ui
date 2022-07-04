@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Wpnavbar.css'
+import './styles/Wpnavbar.css'
 import Library from './Library'
 import AutoCaption from './AutoCaption'
 

@@ -1,50 +1,46 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'PT Sans', sans-serif;
+.App {
+  text-align: center;
+  background-color: #929292;
+  scrollbar-width: none; /* Firefox 64 */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
 }
 
-.sign-up {
+.App::-webkit-scrollbar {
+  /* WebKit */
+  display: none;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
-  height: 90vh;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.topPane {
-  grid-column: 1;
-  grid-row: 1;
+.App-link {
+  color: #61dafb;
 }
 
-.bottomPane {
-  grid-column: 1;
-  grid-row: 2;
-  background-color: aqua;
-}
-
-.outersplitScreen {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-.leftPane {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.rightPane {
-  grid-column: 2;
-  grid-row: 1;
-  background-color: rebeccapurple;
-}
-
-.innersplitScreen {
-  height: 60vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
