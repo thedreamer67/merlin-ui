@@ -1,5 +1,6 @@
 import icon from '../../images/merlinicon.png';
 import styles from './Home.module.css';
+import React from 'react';
 
 function Home(props) {
     const {handleStart} = props
