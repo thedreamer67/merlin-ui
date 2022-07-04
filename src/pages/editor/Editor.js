@@ -12,19 +12,19 @@ function Editor() {
     <div>
         <Navbar />
         <div className={styles.outersplitScreen}>
-        <div className={styles.topPane}>
-            <div className={styles.innersplitScreen}>
-            <div className={styles.leftPane}>
-                <Workingpanel/>
-            </div>
-            <div className={styles.rightPane}>
-                <VideoPlayer/>
-            </div>
-            </div>
+            <div className={styles.topPane}>
+                <div className={styles.innersplitScreen}>
+                    <div className={styles.leftPane}>
+                        <Workingpanel/>
+                    </div>
+                    <div className={styles.rightPane}>
+                        <VideoPlayer/>
+                    </div>
+                </div>
         </div>
-        <div className={styles.bottomPane}>
-            <h1>Timeline</h1>
-        </div>
+            <div className={styles.bottomPane}>
+                <h1>Timeline</h1>
+            </div>
         </div>
     </div>
   );

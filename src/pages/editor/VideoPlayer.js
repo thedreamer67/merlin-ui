@@ -39,7 +39,7 @@ const VideoPlayer = () => {
 			</div>
 
 			<section className='controls'>
-				<i class='fa-solid fa-play' /> hello
+				<i class='fa-solid fa-play' /> 
 			</section>
 		</div>
 
