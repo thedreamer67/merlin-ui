@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import '../styles/Wpnavbar.css'
+import Library from './Library'
+import AutoCaption from './AutoCaption'
 
 function Wpnavbar(){
     const [click, setClick] = useState(false)
-    const handleClick = () => setClick(!click)
+    const [libraryclick, setlibraryclick] = useState(false)
+    const [captionclick, setcaptionclick] = useState(false)
+    const handleLibraryClick = () => {setlibraryclick(!libraryclick); setcaptionclick(false)}
+    const handleCaptionClick = () => {setcaptionclick(!captionclick); setlibraryclick(false)}
+
     return (
+        <React.Fragment>
         <nav className='wpnavbar'>
             <ul className={click ? 'wpnav-menu active' : 'wpnav-menu'}>
                 <li className='wpnav-item'>
-                    <button className='wpbtn'>Library</button>
+                    <button className='wpbtn' onClick={handleLibraryClick}>Library</button>
                 </li>
                 <li className='wpnav-item'>
-                    <button className='wpbtn'>Auto Caption</button>
+                    <button className='wpbtn' onClick={handleCaptionClick}>Auto Caption</button>
                 </li>
             </ul>
         </nav>
+        { libraryclick ? <Library /> : null }
+        { captionclick ? <AutoCaption /> : null }
+        </React.Fragment>
     );
 }
 
