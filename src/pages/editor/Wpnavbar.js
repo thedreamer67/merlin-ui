@@ -16,9 +16,7 @@ function Wpnavbar(){
         <nav className='wpnavbar'>
             <ul className={click ? 'wpnav-menu active' : 'wpnav-menu'}>
                 <li className='wpnav-item'>
-                    <Link to='/library'>
-                        <button className='wpbtn' onClick={handleLibraryClick}>Library</button>
-                    </Link>
+                    <button className='wpbtn' onClick={handleLibraryClick}>Library</button>
                 </li>
                 <li className='wpnav-item'>
                     <button className='wpbtn' onClick={handleCaptionClick}>Auto Caption</button>
