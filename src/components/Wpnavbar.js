@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Wpnavbar.css'
 import Library from './Library'
 import AutoCaption from './AutoCaption'
+import { Link } from 'react-router-dom'
 
 function Wpnavbar(){
     const [click, setClick] = useState(false)
@@ -15,7 +16,9 @@ function Wpnavbar(){
         <nav className='wpnavbar'>
             <ul className={click ? 'wpnav-menu active' : 'wpnav-menu'}>
                 <li className='wpnav-item'>
-                    <button className='wpbtn' onClick={handleLibraryClick}>Library</button>
+                    <Link to='/library'>
+                        <button className='wpbtn' onClick={handleLibraryClick}>Library</button>
+                    </Link>
                 </li>
                 <li className='wpnav-item'>
                     <button className='wpbtn' onClick={handleCaptionClick}>Auto Caption</button>

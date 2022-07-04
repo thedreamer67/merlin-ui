@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 export function Button() {
     return (
-        <Link to='sign-up'>
-            <button className='btn'>Sign Up</button>
+        <Link to='exit'>
+            <button className='btn'>Exit</button>
         </Link>
     )
 }
