@@ -23,12 +23,30 @@ const VideoPlayer = (props) => {
       document.removeEventListener('fullscreenchange', onFullscreenChange);
   }, []);
 
+  useEffect(() => {
+    function onScroll() {
+      console.log(
+        `videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
+      );
+      ref.current.seekTo(props.scrollPosition, 'fraction');
+    }
+    document.getElementById('timeline').addEventListener('scroll', onScroll);
+    return () => {
+      document
+        .getElementById('timeline')
+        .removeEventListener('scroll', onScroll);
+    };
+  });
+
   const handlePlayPause = () => {
     setIsPlaying((prev) => !prev);
     if (hasEnded) {
       setPlayed(ref.current.getCurrentTime());
       setHasEnded(false);
     }
+    console.log(
+      `videoplayer: playpause: props.scrollPosition = ${props.scrollPosition}`
+    );
     // console.log(played);
   };
 

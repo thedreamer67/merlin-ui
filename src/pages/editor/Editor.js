@@ -12,6 +12,7 @@ function Editor(props) {
   const { handleStart } = props;
   const [currentPlaybackTime, setCurrentPlaybackTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const storeTime = (currentTime) => {
     setCurrentPlaybackTime(currentTime);
@@ -19,6 +20,11 @@ function Editor(props) {
 
   const StoreDuration = (duration) => {
     setDuration(duration);
+  };
+
+  const StoreScrollPosition = (position) => {
+    setScrollPosition(position);
+    console.log(`editor: storeScrollPosition: position = ${position}`);
   };
 
   return (
@@ -31,12 +37,20 @@ function Editor(props) {
               <Workingpanel />
             </div>
             <div className={styles.rightPane}>
-              <VideoPlayer getTime={storeTime} getDuration={StoreDuration} />
+              <VideoPlayer
+                getTime={storeTime}
+                getDuration={StoreDuration}
+                scrollPosition={scrollPosition}
+              />
             </div>
           </div>
         </div>
         <div className={styles.bottomPane}>
-          <Timeline currentTime={currentPlaybackTime} duration={duration} />
+          <Timeline
+            currentTime={currentPlaybackTime}
+            duration={duration}
+            getScrollPosition={StoreScrollPosition}
+          />
         </div>
       </div>
     </div>
