@@ -1,39 +1,25 @@
 import './App.css';
+import Home from './pages/home';
+import Editor from './pages/editor';
+import { useState } from "react";
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Workingpanel from './components/WorkingPanel';
-import SignUp from './components/pages/SignUp';
-import VideoPlayer from './components/VideoPlayer'
-import Timeline from './components/Timeline';
+import Navbar from './pages/editor/Navbar';
+import Workingpanel from './pages/editor/WorkingPanel';
+import VideoPlayer from './pages/editor/VideoPlayer'
+import Timeline from './pages/editor/Timeline';
 
 function App() {
-  return (
-   <Router>
-    
-    <Routes>
-    <Route path='/'  />
-    <Route path='/library' />
-    <Route path='/exit' element={<SignUp/>} />
-    </Routes>
+  const [isEditor, setIsEditor] = useState(false);
 
-    <Navbar />
-    <div className='outersplitScreen'>
-      <div className='topPane'>
-        <div className='innersplitScreen'>
-          <div className='leftPane'>
-            <Workingpanel/>
-          </div>
-          <div className='rightPane'>
-            <VideoPlayer/>
-          </div>
-        </div>
-      </div>
-      <div className='bottomPane'>
-        <Timeline/>
-      </div>
+  const handleStart = () => {
+    setIsEditor(!isEditor)
+  }
+
+  return (
+    <div>
+      {!isEditor ? <Home handleStart={handleStart} /> : <Editor handleStart={handleStart}/>}
     </div>
-    
-   </Router>
   );
 }
 

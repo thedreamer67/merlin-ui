@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { Button } from "./Button"
 import { Link } from 'react-router-dom'
-import "../styles/Navbar.css"
+import "./styles/Navbar.css"
 import Dropdown from "./Dropdown"
 
-function Navbar() {
+function Navbar(props) {
+    const { handleStart } = props
+
     const [click, setClick] = useState(false)
     const [dropdown, setDropdown] = useState(false)
 
     const handleClick = () => setClick(!click)
-    const closeMobileMenu = () => setClick(false)
-
+    const closeMobileMenu = () => {
+        setClick(false)
+        handleStart()
+    }
     const onMouseEnter = () => {
         if (window.innerWidth < 960) {
             setDropdown(false);

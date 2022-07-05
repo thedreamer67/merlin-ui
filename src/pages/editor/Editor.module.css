@@ -1,36 +1,19 @@
-.App {
-  text-align: center;
-  background-color: #929292;
-  scrollbar-width: none; /* Firefox 64 */
-  -ms-overflow-style: none; /* Internet Explorer 11 */
-}
-
-.sign-up {
-	display: flex;
-	height: 90vh;
-	align-items: center;
-	justify-content: center;
-	font-size: 3rem;
-}
-
 .topPane {
 	grid-column: 1;
 	grid-row: 1;
-  height: 60vh;
 }
 
 .bottomPane {
 	grid-column: 1;
 	grid-row: 2;
 	background-color: aqua;
-  height: 40vh;
 }
 
 .outersplitScreen {
 	height: 100vh;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr;
+	grid-template-rows: 60% 40%;
 }
 
 .leftPane {
@@ -58,19 +41,3 @@
 	margin: auto;
 	/* padding: 1rem; 
 } */
-body { 
-  margin: 0; }
-
-.App::-webkit-scrollbar {
-  /* WebKit */
-  display: none;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

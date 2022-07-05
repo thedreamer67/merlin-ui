@@ -1,6 +1,6 @@
 import React from 'react';
 import ImageCarousel from './ImageCarousel';
-import '../styles/Timeline.css'
+import './styles/Timeline.css'
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 
 function Timeline() {
