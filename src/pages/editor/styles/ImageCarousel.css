@@ -1,0 +1,13 @@
+.framesGrid {
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+    padding-top: 14px;
+}
+
+.framesImg {
+    padding-left: 3px;
+    padding-right: 3px;
+    width: 100%;
+    height: 100%;
+}

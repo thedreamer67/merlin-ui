@@ -1,0 +1,45 @@
+.topPane {
+	grid-column: 1;
+	grid-row: 1;
+	height: 60vh;
+}
+
+.bottomPane {
+	grid-column: 1;
+	grid-row: 2;
+	background-color: aqua;
+	height: 40vh;
+}
+
+.outersplitScreen {
+	height: 100vh;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
+}
+
+.leftPane {
+	grid-column: 1;
+	grid-row: 1;
+}
+
+.rightPane {
+	grid-column: 2;
+	grid-row: 1;
+	margin: auto;
+	height: 100%;
+	/* background-color: rebeccapurple; */
+}
+
+.innersplitScreen {
+	height: 100%;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 1fr;
+}
+
+/* .player-wrapper {
+	position: relative;
+	margin: auto;
+	/* padding: 1rem; 
+} */
