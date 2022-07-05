@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import video from '../../assets/food_recipe.mp4';
-import '../styles/VideoPlayer.css';
+import './styles/VideoPlayer.css';
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
