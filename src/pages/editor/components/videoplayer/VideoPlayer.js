@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { findDOMNode } from "react-dom";
 import ReactPlayer from "react-player";
 import screenfull from "screenfull";
-import video from "../../assets/food_recipe.mp4";
-import "./styles/VideoPlayer.css";
+import video from "../../../../assets/food_recipe.mp4";
+import "./VideoPlayer.css";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);

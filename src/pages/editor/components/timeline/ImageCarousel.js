@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/ImageCarousel.css";
-import pic from "../../static/000031.jpg";
+import pic from "../../../../static/000031.jpg";
 
 function ImageCarousel() {
   return (
