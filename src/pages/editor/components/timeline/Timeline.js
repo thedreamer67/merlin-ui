@@ -1,16 +1,24 @@
-import React from "react";
-import ImageCarousel from "./ImageCarousel";
-import "./styles/Timeline.css";
-import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
+import React from 'react';
+import ImageCarousel from './ImageCarousel';
+import './styles/Timeline.css';
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
+import { groupProps } from 'utila/lib/object';
 
-function Timeline() {
+function Timeline(props) {
+  let currentTime = new Date(props.currentTime * 1000)
+    .toISOString()
+    .substr(11, 8);
+  let duration = new Date(props.duration * 1000).toISOString().substr(11, 8);
+
   return (
     <React.Fragment>
-      <div className="videoTime">00:00:00/00:10:30</div>
+      <div className='videoTime'>
+        {currentTime}/{duration}
+      </div>
       <ScrollSync>
-        <div className="mainTimeline">
+        <div className='mainTimeline'>
           <ScrollSyncPane>
-            <div style={{ overflow: "auto", height: "100vh" }}>
+            <div style={{ overflow: 'auto', height: '100vh' }}>
               <ImageCarousel />
               <ImageCarousel />
             </div>

@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
-import { findDOMNode } from "react-dom";
-import ReactPlayer from "react-player";
-import screenfull from "screenfull";
-import video from "../../../../assets/food_recipe.mp4";
-import "./VideoPlayer.css";
+import React, { useState, useRef, useEffect } from 'react';
+import { findDOMNode } from 'react-dom';
+import ReactPlayer from 'react-player';
+import screenfull from 'screenfull';
+import video from '../../../../assets/food_recipe.mp4';
+import './VideoPlayer.css';
 
-const VideoPlayer = () => {
+const VideoPlayer = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [played, setPlayed] = useState(0);
-  const [controls, setControls] = useState(false);
+  const [controls, setControls] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
 
@@ -18,9 +18,9 @@ const VideoPlayer = () => {
     function onFullscreenChange() {
       setControls(Boolean(document.fullscreenElement));
     }
-    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener('fullscreenchange', onFullscreenChange);
     return () =>
-      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      document.removeEventListener('fullscreenchange', onFullscreenChange);
   }, []);
 
   const handlePlayPause = () => {
@@ -29,7 +29,7 @@ const VideoPlayer = () => {
       setPlayed(ref.current.getCurrentTime());
       setHasEnded(false);
     }
-    console.log(played);
+    // console.log(played);
   };
 
   const handleForward = () => {
@@ -39,17 +39,26 @@ const VideoPlayer = () => {
         ? Math.floor(ref.current.getDuration())
         : seekTo;
     setPlayed(seekTo);
-    ref.current.seekTo(seekTo, "seconds");
-    console.log(seekTo);
+    ref.current.seekTo(seekTo, 'seconds');
+    // console.log(seekTo);
   };
 
   const handleRewind = () => {
     const seekTo = ref.current.getCurrentTime() - 10;
     setPlayed(seekTo);
-    ref.current.seekTo(seekTo, "seconds");
+    ref.current.seekTo(seekTo, 'seconds');
   };
 
   const handleSeeking = () => {};
+
+  const handleReady = () => {
+    props.getDuration(ref.current.getDuration());
+  };
+
+  const handleProgress = (state) => {
+    // console.log('onProgress', state);
+    props.getTime(state.playedSeconds);
+  };
 
   const handleFullscreen = () => {
     screenfull.request(findDOMNode(ref.current));
@@ -66,47 +75,50 @@ const VideoPlayer = () => {
   };
 
   const MediaButton = (props) => {
-    return <i id="mediaButton" className={props.class} onClick={props.func} />;
+    return <i id='mediaButton' className={props.class} onClick={props.func} />;
   };
 
   return (
-    <div className="video-component">
+    <div className='video-component'>
       <div>
         <ReactPlayer
-          className="react-player"
-          width="100%"
-          height="100%"
+          className='react-player'
+          width='100%'
+          height='100%'
           controls={controls}
           playing={isPlaying}
           played={played}
           muted={isMuted}
+          progressInterval={500}
           url={video}
           ref={ref}
+          onReady={handleReady}
+          onProgress={handleProgress}
           onEnded={handleEnded}
         />
       </div>
 
-      <section className="controls">
+      <section className='controls'>
         {!isMuted && (
-          <MediaButton class="fa-solid fa-volume-high" func={toggleMute} />
+          <MediaButton class='fa-solid fa-volume-high' func={toggleMute} />
         )}
         {isMuted && (
-          <MediaButton class="fa-solid fa-volume-xmark" func={toggleMute} />
+          <MediaButton class='fa-solid fa-volume-xmark' func={toggleMute} />
         )}
-        <div className="media-controls">
-          <MediaButton class="fa-solid fa-backward-step" func={handleRewind} />
+        <div className='media-controls'>
+          <MediaButton class='fa-solid fa-backward-step' func={handleRewind} />
 
           {isPlaying && (
-            <MediaButton class="fa-solid fa-pause" func={handlePlayPause} />
+            <MediaButton class='fa-solid fa-pause' func={handlePlayPause} />
           )}
           {!isPlaying && (
-            <MediaButton class="fa-solid fa-play" func={handlePlayPause} />
+            <MediaButton class='fa-solid fa-play' func={handlePlayPause} />
           )}
 
-          <MediaButton class="fa-solid fa-forward-step" func={handleForward} />
+          <MediaButton class='fa-solid fa-forward-step' func={handleForward} />
         </div>
 
-        <MediaButton class="fa-solid fa-expand" func={handleFullscreen} />
+        <MediaButton class='fa-solid fa-expand' func={handleFullscreen} />
       </section>
     </div>
   );
