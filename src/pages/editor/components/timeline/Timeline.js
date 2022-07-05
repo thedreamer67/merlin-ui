@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ImageCarousel from './ImageCarousel';
 import './styles/Timeline.css';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { groupProps } from 'utila/lib/object';
 
 function Timeline(props) {
-  let currentTime = new Date(props.currentTime * 1000)
+  const currentTime = new Date(props.currentTime * 1000)
     .toISOString()
     .substr(11, 8);
-  let duration = new Date(props.duration * 1000).toISOString().substr(11, 8);
+  const duration = new Date(props.duration * 1000).toISOString().substr(11, 8);
 
   const handleScroll = () => {
     const scrollBar = document.getElementById('timeline');
@@ -19,13 +19,33 @@ function Timeline(props) {
     console.log(
       `timeline: handleScroll: scrollPercentage = ${scrollPercentage}`
     );
-    // console.log(`scrollLeft: ${scrollBar.scrollLeft}`);
-    // console.log(`scrollWidth: ${maxScrollLeft}`);
-    // console.log(`scroll position %: ${scrollPercentage}`);
   };
 
+  // useEffect(() => {
+  //   console.log('useEffect');
+
+  //   function updateScrollBar() {
+  //     const scrollBar = document.getElementById('timeline');
+  //     const maxScrollLeft = scrollBar.scrollWidth - scrollBar.clientWidth;
+  //     const newScrollPosition =
+  //       (props.currentTime / props.duration) * maxScrollLeft;
+  //     scrollBar.scrollTo(newScrollPosition, 0);
+  //     console.log('update');
+  //   }
+
+  //   document
+  //     .querySelector('#video-player')
+  //     .addEventListener('playing', updateScrollBar);
+
+  //   return () => {
+  //     document
+  //       .querySelector('#video-player')
+  //       .removeEventListener('playing', updateScrollBar);
+  //   };
+  // });
+
   return (
-    <React.Fragment>
+    <>
       <div className='videoTime'>
         {currentTime}/{duration}
       </div>
@@ -42,7 +62,7 @@ function Timeline(props) {
           </ScrollSyncPane>
         </div>
       </ScrollSync>
-    </React.Fragment>
+    </>
   );
 }
 

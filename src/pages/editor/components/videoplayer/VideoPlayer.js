@@ -23,20 +23,20 @@ const VideoPlayer = (props) => {
       document.removeEventListener('fullscreenchange', onFullscreenChange);
   }, []);
 
-  useEffect(() => {
-    function onScroll() {
-      console.log(
-        `videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
-      );
-      ref.current.seekTo(props.scrollPosition, 'fraction');
-    }
-    document.getElementById('timeline').addEventListener('scroll', onScroll);
-    return () => {
-      document
-        .getElementById('timeline')
-        .removeEventListener('scroll', onScroll);
-    };
-  });
+  // useEffect(() => {
+  //   function onScroll() {
+  //     console.log(
+  //       `videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
+  //     );
+  //     ref.current.seekTo(props.scrollPosition, 'fraction');
+  //   }
+  //   document.getElementById('timeline').addEventListener('scroll', onScroll);
+  //   return () => {
+  //     document
+  //       .getElementById('timeline')
+  //       .removeEventListener('scroll', onScroll);
+  //   };
+  // });
 
   const handlePlayPause = () => {
     setIsPlaying((prev) => !prev);
@@ -44,9 +44,9 @@ const VideoPlayer = (props) => {
       setPlayed(ref.current.getCurrentTime());
       setHasEnded(false);
     }
-    console.log(
-      `videoplayer: playpause: props.scrollPosition = ${props.scrollPosition}`
-    );
+    // console.log(
+    //   `videoplayer: playpause: props.scrollPosition = ${props.scrollPosition}`
+    // );
     // console.log(played);
   };
 
@@ -76,6 +76,12 @@ const VideoPlayer = (props) => {
   const handleProgress = (state) => {
     // console.log('onProgress', state);
     props.getTime(state.playedSeconds);
+    const scrollBar = document.getElementById('timeline');
+    const maxScrollLeft = scrollBar.scrollWidth - scrollBar.clientWidth;
+    const newScrollPosition = state.played * maxScrollLeft;
+    props.getScrollPosition(state.played);
+    scrollBar.scrollTo(newScrollPosition, 0);
+    console.log(`update to new position at ${newScrollPosition}`);
   };
 
   const handleFullscreen = () => {
@@ -98,7 +104,7 @@ const VideoPlayer = (props) => {
 
   return (
     <div className='video-component'>
-      <div>
+      <div id='video-player'>
         <ReactPlayer
           className='react-player'
           width='100%'

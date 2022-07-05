@@ -23,7 +23,7 @@ function Editor(props) {
   };
 
   const StoreScrollPosition = (position) => {
-    setScrollPosition(position);
+    setScrollPosition(position); //should be a fraction! [0,1]
     console.log(`editor: storeScrollPosition: position = ${position}`);
   };
 
@@ -41,6 +41,7 @@ function Editor(props) {
                 getTime={storeTime}
                 getDuration={StoreDuration}
                 scrollPosition={scrollPosition}
+                getScrollPosition={StoreScrollPosition}
               />
             </div>
           </div>
