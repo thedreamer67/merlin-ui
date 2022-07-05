@@ -1,10 +1,8 @@
-import React from 'react';
-import Wpnavbar from './Wpnavbar'
+import React from "react";
+import Wpnavbar from "./Wpnavbar";
 
-function Workingpanel(){
-    return (
-        <Wpnavbar/>  
-    );
+function Workingpanel() {
+  return <Wpnavbar />;
 }
 
 export default Workingpanel;
