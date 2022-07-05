@@ -1,12 +1,12 @@
 import styles from "./Editor.module.css";
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from "./Navbar";
-import Workingpanel from "./WorkingPanel";
+import Navbar from "./components/navbar";
+import Workingpanel from "./components/workingpanel";
 // import SignUp from "../signup";
 // import Library from './Library';
-import VideoPlayer from "./VideoPlayer";
+import VideoPlayer from "./components/videoplayer";
 import React from "react";
-import Timeline from "./Timeline";
+import Timeline from "./components/timeline";
 
 function Editor(props) {
   const { handleStart } = props;

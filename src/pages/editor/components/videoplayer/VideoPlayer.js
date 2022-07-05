@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { findDOMNode } from 'react-dom';
-import ReactPlayer from 'react-player';
-import screenfull from 'screenfull';
-import video from '../../assets/food_recipe.mp4';
-import './styles/VideoPlayer.css';
+import React, { useState, useRef, useEffect } from "react";
+import { findDOMNode } from "react-dom";
+import ReactPlayer from "react-player";
+import screenfull from "screenfull";
+import video from "../../../../assets/food_recipe.mp4";
+import "./VideoPlayer.css";
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -18,9 +18,9 @@ const VideoPlayer = () => {
     function onFullscreenChange() {
       setControls(Boolean(document.fullscreenElement));
     }
-    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
     return () =>
-      document.removeEventListener('fullscreenchange', onFullscreenChange);
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
   }, []);
 
   const handlePlayPause = () => {
@@ -39,14 +39,14 @@ const VideoPlayer = () => {
         ? Math.floor(ref.current.getDuration())
         : seekTo;
     setPlayed(seekTo);
-    ref.current.seekTo(seekTo, 'seconds');
+    ref.current.seekTo(seekTo, "seconds");
     console.log(seekTo);
   };
 
   const handleRewind = () => {
     const seekTo = ref.current.getCurrentTime() - 10;
     setPlayed(seekTo);
-    ref.current.seekTo(seekTo, 'seconds');
+    ref.current.seekTo(seekTo, "seconds");
   };
 
   const handleSeeking = () => {};
@@ -66,16 +66,16 @@ const VideoPlayer = () => {
   };
 
   const MediaButton = (props) => {
-    return <i id='mediaButton' className={props.class} onClick={props.func} />;
+    return <i id="mediaButton" className={props.class} onClick={props.func} />;
   };
 
   return (
-    <div className='video-component'>
+    <div className="video-component">
       <div>
         <ReactPlayer
-          className='react-player'
-          width='100%'
-          height='100%'
+          className="react-player"
+          width="100%"
+          height="100%"
           controls={controls}
           playing={isPlaying}
           played={played}
@@ -86,27 +86,27 @@ const VideoPlayer = () => {
         />
       </div>
 
-      <section className='controls'>
+      <section className="controls">
         {!isMuted && (
-          <MediaButton class='fa-solid fa-volume-high' func={toggleMute} />
+          <MediaButton class="fa-solid fa-volume-high" func={toggleMute} />
         )}
         {isMuted && (
-          <MediaButton class='fa-solid fa-volume-xmark' func={toggleMute} />
+          <MediaButton class="fa-solid fa-volume-xmark" func={toggleMute} />
         )}
-        <div className='media-controls'>
-          <MediaButton class='fa-solid fa-backward-step' func={handleRewind} />
+        <div className="media-controls">
+          <MediaButton class="fa-solid fa-backward-step" func={handleRewind} />
 
           {isPlaying && (
-            <MediaButton class='fa-solid fa-pause' func={handlePlayPause} />
+            <MediaButton class="fa-solid fa-pause" func={handlePlayPause} />
           )}
           {!isPlaying && (
-            <MediaButton class='fa-solid fa-play' func={handlePlayPause} />
+            <MediaButton class="fa-solid fa-play" func={handlePlayPause} />
           )}
 
-          <MediaButton class='fa-solid fa-forward-step' func={handleForward} />
+          <MediaButton class="fa-solid fa-forward-step" func={handleForward} />
         </div>
 
-        <MediaButton class='fa-solid fa-expand' func={handleFullscreen} />
+        <MediaButton class="fa-solid fa-expand" func={handleFullscreen} />
       </section>
     </div>
   );

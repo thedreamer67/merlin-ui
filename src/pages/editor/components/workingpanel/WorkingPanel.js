@@ -1,8 +1,8 @@
 import React from "react";
 import Wpnavbar from "./Wpnavbar";
 
-function Workingpanel() {
+function WorkingPanel() {
   return <Wpnavbar />;
 }
 
-export default Workingpanel;
+export default WorkingPanel;
