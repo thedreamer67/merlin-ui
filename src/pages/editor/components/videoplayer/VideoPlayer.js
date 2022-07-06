@@ -57,29 +57,29 @@ const VideoPlayer = (props) => {
 		};
 	});
 
-	const handlePlayPause = () => {
-		setIsPlaying((prev) => !prev);
-		if (hasEnded) {
-			setPlayed(ref.current.getCurrentTime());
-			setHasEnded(false);
-		}
-	};
+	// const handlePlayPause = () => {
+	// 	setIsPlaying((prev) => !prev);
+	// 	if (hasEnded) {
+	// 		setPlayed(ref.current.getCurrentTime());
+	// 		setHasEnded(false);
+	// 	}
+	// };
 
-	const handleForward = () => {
-		let seekTo = ref.current.getCurrentTime() + 10;
-		seekTo =
-			seekTo > ref.current.getDuration()
-				? Math.floor(ref.current.getDuration())
-				: seekTo;
-		setPlayed(seekTo);
-		ref.current.seekTo(seekTo, 'seconds');
-	};
+	// const handleForward = () => {
+	// 	let seekTo = ref.current.getCurrentTime() + 10;
+	// 	seekTo =
+	// 		seekTo > ref.current.getDuration()
+	// 			? Math.floor(ref.current.getDuration())
+	// 			: seekTo;
+	// 	setPlayed(seekTo);
+	// 	ref.current.seekTo(seekTo, 'seconds');
+	// };
 
-	const handleRewind = () => {
-		const seekTo = ref.current.getCurrentTime() - 10;
-		setPlayed(seekTo);
-		ref.current.seekTo(seekTo, 'seconds');
-	};
+	// const handleRewind = () => {
+	// 	const seekTo = ref.current.getCurrentTime() - 10;
+	// 	setPlayed(seekTo);
+	// 	ref.current.seekTo(seekTo, 'seconds');
+	// };
 
 	// const handleSeeking = () => {};
 
@@ -95,34 +95,34 @@ const VideoPlayer = (props) => {
 			const maxScrollLeft = scrollBar.scrollWidth - scrollBar.clientWidth;
 			const newScrollPosition = state.played * maxScrollLeft;
 			props.getScrollPosition(state.played);
-			scrollBar.scrollTo(newScrollPosition, 0);
+			scrollBar.scrollTo(newScrollPosition, scrollBar.scrollTop);
 			console.log(`update to new position at ${newScrollPosition}`);
 		}
 	};
 
-	const handleFullscreen = () => {
-		screenfull.request(findDOMNode(ref.current));
-		setControls(true);
-	};
+	// const handleFullscreen = () => {
+	// 	screenfull.request(findDOMNode(ref.current));
+	// 	setControls(true);
+	// };
 
 	const handleEnded = () => {
 		setIsPlaying(false);
 		setHasEnded(true);
 	};
 
-	const toggleMute = () => {
-		setIsMuted((prev) => !prev);
-	};
+	// const toggleMute = () => {
+	// 	setIsMuted((prev) => !prev);
+	// };
 
-	const MediaButton = (props) => {
-		return <i id='mediaButton' className={props.class} onClick={props.func} />;
-	};
+	// const MediaButton = (props) => {
+	// 	return <i id='mediaButton' className={props.class} onClick={props.func} />;
+	// };
 
 	return (
 		<div className='video-component'>
-			<div id='video-player'>
+			<div id='video-player' className='react-player'>
 				<ReactPlayer
-					className='react-player'
+					// className='react-player'
 					width='100%'
 					height='100%'
 					controls={controls}
@@ -138,7 +138,7 @@ const VideoPlayer = (props) => {
 				/>
 			</div>
 
-			<section className='controls'>
+			{/* <section className='controls'>
 				{!isMuted && (
 					<MediaButton class='fa-solid fa-volume-high' func={toggleMute} />
 				)}
@@ -159,7 +159,7 @@ const VideoPlayer = (props) => {
 				</div>
 
 				<MediaButton class='fa-solid fa-expand' func={handleFullscreen} />
-			</section>
+			</section> */}
 		</div>
 	);
 };
