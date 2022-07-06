@@ -25,12 +25,16 @@ const VideoPlayer = (props) => {
 
 	useEffect(() => {
 		function onScroll() {
-			props.seeking &&
-				// console.log(
-				// 	`videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
-				// );
-				props.seeking &&
+			// props.seeking &&
+			// console.log(
+			// 	`videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
+			// );
+			if (props.seeking) {
 				ref.current.seekTo(props.scrollPosition, 'fraction');
+				props.getTime(props.scrollPosition * ref.current.getDuration());
+			}
+			// props.seeking &&
+			// ref.current.seekTo(props.scrollPosition, 'fraction');
 		}
 		document.getElementById('timeline').addEventListener('scroll', onScroll);
 		return () => {
@@ -47,10 +51,10 @@ const VideoPlayer = (props) => {
 
 	useEffect(() => {
 		function onMouseWheel(e) {
-			e.shiftKey &&
-				console.log(
-					`videoplayer: useEffect onMouseWheel: props.scrollPosition = ${props.scrollPosition}`
-				);
+			// e.shiftKey &&
+			// 	console.log(
+			// 		`videoplayer: useEffect onMouseWheel: props.scrollPosition = ${props.scrollPosition}`
+			// 	);
 			e.shiftKey && ref.current.seekTo(props.scrollPosition, 'fraction');
 		}
 		document
