@@ -20,14 +20,14 @@ function Timeline({ open }) {
         <div className="mainTimeline">
           <div
             {...getRootProps({
-              classname: "dropzone",
+              className: "dropzone",
               onClick: (e) => e.stopPropagation(),
               // noClick: true,
             })}
           >
             <input classname="input-zone" {...getInputProps()} />
             <ScrollSyncPane>
-              <div style={{ overflow: "auto", height: "100vh" }}>
+              <div style={{ overflow: "auto" }}>
                 <ImageCarousel />
                 <ImageCarousel />
               </div>
