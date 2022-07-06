@@ -47,10 +47,10 @@ const VideoPlayer = (props) => {
 
 	useEffect(() => {
 		function onMouseWheel(e) {
-			e.shiftKey &&
-				console.log(
-					`videoplayer: useEffect onMouseWheel: props.scrollPosition = ${props.scrollPosition}`
-				);
+			// e.shiftKey &&
+			// 	console.log(
+			// 		`videoplayer: useEffect onMouseWheel: props.scrollPosition = ${props.scrollPosition}`
+			// 	);
 			e.shiftKey && ref.current.seekTo(props.scrollPosition, 'fraction');
 		}
 		document

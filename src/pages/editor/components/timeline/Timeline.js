@@ -86,7 +86,9 @@ function Timeline(props) {
 								className='scrollDemo'
 							>
 								{timelineFiles.length !== 0 ? (
-									timelineFiles.map((file) => <ImageCarousel />)
+									timelineFiles.map((file) => (
+										<ImageCarousel numRows={timelineFiles.length} />
+									))
 								) : (
 									<DropzonePrompt />
 								)}
