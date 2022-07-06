@@ -36,7 +36,7 @@ function Navbar(props) {
             <i className={click ? "fa-solid fa-circle-question" : "fa-regular fa-circle-question"} onClick={() => handleClick()} />
           </div>
           <div className="nav-item">
-            <i class="fa-regular fa-circle-xmark"></i>
+            <i class="fa-regular fa-circle-xmark" onClick={() => handleStart()}></i>
           </div>
         </div>
       </nav>
