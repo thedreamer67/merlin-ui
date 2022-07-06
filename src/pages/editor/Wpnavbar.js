@@ -18,18 +18,18 @@ function Wpnavbar() {
   return (
     <React.Fragment>
       <nav className="wpnavbar">
-        <ul className="wpnav-menu">
-          <li className="wpnav-item">
+        <div className="wpnav-menu">
+          <div className="wpnav-item">
             <button className="wpbtn" onClick={handleLibraryClick}>
               Library
             </button>
-          </li>
-          <li className="wpnav-item">
+          </div>
+          <div className="wpnav-item">
             <button className="wpbtn" onClick={handleCaptionClick}>
               Auto Caption
             </button>
-          </li>
-        </ul>
+          </div>
+        </div>
       </nav>
       {libraryclick ? <Library /> : null}
       {captionclick ? <AutoCaption /> : null}

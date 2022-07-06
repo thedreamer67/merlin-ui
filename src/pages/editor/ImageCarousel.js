@@ -24,7 +24,7 @@ function ImageCarousel() {
       <img className="framesImg" src={pic} alt="frame17" />
       <img className="framesImg" src={pic} alt="frame18" />
       <img className="framesImg" src={pic} alt="frame19" />
-      <img className="framesImg" src={pic} alt="frame20" />
+      <img className="framesImg last" src={pic} alt="frame20" />
     </section>
   );
 }
