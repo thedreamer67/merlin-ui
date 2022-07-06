@@ -1,9 +1,12 @@
 import React from "react";
+import "./styles/AutoCaption.css"
 
 function AutoCaption() {
   return (
     <div>
-      <h1>Auto Caption here!</h1>
+        <button className="autocaptionbtn">
+          Generate Caption
+        </button>
     </div>
   );
 }
