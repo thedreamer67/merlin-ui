@@ -28,13 +28,12 @@ function Timeline({ open }) {
             {...getRootProps({
               className: "dropzone",
               onClick: (e) => e.stopPropagation(),
-              // noClick: true,
             })}
           >
             <input classname="input-zone" {...getInputProps()} />
              <ScrollSyncPane>
-              <div className="scrollDemo" style={{ overflow: "auto", maxHeight: "30vh" }}>
-                {timelineFiles.length != 0 ? 
+              <div style={{ overflow: "auto", maxHeight: "30vh" }}>
+                {timelineFiles.length !== 0 ? 
                   timelineFiles.map((file) => <ImageCarousel/>) :
                   <DropzonePrompt/>} 
               </div>
