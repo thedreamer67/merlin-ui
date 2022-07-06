@@ -5,7 +5,7 @@ import "./styles/Navbar.css";
 import Dropdown from "./Dropdown";
 
 function Navbar(props) {
-  const {handleStart} = props;
+  const { handleStart } = props;
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
@@ -18,6 +18,7 @@ function Navbar(props) {
       setDropdown(true);
     }
   };
+
   const onMouseLeave = () => {
     if (window.innerWidth < 960) {
       setDropdown(false);
@@ -36,7 +37,7 @@ function Navbar(props) {
             <i className={click ? "fa-solid fa-circle-question" : "fa-regular fa-circle-question"} onClick={() => handleClick()} />
           </div>
           <div className="nav-item">
-            <i class="fa-regular fa-circle-xmark" onClick={() => handleStart()}></i>
+            <i class="fa-regular fa-circle-xmark" onClick={handleStart}></i>
           </div>
         </div>
       </nav>

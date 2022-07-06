@@ -33,9 +33,14 @@ const VideoPlayer = (props) => {
 		}
 		document.getElementById('timeline').addEventListener('scroll', onScroll);
 		return () => {
-			document
-				.getElementById('timeline')
-				.removeEventListener('scroll', onScroll);
+			try {
+				document
+					.getElementById('timeline')
+					.removeEventListener('scroll', onScroll);
+			} catch (err) {
+				// do nothing
+				console.log(err)
+			}
 		};
 	});
 
@@ -51,9 +56,14 @@ const VideoPlayer = (props) => {
 			.getElementById('timeline')
 			.addEventListener('mousewheel', onMouseWheel);
 		return () => {
-			document
-				.getElementById('timeline')
-				.removeEventListener('mousewheel', onMouseWheel);
+			try {
+				document
+					.getElementById('timeline')
+					.removeEventListener('mousewheel', onMouseWheel);
+			} catch (err) {
+				// do nothing
+				console.log(err)
+			}
 		};
 	});
 
