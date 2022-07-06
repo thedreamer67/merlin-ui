@@ -26,7 +26,7 @@ function Wpnavbar() {
           </div>
           <div className="wpnav-item">
             <button className="wpbtn" onClick={handleCaptionClick}>
-              Auto Caption
+              Auto-Caption
             </button>
           </div>
         </div>
