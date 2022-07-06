@@ -34,9 +34,14 @@ function Timeline(props) {
 		// );
 	};
 
-	const handleMouseDown = () => {
-		props.getSeeking(true);
-		// console.log(`mouseDown`);
+	const handleMouseDown = (e) => {
+		const scrollBar = document.getElementById('timeline');
+		const maxY =
+			scrollBar.getBoundingClientRect()['top'] + scrollBar.clientHeight;
+		if (e.clientY > maxY) {
+			props.getSeeking(true);
+			console.log(`mouseDown ${e.clientY}`);
+		}
 	};
 
 	const handleMouseUp = () => {
@@ -44,17 +49,17 @@ function Timeline(props) {
 		// console.log(`mouseUp`);
 	};
 
-	const handleDragEnd = () => {
-		props.getSeeking(false);
-		// console.log(`dragend`);
-	};
+	// const handleDragEnd = () => {
+	// 	props.getSeeking(false);
+	// 	// console.log(`dragend`);
+	// };
 
 	// const coords = (e) => {
 	// 	console.log(e.clientY);
 	// };
 
 	return (
-		<React.Fragment>
+		<>
 			<div className='videoTime'>
 				{currentTime}/{duration}
 			</div>
@@ -76,7 +81,7 @@ function Timeline(props) {
 								onScroll={handleScroll}
 								onMouseDown={handleMouseDown}
 								onMouseUp={handleMouseUp}
-								onDragEnd={handleDragEnd}
+								// onDragEnd={handleDragEnd}
 								// onClick={coords}
 								style={{
 									overflow: 'auto',
@@ -97,7 +102,7 @@ function Timeline(props) {
 					</div>
 				</div>
 			</ScrollSync>
-		</React.Fragment>
+		</>
 	);
 }
 
