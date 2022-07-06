@@ -99,7 +99,7 @@ const VideoPlayer = (props) => {
 	};
 
 	const handleProgress = (state) => {
-		console.log('onProgress props.seeking', props.seeking);
+		// console.log('onProgress props.seeking', props.seeking);
 		if (!props.seeking) {
 			props.getTime(state.playedSeconds);
 			const scrollBar = document.getElementById('timeline');
@@ -107,7 +107,7 @@ const VideoPlayer = (props) => {
 			const newScrollPosition = state.played * maxScrollLeft;
 			props.getScrollPosition(state.played);
 			scrollBar.scrollTo(newScrollPosition, scrollBar.scrollTop);
-			console.log(`update to new position at ${newScrollPosition}`);
+			// console.log(`update to new position at ${newScrollPosition}`);
 		}
 	};
 
