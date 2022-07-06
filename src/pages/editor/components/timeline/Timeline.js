@@ -29,24 +29,24 @@ function Timeline(props) {
 		const scrollPercentage = scrollBar.scrollLeft / maxScrollLeft;
 
 		props.getScrollPosition(scrollPercentage);
-		console.log(
-			`timeline: handleScroll: scrollPercentage = ${scrollPercentage}`
-		);
+		// console.log(
+		// 	`timeline: handleScroll: scrollPercentage = ${scrollPercentage}`
+		// );
 	};
 
 	const handleMouseDown = () => {
 		props.getSeeking(true);
-		console.log(`mouseDown`);
+		// console.log(`mouseDown`);
 	};
 
 	const handleMouseUp = () => {
 		props.getSeeking(false);
-		console.log(`mouseUp`);
+		// console.log(`mouseUp`);
 	};
 
 	const handleDragEnd = () => {
 		props.getSeeking(false);
-		console.log(`dragend`);
+		// console.log(`dragend`);
 	};
 
 	// const coords = (e) => {
@@ -60,7 +60,9 @@ function Timeline(props) {
 			</div>
 			<ScrollSync>
 				<div className='mainTimeline'>
-				<div className={timelineFiles.length !== 0 ? "LineScroll" : "Line"} ></div>
+					<div
+						className={timelineFiles.length !== 0 ? 'LineScroll' : 'Line'}
+					></div>
 					<div
 						{...getRootProps({
 							className: 'dropzone',
@@ -76,7 +78,11 @@ function Timeline(props) {
 								onMouseUp={handleMouseUp}
 								onDragEnd={handleDragEnd}
 								// onClick={coords}
-								style={{ overflow: 'auto', minHeight: '34.4vh', maxHeight: '34.4vh' }}
+								style={{
+									overflow: 'auto',
+									minHeight: '34.4vh',
+									maxHeight: '34.4vh',
+								}}
 								className='scrollDemo'
 							>
 								{timelineFiles.length !== 0 ? (

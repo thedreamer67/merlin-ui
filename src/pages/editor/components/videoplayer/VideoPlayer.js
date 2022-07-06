@@ -14,22 +14,23 @@ const VideoPlayer = (props) => {
 
 	const ref = useRef(null);
 
-	useEffect(() => {
-		function onFullscreenChange() {
-			setControls(Boolean(document.fullscreenElement));
-		}
-		document.addEventListener('fullscreenchange', onFullscreenChange);
-		return () =>
-			document.removeEventListener('fullscreenchange', onFullscreenChange);
-	}, []);
+	// useEffect(() => {
+	// 	function onFullscreenChange() {
+	// 		setControls(Boolean(document.fullscreenElement));
+	// 	}
+	// 	document.addEventListener('fullscreenchange', onFullscreenChange);
+	// 	return () =>
+	// 		document.removeEventListener('fullscreenchange', onFullscreenChange);
+	// }, []);
 
 	useEffect(() => {
 		function onScroll() {
 			props.seeking &&
-				console.log(
-					`videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
-				);
-			props.seeking && ref.current.seekTo(props.scrollPosition, 'fraction');
+				// console.log(
+				// 	`videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
+				// );
+				props.seeking &&
+				ref.current.seekTo(props.scrollPosition, 'fraction');
 		}
 		document.getElementById('timeline').addEventListener('scroll', onScroll);
 		return () => {
@@ -39,7 +40,7 @@ const VideoPlayer = (props) => {
 					.removeEventListener('scroll', onScroll);
 			} catch (err) {
 				// do nothing
-				console.log(err)
+				console.log(err);
 			}
 		};
 	});
@@ -62,7 +63,7 @@ const VideoPlayer = (props) => {
 					.removeEventListener('mousewheel', onMouseWheel);
 			} catch (err) {
 				// do nothing
-				console.log(err)
+				console.log(err);
 			}
 		};
 	});
