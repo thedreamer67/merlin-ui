@@ -5,6 +5,7 @@ import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
 
+
 function Timeline(props) {
 	const onDrop = useCallback((acceptedFiles) => {
 		console.log('acceptedFiles: ' + acceptedFiles);
@@ -53,6 +54,11 @@ function Timeline(props) {
 	// 	console.log(e.clientY);
 	// };
 
+	const [frameclick, setFrameclick] = useState(true);
+	const handleFrameClick = () => {
+		setFrameclick(!frameclick);
+	};
+
 	return (
 		<React.Fragment>
 			<div className='videoTime'>
@@ -86,7 +92,7 @@ function Timeline(props) {
 								className='scrollDemo'
 							>
 								{timelineFiles.length !== 0 ? (
-									timelineFiles.map((file) => <ImageCarousel />)
+									timelineFiles.map((file) => <ImageCarousel/>)
 								) : (
 									<DropzonePrompt />
 								)}
@@ -95,6 +101,7 @@ function Timeline(props) {
 					</div>
 				</div>
 			</ScrollSync>
+			
 		</React.Fragment>
 	);
 }

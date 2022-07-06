@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import "./styles/ImageCarousel.css";
 import pic from "../../../../static/000031.jpg";
+import FrameTools from './FrameTools'
 
 function ImageCarousel() {
+  const [frameclick, setFrameclick] = useState(false);
+	const handleFrameClick = () => {
+		setFrameclick(!frameclick);
+	};
   return (
-    <section className="framesGrid">
+    <section>
+    <section className="framesGrid" onClick={handleFrameClick}>
       <div className="last"></div>
       <img className="framesImg" src={pic} alt="frame1" />
       <img className="framesImg" src={pic} alt="frame2" />
@@ -27,6 +33,8 @@ function ImageCarousel() {
       <img className="framesImg" src={pic} alt="frame19" />
       <img className="framesImg" src={pic} alt="frame20" />
       <div className="last"></div>
+    </section>
+    {frameclick ? <FrameTools /> : null}
     </section>
   );
 }

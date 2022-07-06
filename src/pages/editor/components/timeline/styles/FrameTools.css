@@ -1,0 +1,45 @@
+.frametoolsbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #000000;
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.uppertoolbar {
+    height: 3vh;
+}
+
+.actionContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionTitle{
+    padding: 1px 10px;
+    color: #FFFFFF;
+}
+
+.lowertoolbar {
+    height: 7vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-container {
+    font-size: 100%;
+    padding-left:10px;
+    padding-right:10px;
+    color: white;
+    text-align: center;
+}
+
+.iconTitle{
+    font-size: 13px;
+}
