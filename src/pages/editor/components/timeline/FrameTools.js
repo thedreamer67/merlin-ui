@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import "./styles/FrameTools.css";
 
-
 function FrameTools(props) {
-
+    const [actionsActionclick, setactionsActionclick] = useState(false);
+    const handleactionsActionClick = () => {
+        setactionsActionclick(!actionsActionclick);
+    };
   return (
     <>
       <nav className="frametoolsbar">
         <div className="uppertoolbar">
-            <div className="actionContainer">
-                <div className="actionTitle">Crop</div>
-                <div className="actionTitle">Duplicate</div>
-                <div className="actionTitle">Split</div>
-                <div className="actionTitle">Delete</div>
-            </div>
+            {actionsActionclick ? <ActionsAction /> : null}
         </div>
         <div className="lowertoolbar">
-            <div className="icon-container">
+            <div className="icon-container" onClick={handleactionsActionClick} style={{backgroundColor: actionsActionclick ? 'purple' : 'transparent',}}>
                 <i class="fa-solid fa-scissors"></i>
                 <div className="iconTitle">Actions</div>
             </div>
@@ -43,4 +40,20 @@ function FrameTools(props) {
   );
 }
 
+function ActionsAction() {
+    const [isActive, setIsActive] = useState(false);
+    const handleClick = () => {
+        setIsActive(current => !current);
+    };
+    return (
+        <div className="actionContainer">
+            <div className="actionTitle" onClick={handleClick} style={{backgroundColor: isActive ? 'purple' : 'transparent',}}>Crop</div>
+            <div className="actionTitle" >Duplicate</div>
+            <div className="actionTitle">Split</div>
+            <div className="actionTitle">Delete</div>
+        </div>
+    );
+  }
+
 export default FrameTools;
+

@@ -20,9 +20,14 @@
 }
 
 .actionTitle{
-    padding: 1px 10px;
+    padding: 3px 10px;
     color: #FFFFFF;
     font-size: 13px;
+    cursor: pointer;
+}
+
+.actionTitle:hover {
+    background-color: purple;
 }
 
 .lowertoolbar {
@@ -37,9 +42,17 @@
     font-size: 100%;
     padding-left:10px;
     padding-right:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     color: white;
     text-align: center;
+    cursor: pointer;
 }
+
+.icon-container:hover {
+    background-color: purple;
+}
+
 
 .iconTitle{
     font-size: 13px;
