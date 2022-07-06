@@ -3,7 +3,6 @@
     flex-direction: column;
     max-height: 93%;
     position: relative;
-    
 }
 
 .videoTime {
@@ -16,12 +15,18 @@
 
 .Line {
     align-self: center;
+    justify-content: center;
     position: absolute;
     width: 5px;
-    height: 31.8vh;
+    height: 34.3vh;
     background-color: white;
   }
 
-  .scrollDemo {
-    padding-left: 51vw;
+  .LineScroll {
+    align-self: center;
+    justify-content: center;
+    position: absolute;
+    width: 5px;
+    height: 32vh;
+    background-color: white;
   }

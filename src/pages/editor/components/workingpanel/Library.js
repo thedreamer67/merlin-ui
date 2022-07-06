@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./styles/Library.css";
 
-import pic from "../../static/000031.jpg";
+import pic from "../../../../static/000031.jpg";
 
 function Library() {
   const [selectedFile, setSelectedFile] = useState(null);

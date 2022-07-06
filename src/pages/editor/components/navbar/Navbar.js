@@ -5,7 +5,7 @@ import "./styles/Navbar.css";
 import Dropdown from "./Dropdown";
 
 function Navbar(props) {
-
+  const {handleStart} = props;
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 

@@ -3,6 +3,7 @@
     flex-direction: row;
     height: 15vh;
     padding-top: 14px;
+    max-width: 100vw;
 }
 
 .framesImg {
@@ -13,5 +14,10 @@
 }
 
 .last {
-    float: right;
+    min-width: 50vw;
+}
+
+.start {
+     color: #929292;
+     width: 50vw;
 }
