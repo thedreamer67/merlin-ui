@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import ImageCarousel from './ImageCarousel';
 import './styles/Timeline.css';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
-// import { groupProps } from 'utila/lib/object';
+import { useDropzone } from 'react-dropzone';
+import DropzonePrompt from './DropzonePrompt';
 
 function Timeline(props) {
+	const onDrop = useCallback((acceptedFiles) => {
+		console.log('acceptedFiles: ' + acceptedFiles);
+		setTimelineFiles((prevArray) => [...prevArray, ...acceptedFiles]);
+		console.log('timelineFiles: ' + timelineFiles);
+	}, []);
+
+	const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+		onDrop,
+	});
+
+	const [timelineFiles, setTimelineFiles] = useState([]);
+
 	const currentTime = new Date(props.currentTime * 1000)
 		.toISOString()
 		.substr(11, 8);
@@ -41,29 +54,40 @@ function Timeline(props) {
 	// };
 
 	return (
-		<>
+		<React.Fragment>
 			<div className='videoTime'>
 				{currentTime}/{duration}
 			</div>
 			<ScrollSync>
 				<div className='mainTimeline'>
-					<ScrollSyncPane>
-						<div
-							id='timeline'
-							style={{ overflow: 'auto', height: '100vh' }}
-							onScroll={handleScroll}
-							onMouseDown={handleMouseDown}
-							onMouseUp={handleMouseUp}
-							onDragEnd={handleDragEnd}
-							// onClick={coords}
-						>
-							<ImageCarousel />
-							<ImageCarousel />
-						</div>
-					</ScrollSyncPane>
+					<div
+						{...getRootProps({
+							className: 'dropzone',
+							onClick: (e) => e.stopPropagation(),
+						})}
+					>
+						<input classname='input-zone' {...getInputProps()} />
+						<ScrollSyncPane>
+							<div
+								id='timeline'
+								onScroll={handleScroll}
+								onMouseDown={handleMouseDown}
+								onMouseUp={handleMouseUp}
+								onDragEnd={handleDragEnd}
+								// onClick={coords}
+								style={{ overflow: 'auto', maxHeight: '30vh' }}
+							>
+								{timelineFiles.length !== 0 ? (
+									timelineFiles.map((file) => <ImageCarousel />)
+								) : (
+									<DropzonePrompt />
+								)}
+							</div>
+						</ScrollSyncPane>
+					</div>
 				</div>
 			</ScrollSync>
-		</>
+		</React.Fragment>
 	);
 }
 
