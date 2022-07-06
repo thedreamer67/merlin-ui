@@ -1,48 +1,94 @@
-import React, { useCallback, useState } from "react";
-import ImageCarousel from "./ImageCarousel";
-import "./styles/Timeline.css";
-import { ScrollSync, ScrollSyncPane } from "react-scroll-sync";
-import { useDropzone } from "react-dropzone";
-import DropzonePrompt from "./DropzonePrompt";
+import React, { useCallback, useState } from 'react';
+import ImageCarousel from './ImageCarousel';
+import './styles/Timeline.css';
+import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
+import { useDropzone } from 'react-dropzone';
+import DropzonePrompt from './DropzonePrompt';
 
-function Timeline({ open }) {
+function Timeline(props) {
+	const onDrop = useCallback((acceptedFiles) => {
+		console.log('acceptedFiles: ' + acceptedFiles);
+		setTimelineFiles((prevArray) => [...prevArray, ...acceptedFiles]);
+		console.log('timelineFiles: ' + timelineFiles);
+	}, []);
 
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log("acceptedFiles: " + acceptedFiles);
-    setTimelineFiles(prevArray => [...prevArray, ...acceptedFiles])
-    console.log("timelineFiles: " + timelineFiles)
-  }, []);
+	const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+		onDrop,
+	});
 
-  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
-    onDrop,
-  });
+	const [timelineFiles, setTimelineFiles] = useState([]);
 
-  const [timelineFiles, setTimelineFiles] = useState([])
+	const currentTime = new Date(props.currentTime * 1000)
+		.toISOString()
+		.substr(11, 8);
+	const duration = new Date(props.duration * 1000).toISOString().substr(11, 8);
 
-  return (
-    <React.Fragment>
-      <div className="videoTime">00:00:00/00:10:30</div>
-      <ScrollSync>
-        <div className="mainTimeline">
-          <div
-            {...getRootProps({
-              className: "dropzone",
-              onClick: (e) => e.stopPropagation(),
-            })}
-          >
-            <input classname="input-zone" {...getInputProps()} />
-             <ScrollSyncPane>
-              <div style={{ overflow: "auto", maxHeight: "30vh" }}>
-                {timelineFiles.length !== 0 ? 
-                  timelineFiles.map((file) => <ImageCarousel/>) :
-                  <DropzonePrompt/>} 
-              </div>
-             </ScrollSyncPane>
-          </div>
-        </div>
-      </ScrollSync>
-    </React.Fragment>
-  );
+	const handleScroll = () => {
+		const scrollBar = document.getElementById('timeline');
+		const maxScrollLeft = scrollBar.scrollWidth - scrollBar.clientWidth;
+		const scrollPercentage = scrollBar.scrollLeft / maxScrollLeft;
+
+		props.getScrollPosition(scrollPercentage);
+		console.log(
+			`timeline: handleScroll: scrollPercentage = ${scrollPercentage}`
+		);
+	};
+
+	const handleMouseDown = () => {
+		props.getSeeking(true);
+		console.log(`mouseDown`);
+	};
+
+	const handleMouseUp = () => {
+		props.getSeeking(false);
+		console.log(`mouseUp`);
+	};
+
+	const handleDragEnd = () => {
+		props.getSeeking(false);
+		console.log(`dragend`);
+	};
+
+	// const coords = (e) => {
+	// 	console.log(e.clientY);
+	// };
+
+	return (
+		<React.Fragment>
+			<div className='videoTime'>
+				{currentTime}/{duration}
+			</div>
+			<ScrollSync>
+				<div className='mainTimeline'>
+					<div
+						{...getRootProps({
+							className: 'dropzone',
+							onClick: (e) => e.stopPropagation(),
+						})}
+					>
+						<input classname='input-zone' {...getInputProps()} />
+						<ScrollSyncPane>
+							<div
+								id='timeline'
+								onScroll={handleScroll}
+								onMouseDown={handleMouseDown}
+								onMouseUp={handleMouseUp}
+								onDragEnd={handleDragEnd}
+								// onClick={coords}
+								style={{ overflow: 'auto', maxHeight: '30vh' }}
+							>
+								{timelineFiles.length !== 0 ? (
+									timelineFiles.map((file) => <ImageCarousel />)
+								) : (
+									<DropzonePrompt />
+								)}
+							</div>
+						</ScrollSyncPane>
+					</div>
+				</div>
+			</ScrollSync>
+		</React.Fragment>
+	);
 }
 
 export default Timeline;
