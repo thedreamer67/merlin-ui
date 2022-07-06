@@ -44,7 +44,10 @@
 
 .subtitles {
     margin: 0px;
-    overflow-y: scroll;
     max-height: 48.6vh;
     overflow-wrap: break-word;
+}
+
+.subtitlestab {
+    overflow-y: scroll;
 }
