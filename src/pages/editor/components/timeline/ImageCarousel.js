@@ -5,6 +5,7 @@ import pic from "../../../../static/000031.jpg";
 function ImageCarousel() {
   return (
     <section className="framesGrid">
+      <div className="last"></div>
       <img className="framesImg" src={pic} alt="frame1" />
       <img className="framesImg" src={pic} alt="frame2" />
       <img className="framesImg" src={pic} alt="frame3" />
@@ -25,6 +26,7 @@ function ImageCarousel() {
       <img className="framesImg" src={pic} alt="frame18" />
       <img className="framesImg" src={pic} alt="frame19" />
       <img className="framesImg" src={pic} alt="frame20" />
+      <div className="last"></div>
     </section>
   );
 }

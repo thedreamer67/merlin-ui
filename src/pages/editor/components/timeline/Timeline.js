@@ -60,6 +60,7 @@ function Timeline(props) {
 			</div>
 			<ScrollSync>
 				<div className='mainTimeline'>
+				<div className={timelineFiles.length !== 0 ? "LineScroll" : "Line"} ></div>
 					<div
 						{...getRootProps({
 							className: 'dropzone',
@@ -75,7 +76,8 @@ function Timeline(props) {
 								onMouseUp={handleMouseUp}
 								onDragEnd={handleDragEnd}
 								// onClick={coords}
-								style={{ overflow: 'auto', maxHeight: '30vh' }}
+								style={{ overflow: 'auto', minHeight: '34.4vh', maxHeight: '34.4vh' }}
+								className='scrollDemo'
 							>
 								{timelineFiles.length !== 0 ? (
 									timelineFiles.map((file) => <ImageCarousel />)

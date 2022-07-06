@@ -1,4 +1,4 @@
-import icon from "../../images/merlinicon.png";
+// import icon from "../../images/merlinicon.png";
 import styles from "./Home.module.css";
 import React from "react";
 

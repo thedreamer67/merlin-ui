@@ -2,17 +2,18 @@
 	grid-column: 1;
 	grid-row: 1;
 	height: 60vh;
+	background-color: #929292;
 }
 
 .bottomPane {
 	grid-column: 1;
 	grid-row: 2;
-	background-color: aqua;
-	height: 40vh;
+	background-color: #929292;
+	height: 37vh;
 }
 
 .outersplitScreen {
-	height: 100vh;
+	height: 97vh;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 1fr;
@@ -21,6 +22,7 @@
 .leftPane {
 	grid-column: 1;
 	grid-row: 1;
+	border-right: 1px solid #000000;
 }
 
 .rightPane {

@@ -1,7 +1,7 @@
 .promptbox {
     border-style: dashed;
     border-color: purple;
-    min-height: 29vh;
+    min-height: 33.5vh;
     display: flex;
     align-items: center;
     justify-content: center;
