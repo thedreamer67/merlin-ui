@@ -5,6 +5,7 @@ import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
 
+
 function Timeline(props) {
 	const onDrop = useCallback((acceptedFiles) => {
 		console.log('acceptedFiles: ' + acceptedFiles);
@@ -57,6 +58,11 @@ function Timeline(props) {
 	// const coords = (e) => {
 	// 	console.log(e.clientY);
 	// };
+
+	const [frameclick, setFrameclick] = useState(true);
+	const handleFrameClick = () => {
+		setFrameclick(!frameclick);
+	};
 
 	return (
 		<>
