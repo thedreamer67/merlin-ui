@@ -5,7 +5,6 @@ import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
 
-
 function Timeline(props) {
 	const {handleMagicActionClick} = props
 	const {isMagicActionActive, setIsMagicActionActive} = props
@@ -86,17 +85,12 @@ function Timeline(props) {
 						<ScrollSyncPane>
 							<div
 								id='timeline'
+								className='timeline'
 								onScroll={handleScroll}
 								onMouseDown={handleMouseDown}
 								onMouseUp={handleMouseUp}
 								// onDragEnd={handleDragEnd}
 								// onClick={coords}
-								style={{
-									overflow: 'auto',
-									minHeight: '34.4vh',
-									maxHeight: '34.4vh',
-								}}
-								className='scrollDemo'
 							>
 								{timelineFiles.length !== 0 ? (
 									timelineFiles.map((file) => (

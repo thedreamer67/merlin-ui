@@ -1,24 +1,28 @@
-.App {
-  text-align: center;
-  background-color: #929292;
-  scrollbar-width: none; /* Firefox 64 */
-  -ms-overflow-style: none; /* Internet Explorer 11 */
+* {
+	font-family: 'Gentium Book Plus', serif;
 }
 
-body { 
-  margin: 0; 
+.App {
+	text-align: center;
+	background-color: #929292;
+	scrollbar-width: none; /* Firefox 64 */
+	-ms-overflow-style: none; /* Internet Explorer 11 */
+}
+
+body {
+	margin: 0;
 }
 
 .App::-webkit-scrollbar {
-  /* WebKit */
-  display: none;
+	/* WebKit */
+	display: none;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

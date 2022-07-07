@@ -1,29 +1,29 @@
 .frametoolsbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #000000;
-    height: 10vh;
-    display: flex;
-    flex-direction: column;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #000000;
+	height: 10vh;
+	display: flex;
+	flex-direction: column;
 }
 
 .uppertoolbar {
-    height: 3vh;
+	height: 3vh;
 }
 
 .actionContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
-.actionTitle{
-    padding: 3px 10px;
-    color: #FFFFFF;
-    font-size: 13px;
-    cursor: pointer;
+.actionTitle {
+	padding: 0.1rem 0.6rem;
+	color: #ffffff;
+	font-size: 0.8rem;
+	cursor: pointer;
 }
 
 .actionTitle:hover {
@@ -31,29 +31,26 @@
 }
 
 .lowertoolbar {
-    height: 7vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+	height: 7vh;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 .icon-container {
-    font-size: 100%;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: white;
-    text-align: center;
-    cursor: pointer;
+	font-size: 100%;
+	padding-left: 0.6rem;
+	padding-right: 0.6rem;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+
+.iconTitle {
+	font-size: 0.8rem;
 }
 
 .icon-container:hover {
     background-color: purple;
-}
-
-
-.iconTitle{
-    font-size: 13px;
 }

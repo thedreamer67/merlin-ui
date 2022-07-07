@@ -24,25 +24,25 @@ function FrameTools(props) {
         <div className="lowertoolbar">
             <div onClick={handleactionsActionClick} style={{backgroundColor: actionsActionclick ? 'purple' : 'transparent',}}>
                 <div className="icon-container">
-                    <i class="fa-solid fa-scissors"></i>
+                    <i className="fa-solid fa-scissors"></i>
                     <div className="iconTitle">Actions</div>
                 </div>
             </div>
             <div className="icon-container">
-                <i class="fa-solid fa-gauge"></i>
+                <i className="fa-solid fa-gauge"></i>
                 <div className="iconTitle">Speed</div>
             </div>
             <div className="icon-container">
-                <i class="fa-solid fa-volume-high"></i>
+                <i className="fa-solid fa-volume-high"></i>
                 <div className="iconTitle">Volume</div>
             </div>
             <div className="icon-container">
-                <i class="fa-solid fa-compact-disc"></i>
+                <i className="fa-solid fa-compact-disc"></i>
                 <div className="iconTitle">Filters</div>
             </div>
             <div onClick={handlemagicIconClick} style={{backgroundColor: magicActionclick ? 'purple' : 'transparent',}}>
                 <div className="icon-container">
-                    <i class="fa-solid fa-wand-magic-sparkles" ></i>
+                    <i className="fa-solid fa-wand-magic-sparkles" ></i>
                     <div className="iconTitle">Magic</div>
                 </div>
             </div>
