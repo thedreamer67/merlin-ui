@@ -7,6 +7,8 @@ import DropzonePrompt from './DropzonePrompt';
 
 
 function Timeline(props) {
+	const {handleMagicActionClick} = props
+	const {isMagicActionActive, setIsMagicActionActive} = props
 	const onDrop = useCallback((acceptedFiles) => {
 		console.log('acceptedFiles: ' + acceptedFiles);
 		setTimelineFiles((prevArray) => [...prevArray, ...acceptedFiles]);
@@ -98,7 +100,7 @@ function Timeline(props) {
 							>
 								{timelineFiles.length !== 0 ? (
 									timelineFiles.map((file) => (
-										<ImageCarousel numRows={timelineFiles.length} />
+										<ImageCarousel numRows={timelineFiles.length} handleMagicActionClick={handleMagicActionClick} isMagicActionActive={isMagicActionActive} setIsMagicActionActive={setIsMagicActionActive}/>
 									))
 								) : (
 									<DropzonePrompt />

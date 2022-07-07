@@ -11,12 +11,18 @@ function App() {
     setIsEditor(!isEditor);
   };
 
+  const [isMagicActionActive, setIsMagicActionActive] = useState(false);
+  const handleMagicActionClick = () => {
+      setIsMagicActionActive(!isMagicActionActive);
+      console.log(isMagicActionActive)
+  };
+
   return (
     <div>
       {!isEditor ? (
         <Home handleStart={handleStart} />
       ) : (
-        <Editor handleStart={handleStart} />
+        <Editor handleStart={handleStart} handleMagicActionClick={handleMagicActionClick} isMagicActionActive={isMagicActionActive} setIsMagicActionActive={setIsMagicActionActive}/>
       )}
     </div>
   );

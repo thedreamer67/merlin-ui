@@ -5,6 +5,7 @@ import FrameTools from './FrameTools'
 import { groupProps } from 'utila/lib/object';
 
 function ImageCarousel(props) {
+  const {handleMagicActionClick, isMagicActionActive, setIsMagicActionActive} = props
   const [frameclick, setFrameclick] = useState(false);
 	const handleFrameClick = () => {
 		setFrameclick(!frameclick);
@@ -35,7 +36,7 @@ function ImageCarousel(props) {
       <img className="framesImg" src={pic} alt="frame20" />
       <div className={props.numRows > 1 ? 'lastMany' : 'last'}></div>
     </section>
-    {frameclick ? <FrameTools /> : null}
+    {frameclick ? <FrameTools handleMagicActionClick={handleMagicActionClick} isMagicActionActive={isMagicActionActive} setIsMagicActionActive={setIsMagicActionActive}/> : null}
     </section>
   );
 }

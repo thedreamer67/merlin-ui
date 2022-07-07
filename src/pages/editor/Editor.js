@@ -10,6 +10,9 @@ import Timeline from './components/timeline';
 
 function Editor(props) {
 	const { handleStart } = props;
+	const { handleMagicActionClick } =props
+	const { isMagicActionActive } = props
+	const { setIsMagicActionActive } =props
 	const [currentPlaybackTime, setCurrentPlaybackTime] = useState(0);
 	const [duration, setDuration] = useState(0);
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -40,7 +43,7 @@ function Editor(props) {
 				<div className={styles.topPane}>
 					<div className={styles.innersplitScreen}>
 						<div className={styles.leftPane}>
-							<Workingpanel />
+							<Workingpanel isMagicActionActive={isMagicActionActive} setIsMagicActionActive={setIsMagicActionActive}/>
 						</div>
 						<div className={styles.rightPane}>
 							<VideoPlayer
@@ -59,6 +62,9 @@ function Editor(props) {
 						duration={duration}
 						getScrollPosition={storeScrollPosition}
 						getSeeking={storeIsSeeking}
+						handleMagicActionClick={handleMagicActionClick}
+						isMagicActionActive={isMagicActionActive}
+						setIsMagicActionActive={setIsMagicActionActive}
 					/>
 				</div>
 			</div>
