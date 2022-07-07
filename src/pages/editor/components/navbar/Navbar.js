@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from './Button';
+// import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './styles/Navbar.css';
 import Dropdown from './Dropdown';
@@ -50,7 +50,7 @@ function Navbar(props) {
 					</div>
 					<div className='nav-item'>
 						<i
-							class='fa-regular fa-circle-xmark'
+							className='fa-regular fa-circle-xmark'
 							style={btnStyle}
 							onClick={handleStart}
 						></i>
