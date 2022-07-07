@@ -25,12 +25,12 @@ function Editor(props) {
 
 	const storeScrollPosition = (position) => {
 		setScrollPosition(position); //should be a fraction! [0,1]
-		console.log(`editor: storeScrollPosition: position = ${position}`);
+		// console.log(`editor: storeScrollPosition: position = ${position}`);
 	};
 
 	const storeIsSeeking = (seeking) => {
 		setIsSeeking(seeking);
-		console.log(`editor setIsSeeking = ${seeking}`);
+		// console.log(`editor setIsSeeking = ${seeking}`);
 	};
 
 	return (

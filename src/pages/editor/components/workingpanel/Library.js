@@ -39,17 +39,15 @@ function Library() {
   const fileData = () => {
     if (selectedFile) {
       return (
-        <div>
-          <h2>File Details:</h2>
-          <p>File Name: {selectedFile.name}</p>
-          <p>File Type: {selectedFile.type}</p>
+        <div className="fileDetails">
+          <div>File Name: {selectedFile.name}</div>
+          <div>File Type: {selectedFile.type}</div>
         </div>
       );
     } else {
       return (
-        <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
+        <div className="fileDetails">
+          <div>Choose before Pressing the Upload button</div>
         </div>
       );
     }

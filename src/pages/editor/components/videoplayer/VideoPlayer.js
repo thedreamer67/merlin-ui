@@ -14,22 +14,27 @@ const VideoPlayer = (props) => {
 
 	const ref = useRef(null);
 
-	useEffect(() => {
-		function onFullscreenChange() {
-			setControls(Boolean(document.fullscreenElement));
-		}
-		document.addEventListener('fullscreenchange', onFullscreenChange);
-		return () =>
-			document.removeEventListener('fullscreenchange', onFullscreenChange);
-	}, []);
+	// useEffect(() => {
+	// 	function onFullscreenChange() {
+	// 		setControls(Boolean(document.fullscreenElement));
+	// 	}
+	// 	document.addEventListener('fullscreenchange', onFullscreenChange);
+	// 	return () =>
+	// 		document.removeEventListener('fullscreenchange', onFullscreenChange);
+	// }, []);
 
 	useEffect(() => {
 		function onScroll() {
-			props.seeking &&
-				console.log(
-					`videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
-				);
-			props.seeking && ref.current.seekTo(props.scrollPosition, 'fraction');
+			// props.seeking &&
+			// console.log(
+			// 	`videoplayer: useEffect onScroll: props.scrollPosition = ${props.scrollPosition}`
+			// );
+			if (props.seeking) {
+				ref.current.seekTo(props.scrollPosition, 'fraction');
+				props.getTime(props.scrollPosition * ref.current.getDuration());
+			}
+			// props.seeking &&
+			// ref.current.seekTo(props.scrollPosition, 'fraction');
 		}
 		document.getElementById('timeline').addEventListener('scroll', onScroll);
 		return () => {
@@ -39,17 +44,17 @@ const VideoPlayer = (props) => {
 					.removeEventListener('scroll', onScroll);
 			} catch (err) {
 				// do nothing
-				console.log(err)
+				console.log(err);
 			}
 		};
 	});
 
 	useEffect(() => {
 		function onMouseWheel(e) {
-			e.shiftKey &&
-				console.log(
-					`videoplayer: useEffect onMouseWheel: props.scrollPosition = ${props.scrollPosition}`
-				);
+			// e.shiftKey &&
+			// 	console.log(
+			// 		`videoplayer: useEffect onMouseWheel: props.scrollPosition = ${props.scrollPosition}`
+			// 	);
 			e.shiftKey && ref.current.seekTo(props.scrollPosition, 'fraction');
 		}
 		document
@@ -62,7 +67,7 @@ const VideoPlayer = (props) => {
 					.removeEventListener('mousewheel', onMouseWheel);
 			} catch (err) {
 				// do nothing
-				console.log(err)
+				console.log(err);
 			}
 		};
 	});
@@ -98,7 +103,7 @@ const VideoPlayer = (props) => {
 	};
 
 	const handleProgress = (state) => {
-		console.log('onProgress props.seeking', props.seeking);
+		// console.log('onProgress props.seeking', props.seeking);
 		if (!props.seeking) {
 			props.getTime(state.playedSeconds);
 			const scrollBar = document.getElementById('timeline');
@@ -106,7 +111,7 @@ const VideoPlayer = (props) => {
 			const newScrollPosition = state.played * maxScrollLeft;
 			props.getScrollPosition(state.played);
 			scrollBar.scrollTo(newScrollPosition, scrollBar.scrollTop);
-			console.log(`update to new position at ${newScrollPosition}`);
+			// console.log(`update to new position at ${newScrollPosition}`);
 		}
 	};
 

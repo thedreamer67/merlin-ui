@@ -20,14 +20,14 @@ function Wpnavbar() {
       <nav className="wpnavbar">
         <div className="wpnav-menu">
           <div className="wpnav-item">
-            <button className="wpbtn" onClick={handleLibraryClick}>
+            <div className="wpbtn" onClick={handleLibraryClick}>
               Library
-            </button>
+            </div>
           </div>
           <div className="wpnav-item">
-            <button className="wpbtn" onClick={handleCaptionClick}>
-              Auto-Caption
-            </button>
+            <div className="wpbtn" onClick={handleCaptionClick}>
+              Auto Caption
+            </div>
           </div>
         </div>
       </nav>
