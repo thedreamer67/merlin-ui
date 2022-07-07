@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+// import AccountCircle from '@mui/icons-material/AccountCircle';
 import './styles/Wpnavbar.css';
 
 import Library from './Library';
@@ -78,7 +78,7 @@ function Wpnavbar(props) {
 						id='input-with-icon-adornment'
 						startAdornment={
 							<InputAdornment position='start'>
-								<AccountCircle />
+								{/* <AccountCircle /> */}
 							</InputAdornment>
 						}
 					/>
@@ -89,14 +89,14 @@ function Wpnavbar(props) {
 					InputProps={{
 						startAdornment: (
 							<InputAdornment position='start'>
-								<AccountCircle />
+								{/* <AccountCircle /> */}
 							</InputAdornment>
 						),
 					}}
 					variant='standard'
 				/>
 				<Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-					<AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+					{/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
 					<TextField id='input-with-sx' label='With sx' variant='standard' />
 				</Box>
 			</Box>
@@ -130,7 +130,7 @@ function Wpnavbar(props) {
 						</div>
 					</div>
 					<div>
-						<form onSubmit={handleSearchSubmit}>
+						{/* <form onSubmit={handleSearchSubmit}>
 							<input
 								className='searchBar'
 								placeholder='Enter search here'
@@ -138,7 +138,8 @@ function Wpnavbar(props) {
 									setSearchQuery(e.target.value);
 								}}
 							></input>
-						</form>
+						</form> */}
+						<SearchBar />
 					</div>
 				</div>
 			</nav>
