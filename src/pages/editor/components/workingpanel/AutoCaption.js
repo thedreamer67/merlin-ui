@@ -19,11 +19,81 @@ function AutoCaption() {
         // <p className="subtitles"> 
         //   {subtitles}
         // </p> :
-        <EditableLabel 
-          text={subtitles}
-          inputWidth="50vw"
-          inputHeight="48.6vh"
-          /> :
+        // <EditableLabel 
+        //   text={subtitles}
+        //   inputWidth="50vw"
+        //   inputHeight="48.6vh"
+        //   /> :
+        <div className ="subtitles">
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" labelClassName="subtitles" inputClassName="subtitle"/>
+          </div>        
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>         
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>   
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+          <div className="subtitlesrow">
+            <p className="time">00:00:00</p>
+            <EditableLabel text="Hello guys" className="subtitle"/>
+          </div>
+        </div> :
         <p></p>}
     </div>
   );

@@ -43,11 +43,25 @@
 }
 
 .subtitles {
-    margin: 0px;
+    /* margin: 0px; */
     max-height: 48.6vh;
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
+    overflow-y: auto;
 }
 
-.subtitlestab {
-    overflow-y: scroll;
+.subtitlesrow {
+    margin-top: 2vh;
+    display: flex;
+    justify-content: start;
+    flex-direction: row;    
 }
+
+.time {
+    margin-right: 1vw;
+    margin-left: 1vw;
+    margin-top: 0vh;
+}
+
+/* .subtitlestab {
+    overflow-y: scroll;
+} */
