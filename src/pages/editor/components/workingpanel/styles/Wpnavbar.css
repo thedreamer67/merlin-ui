@@ -9,6 +9,13 @@
 .wpnav-menu {
 	display: flex;
 	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.leftMenu {
+	display: flex;
+	flex-direction: row;
 	align-items: center;
 }
 
@@ -17,15 +24,6 @@
 }
 
 .wpbtn {
-	/* font-size: 15px;
-	color: #ffffff;
-	justify-self: center;
-	align-items: center;
-	font-size: 15px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-left: 5px;
-	padding-right: 5px; */
 	color: #ffffff;
 	display: flex;
 	justify-content: center;
@@ -41,3 +39,13 @@
 	background-color: purple;
 	color: #fff;
 }
+
+.searchBar {
+	box-sizing: border-box;
+	border: 0rem;
+	padding: 0.1rem 0.3rem;
+}
+
+/* .searchBar:focus {
+	border: 0.1rem solid #555;
+} */
