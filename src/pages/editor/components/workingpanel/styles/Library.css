@@ -1,5 +1,6 @@
 .libraryPanel {
 	display: grid;
+	height: 90%;
 	grid-template-rows: 10% 90%;
 }
 
@@ -24,8 +25,6 @@
 	color: #ffffff;
 	font-size: 0.8rem;
 	padding: 0.2rem 0.2rem;
-	/* font-size: 12px;
-	padding: 3px 3px; */
 }
 
 .libraryGrid {
