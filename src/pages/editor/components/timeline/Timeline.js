@@ -6,8 +6,11 @@ import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
 
 function Timeline(props) {
-	const {handleMagicActionClick} = props
-	const {isMagicActionActive, setIsMagicActionActive} = props
+	const {
+		isMagicActionActive,
+		handleMagicActionClick,
+		setIsMagicActionActive,
+	} = props;
 	const onDrop = useCallback((acceptedFiles) => {
 		console.log('acceptedFiles: ' + acceptedFiles);
 		setTimelineFiles((prevArray) => [...prevArray, ...acceptedFiles]);
@@ -60,10 +63,10 @@ function Timeline(props) {
 	// 	console.log(e.clientY);
 	// };
 
-	const [frameclick, setFrameclick] = useState(true);
-	const handleFrameClick = () => {
-		setFrameclick(!frameclick);
-	};
+	// const [frameclick, setFrameclick] = useState(true);
+	// const handleFrameClick = () => {
+	// 	setFrameclick(!frameclick);
+	// };
 
 	return (
 		<>
@@ -94,7 +97,12 @@ function Timeline(props) {
 							>
 								{timelineFiles.length !== 0 ? (
 									timelineFiles.map((file) => (
-										<ImageCarousel numRows={timelineFiles.length} handleMagicActionClick={handleMagicActionClick} isMagicActionActive={isMagicActionActive} setIsMagicActionActive={setIsMagicActionActive}/>
+										<ImageCarousel
+											numRows={timelineFiles.length}
+											handleMagicActionClick={handleMagicActionClick}
+											isMagicActionActive={isMagicActionActive}
+											setIsMagicActionActive={setIsMagicActionActive}
+										/>
 									))
 								) : (
 									<DropzonePrompt />
