@@ -5,8 +5,12 @@ import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
 
-
 function Timeline(props) {
+	const {
+		isMagicActionActive,
+		handleMagicActionClick,
+		setIsMagicActionActive,
+	} = props;
 	const onDrop = useCallback((acceptedFiles) => {
 		console.log('acceptedFiles: ' + acceptedFiles);
 		setTimelineFiles((prevArray) => [...prevArray, ...acceptedFiles]);
@@ -59,10 +63,10 @@ function Timeline(props) {
 	// 	console.log(e.clientY);
 	// };
 
-	const [frameclick, setFrameclick] = useState(true);
-	const handleFrameClick = () => {
-		setFrameclick(!frameclick);
-	};
+	// const [frameclick, setFrameclick] = useState(true);
+	// const handleFrameClick = () => {
+	// 	setFrameclick(!frameclick);
+	// };
 
 	return (
 		<>
@@ -84,21 +88,21 @@ function Timeline(props) {
 						<ScrollSyncPane>
 							<div
 								id='timeline'
+								className='timeline'
 								onScroll={handleScroll}
 								onMouseDown={handleMouseDown}
 								onMouseUp={handleMouseUp}
 								// onDragEnd={handleDragEnd}
 								// onClick={coords}
-								style={{
-									overflow: 'auto',
-									minHeight: '34.4vh',
-									maxHeight: '34.4vh',
-								}}
-								className='scrollDemo'
 							>
 								{timelineFiles.length !== 0 ? (
 									timelineFiles.map((file) => (
-										<ImageCarousel numRows={timelineFiles.length} />
+										<ImageCarousel
+											numRows={timelineFiles.length}
+											handleMagicActionClick={handleMagicActionClick}
+											isMagicActionActive={isMagicActionActive}
+											setIsMagicActionActive={setIsMagicActionActive}
+										/>
 									))
 								) : (
 									<DropzonePrompt />

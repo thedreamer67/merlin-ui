@@ -9,11 +9,11 @@
 	grid-column: 1;
 	grid-row: 2;
 	background-color: #929292;
-	height: 37vh;
+	height: 36vh;
 }
 
 .outersplitScreen {
-	height: 97vh;
+	height: 96vh;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 1fr;

@@ -1,0 +1,76 @@
+.autocaptionbtn {
+	/* padding: 3px 3px;
+	outline: none;
+	border: none;
+	font-size: 12px;
+	color: #fff;
+	cursor: pointer;
+	background-color: #000000;
+	margin-left: 4px;
+    margin-top: 4px;
+	margin-left: 4px; */
+	padding: 0.2rem 0.2rem;
+	outline: none;
+	border: none;
+	font-size: 0.8rem;
+	color: #fff;
+	cursor: pointer;
+	background-color: #000000;
+	margin-left: 0.3rem;
+	margin-top: 0.3rem;
+}
+
+.autocaptionbtn:hover {
+	/* background-color: purple;
+	color: #ffffff;
+	font-size: 12px;
+	padding: 3px 3px; */
+	background-color: purple;
+	color: #ffffff;
+	font-size: 0.8rem;
+	padding: 0.2rem 0.2rem;
+}
+
+.autocaptionbtn-selected {
+	padding: 0.2rem 0.2rem;
+	outline: none;
+	border: none;
+	font-size: 0.8rem;
+	color: #fff;
+	cursor: pointer;
+	background-color: purple;
+	margin-left: 0.3rem;
+	margin-top: 0.3rem;
+	margin-bottom: 0.3rem;
+}
+
+/* .autocaptionbtn-selected:hover {
+	background-color: purple;
+	color: #ffffff;
+	font-size: 12px;
+	padding: 3px 2px;
+} */
+
+.subtitles {
+	/* margin: 0px; */
+	max-height: 51vh;
+	/* overflow-wrap: break-word; */
+	overflow-y: auto;
+}
+
+.subtitlesrow {
+	margin-top: 2vh;
+	display: flex;
+	justify-content: start;
+	flex-direction: row;
+}
+
+.time {
+	margin-right: 1vw;
+	margin-left: 1vw;
+	margin-top: 0vh;
+}
+
+/* .subtitlestab {
+    overflow-y: scroll;
+} */
