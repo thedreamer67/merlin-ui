@@ -1,13 +1,13 @@
 .promptbox {
-	border-style: dashed;
-	border-color: purple;
-	min-height: 31.5vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  border-style: dashed;
+  border-color: purple;
+  height: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .prompttext {
-	text-align: center;
-	font-size: 1.3rem;
+  text-align: center;
+  font-size: 3vh;
 }
