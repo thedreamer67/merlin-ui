@@ -94,7 +94,9 @@ function Wpnavbar(props) {
             </div>
           </div>
           <div className='searchBar'>
-            <form onSubmit={handleSearchSubmit}>
+            <form
+              onSubmit={handleSearchSubmit}
+              style={{ height: '100%', width: '100%' }}>
               <input
                 className='searchInput'
                 placeholder='Search video'
