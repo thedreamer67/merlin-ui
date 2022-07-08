@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./styles/Wpnavbar.css";
-import Library from "./library";
-import AutoCaption from "./autocaption";
+import Library from "./library/Library";
+import AutoCaption from "./autocaption/AutoCaption";
 import MagicAction from "./MagicAction";
 
 function Wpnavbar(props) {
