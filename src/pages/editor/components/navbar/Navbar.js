@@ -5,29 +5,29 @@ import './styles/Navbar.css';
 import Dropdown from './Dropdown';
 
 function Navbar(props) {
-	const { handleStart } = props;
-	const [click, setClick] = useState(false);
-	const [dropdown, setDropdown] = useState(false);
+  const { handleStart } = props;
+  const [click, setClick] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
-	const handleClick = () => setClick(!click);
+  const handleClick = () => setClick(!click);
 
-	const onMouseEnter = () => {
-		if (window.innerWidth < 960) {
-			setDropdown(false);
-		} else {
-			setDropdown(true);
-		}
-	};
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(true);
+    }
+  };
 
-	const onMouseLeave = () => {
-		if (window.innerWidth < 960) {
-			setDropdown(false);
-		} else {
-			setDropdown(false);
-		}
-	};
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setDropdown(false);
+    } else {
+      setDropdown(false);
+    }
+  };
 
-	const btnStyle = { cursor: 'pointer' };
+  const btnStyle = { cursor: 'pointer' };
 
 	return (
 		<>
