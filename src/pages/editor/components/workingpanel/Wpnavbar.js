@@ -1,12 +1,12 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/Wpnavbar.css";
-import Library from "./Library";
-import AutoCaption from "./AutoCaption";
+import Library from "./library";
+import AutoCaption from "./autocaption";
 import MagicAction from "./MagicAction";
 
 function Wpnavbar(props) {
-  const {isMagicActionActive} = props
-  const {setIsMagicActionActive} = props
+  const { isMagicActionActive } = props;
+  const { setIsMagicActionActive } = props;
   const [libraryclick, setlibraryclick] = useState(false);
   const [captionclick, setcaptionclick] = useState(false);
   const handleLibraryClick = () => {
@@ -20,7 +20,7 @@ function Wpnavbar(props) {
     setIsMagicActionActive(false);
   };
   useEffect(() => {
-    if (isMagicActionActive){
+    if (isMagicActionActive) {
       setlibraryclick(false);
       setcaptionclick(false);
     }
@@ -45,12 +45,22 @@ function Wpnavbar(props) {
       <nav className="wpnavbar">
         <div className="wpnav-menu">
           <div className="wpnav-item">
-            <div onClick={handleLibraryClick} style={{backgroundColor: libraryclick ? 'purple' : 'transparent',}}>
+            <div
+              onClick={handleLibraryClick}
+              style={{
+                backgroundColor: libraryclick ? "purple" : "transparent",
+              }}
+            >
               <div className="wpbtn">Library</div>
             </div>
           </div>
           <div className="wpnav-item">
-            <div onClick={handleCaptionClick} style={{backgroundColor: captionclick ? 'purple' : 'transparent',}}>
+            <div
+              onClick={handleCaptionClick}
+              style={{
+                backgroundColor: captionclick ? "purple" : "transparent",
+              }}
+            >
               <div className="wpbtn">Auto Caption</div>
             </div>
           </div>
@@ -58,10 +68,9 @@ function Wpnavbar(props) {
       </nav>
       {libraryclick ? <Library /> : null}
       {captionclick ? <AutoCaption /> : null}
-      {isMagicActionActive? <MagicAction /> : null}
+      {isMagicActionActive ? <MagicAction /> : null}
     </React.Fragment>
   );
 }
 
 export default Wpnavbar;
-
