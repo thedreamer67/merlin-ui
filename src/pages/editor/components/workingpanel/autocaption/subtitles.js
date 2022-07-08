@@ -222,6 +222,21 @@ var PF_SRT = (function () {
   };
 })();
 
-const subtitle_parsed = PF_SRT.parse(text);
+var subtitle_parsed = PF_SRT.parse(text);
 
 export default subtitle_parsed;
+
+export function convertToSRTFormat(subtitles) {
+  let output = "";
+  for (let i = 0; i < subtitles.length; i++) {
+    const obj = subtitles[i];
+    output += obj.line;
+    output += "\n";
+    output += obj.startTime + " --> " + obj.endTime;
+    output += "\n";
+    output += obj.text;
+    output += "\n\n";
+  }
+  console.log(output);
+  return output;
+}

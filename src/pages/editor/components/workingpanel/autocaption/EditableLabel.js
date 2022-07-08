@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 function EditableLabel(props) {
-  const { id, text, saveSubtitles } = props;
+  const { id, text, editSubtitles } = props;
 
   const [isEditing, setIsEditing] = useState(false);
   const [value, setValue] = useState(text);
 
   const exitInput = () => {
     setIsEditing(false);
-    saveSubtitles(id, value);
+    editSubtitles(id, value);
   };
 
   return (
