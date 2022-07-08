@@ -32,11 +32,21 @@ function Navbar(props) {
 	return (
 		<>
 			<nav className='navbar'>
-				<div className='navbar-left-menu' style={btnStyle}>
-					File
+				<div className='navbar-left-menu'>
+					<i class="fa-solid fa-hat-wizard"></i>
+					<div className='nav-title'>MERLIN</div>
 				</div>
-				<div className='navbar-center-title'>MERLIN</div>
+				
 				<div className='navbar-right-menu'>
+					<div className='nav-item'>
+						<i
+							className='fa-solid fa-floppy-disk'
+							style={btnStyle}
+						></i>
+					</div>
+					<div className='nav-item'>
+						<i class="fa-solid fa-download"></i>
+					</div>
 					<div className='nav-item'>
 						<i
 							className={

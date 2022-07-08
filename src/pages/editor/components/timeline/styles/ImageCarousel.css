@@ -6,6 +6,10 @@
 	max-width: 100vw;
 }
 
+.framesGrid:hover{
+	background-color: purple;
+}
+
 .framesImg {
 	padding-left: 3px;
 	padding-right: 3px;

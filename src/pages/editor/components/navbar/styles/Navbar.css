@@ -16,11 +16,7 @@
 	padding-right: 0.4rem;
 }
 
-.navbar-left-menu:hover {
-	background-color: purple;
-	font-size: 0.95rem;
-	color: #ffffff;
-}
+
 
 .fa-firstdraft {
 	margin-left: 0.5rem;
@@ -38,6 +34,16 @@
 	align-items: center;
 	font-size: 0.9rem;
 	padding-right: 0.4rem;
+	color: #ffffff;
+}
+
+.nav-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.9rem;
+	padding-left: 0.4rem;
+	color: #ffffff;
 }
 
 /* .nav-links {
