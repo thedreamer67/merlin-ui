@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
+// import Input from '@mui/material/Input';
+// import InputLabel from '@mui/material/InputLabel';
+// import InputAdornment from '@mui/material/InputAdornment';
+// import FormControl from '@mui/material/FormControl';
+import { createTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import './styles/Wpnavbar.css';
@@ -13,6 +14,7 @@ import Library from './library/Library';
 import AutoCaption from './autocaption/AutoCaption';
 import MagicAction from './MagicAction';
 import Search from './Search';
+import { ThemeProvider } from '@emotion/react';
 
 function Wpnavbar(props) {
   const { isMagicActionActive, setIsMagicActionActive } = props;
@@ -67,42 +69,6 @@ function Wpnavbar(props) {
   //   }
   // }, [captionclick]);
 
-  const SearchBar = () => {
-    return (
-      <Box sx={{ '& > :not(style)': { m: 1 } }}>
-        <FormControl variant='standard'>
-          <InputLabel htmlFor='input-with-icon-adornment'>
-            With a start adornment
-          </InputLabel>
-          <Input
-            id='input-with-icon-adornment'
-            startAdornment={
-              <InputAdornment position='start'>
-                {/* <AccountCircle /> */}
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        <TextField
-          id='input-with-icon-textfield'
-          label='TextField'
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position='start'>
-                {/* <AccountCircle /> */}
-              </InputAdornment>
-            ),
-          }}
-          variant='standard'
-        />
-        <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-          {/* <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} /> */}
-          <TextField id='input-with-sx' label='With sx' variant='standard' />
-        </Box>
-      </Box>
-    );
-  };
-
   return (
     <>
       <nav className='wpnavbar'>
@@ -127,17 +93,16 @@ function Wpnavbar(props) {
               </div>
             </div>
           </div>
-          <div>
-            {/* <form onSubmit={handleSearchSubmit}>
-							<input
-								className='searchBar'
-								placeholder='Enter search here'
-								onChange={(e) => {
-									setSearchQuery(e.target.value);
-								}}
-							></input>
-						</form> */}
-            <SearchBar />
+          <div className='searchBar'>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                className='searchInput'
+                placeholder='Search video'
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                }}></input>
+              {/* <SearchBar updateSearchQuery={setSearchQuery} /> */}
+            </form>
           </div>
         </div>
       </nav>
@@ -148,5 +113,42 @@ function Wpnavbar(props) {
     </>
   );
 }
+
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '#e3f2fd',
+//     },
+//   },
+// });
+
+// const SearchBar = (props) => {
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <Box
+//         sx={{
+//           display: 'flex',
+//           alignItems: 'flex-end',
+//           color: '#e3f2fd',
+//           maxHeight: '100%',
+//         }}
+//         autoComplete='off'>
+//         <i
+//           className='fa-solid fa-magnifying-glass'
+//           style={{ paddingRight: '0.5vw' }}></i>
+//         <TextField
+//           id='filled-basic'
+//           label='Search video'
+//           variant='outlined'
+//           color='primary'
+//           sx={{ input: { color: 'white' } }}
+//           onChange={(e) => {
+//             props.updateSearchQuery(e.target.value);
+//           }}
+//         />
+//       </Box>
+//     </ThemeProvider>
+//   );
+// };
 
 export default Wpnavbar;
