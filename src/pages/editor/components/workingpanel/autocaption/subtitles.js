@@ -181,47 +181,46 @@ Taught me and buy me lunch for today you can head over there by we don't want to
 46
 00:01:33,184 --> 00:01:34,720
 Totally fine as well
-`
+`;
 
 // credits: https://stackoverflow.com/questions/33145762/parse-a-srt-file-with-jquery-javascript
-var PF_SRT = function() {
-    var pattern = /(\d+)\n([\d:,]+)\s+-{2}\>\s+([\d:,]+)\n([\s\S]*?(?=\n{2}|=\n{2}))/gm;
-    var _regExp;
-  
-    var init = function() {
-      _regExp = new RegExp(pattern);
-    };
+var PF_SRT = (function () {
+  var pattern =
+    /(\d+)\n([\d:,]+)\s+-{2}\>\s+([\d:,]+)\n([\s\S]*?(?=\n{2}|=\n{2}))/gm;
+  var _regExp;
 
-    var parse = function(f) {
-      if (typeof(f) != "string")
-        throw "Sorry, Parser accept string only.";
-  
-      var result = [];
-      if (f == null)
-        return {};
-  
-      f = f.replace(/\r\n|\r|\n/g, '\n')
-        
-      let matches = 0;
-      
-      while ((matches = pattern.exec(f)) != null) {
-        result.push(toLineObj(matches));
-      }
-      return result;
+  var init = function () {
+    _regExp = new RegExp(pattern);
+  };
+
+  var parse = function (f) {
+    if (typeof f != "string") throw "Sorry, Parser accept string only.";
+
+    var result = [];
+    if (f == null) return {};
+
+    f = f.replace(/\r\n|\r|\n/g, "\n");
+
+    let matches = 0;
+
+    while ((matches = pattern.exec(f)) != null) {
+      result.push(toLineObj(matches));
     }
-    var toLineObj = function(group) {
-      return {
-        line: group[1],
-        startTime: group[2],
-        endTime: group[3],
-        text: group[4]
-      };
-    }
-    init();
+    return result;
+  };
+  var toLineObj = function (group) {
     return {
-      parse: parse
-    }
-}();
+      line: group[1],
+      startTime: group[2],
+      endTime: group[3],
+      text: group[4],
+    };
+  };
+  init();
+  return {
+    parse: parse,
+  };
+})();
 
 const subtitle_parsed = PF_SRT.parse(text);
 
