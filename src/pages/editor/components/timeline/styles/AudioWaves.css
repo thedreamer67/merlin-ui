@@ -1,0 +1,11 @@
+.wave {
+    display: flex;
+    flex-direction: row;
+    /* height: 15vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh; */
+}
+
+.last {
+    min-width: 50vw;
+}
