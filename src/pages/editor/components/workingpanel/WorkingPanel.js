@@ -7,6 +7,8 @@ function WorkingPanel(props) {
     <Wpnavbar
       isMagicActionActive={isMagicActionActive}
       setIsMagicActionActive={setIsMagicActionActive}
+      setIsInpainting={props.setIsInpainting}
+      setIsRemovingBG={props.setIsRemovingBG}
     />
   );
 }

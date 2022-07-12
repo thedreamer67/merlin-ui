@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styles from "./Editor.module.css";
+import React, { useState } from 'react';
+import styles from './Editor.module.css';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from "./components/navbar";
-import Workingpanel from "./components/workingpanel";
+import Navbar from './components/navbar';
+import Workingpanel from './components/workingpanel';
 // import SignUp from "../signup";
 // import Library from './Library';
-import VideoPlayer from "./components/videoplayer";
-import Timeline from "./components/timeline";
+import VideoPlayer from './components/videoplayer';
+import Timeline from './components/timeline';
 
 function Editor(props) {
   const { handleStart } = props;
@@ -15,6 +15,9 @@ function Editor(props) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
   const [isMagicActionActive, setIsMagicActionActive] = useState(false);
+  const [isInpainting, setIsInpainting] = useState(false);
+  const [isRemovingBG, setIsRemovingBG] = useState(false);
+  const [frameNum, setFrameNum] = useState(null);
 
   const storeTime = (currentTime) => {
     setCurrentPlaybackTime(currentTime);
@@ -48,6 +51,8 @@ function Editor(props) {
               <Workingpanel
                 isMagicActionActive={isMagicActionActive}
                 setIsMagicActionActive={setIsMagicActionActive}
+                setIsInpainting={setIsInpainting}
+                setIsRemovingBG={setIsRemovingBG}
               />
             </div>
             <div className={styles.rightPane}>
@@ -57,6 +62,9 @@ function Editor(props) {
                 scrollPosition={scrollPosition}
                 getScrollPosition={storeScrollPosition}
                 seeking={isSeeking}
+                isInpainting={isInpainting}
+                isRemovingBG={isRemovingBG}
+                setFrameNum={setFrameNum}
               />
             </div>
           </div>

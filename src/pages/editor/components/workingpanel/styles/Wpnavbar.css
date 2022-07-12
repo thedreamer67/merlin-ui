@@ -97,3 +97,10 @@
 .search {
   color: white;
 }
+
+#inpaint-btn,
+#removeBG-btn {
+  font-size: 3vh;
+  cursor: pointer;
+  padding: 1vw 1vh;
+}
