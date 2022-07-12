@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import Box from '@mui/material/Box';
+// import Box from '@mui/material/Box';
 // import Input from '@mui/material/Input';
 // import InputLabel from '@mui/material/InputLabel';
 // import InputAdornment from '@mui/material/InputAdornment';
 // import FormControl from '@mui/material/FormControl';
-import { createTheme } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
+// import { createTheme } from '@mui/material/styles';
+// import TextField from '@mui/material/TextField';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import './styles/Wpnavbar.css';
 
@@ -69,6 +69,10 @@ function Wpnavbar(props) {
   //   }
   // }, [captionclick]);
 
+  const handleDragStart = () => {};
+
+  const handleDragEnd = () => {};
+
   return (
     <>
       <nav className='wpnavbar'>
@@ -112,6 +116,37 @@ function Wpnavbar(props) {
       {captionclick ? <AutoCaption /> : null}
       {isMagicActionActive ? <MagicAction /> : null}
       {isSearching ? <Search query={searchQuery} /> : null}
+      <div
+        style={{
+          padding: '1vw 1vh',
+        }}>
+        <i
+          className='fa-solid fa-wand-magic-sparkles'
+          id='inpaint-btn'
+          draggable='true'
+          onDragStart={() => {
+            props.setIsInpainting(true);
+            document.getElementById('video-player').style.border =
+              'dotted purple';
+          }}
+          onDragEnd={() => {
+            props.setIsInpainting(false);
+            document.getElementById('video-player').style.border = '';
+          }}></i>
+        <i
+          className='fa-solid fa-rectangle-xmark'
+          id='removeBG-btn'
+          draggable='true'
+          onDragStart={() => {
+            document.getElementById('video-player').style.border =
+              'dotted purple';
+            props.setIsRemovingBG(true);
+          }}
+          onDragEnd={() => {
+            document.getElementById('video-player').style.border = '';
+            props.setIsRemovingBG(false);
+          }}></i>
+      </div>
     </>
   );
 }
