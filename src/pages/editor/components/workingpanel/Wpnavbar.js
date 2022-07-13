@@ -3,19 +3,29 @@ import "./styles/Wpnavbar.css";
 import Library from "./library/Library";
 import AutoCaption from "./autocaption/AutoCaption";
 import MagicAction from "./MagicAction";
+import Spells from "./Spells";
 
 function Wpnavbar(props) {
   const { isMagicActionActive } = props;
   const { setIsMagicActionActive } = props;
   const [libraryclick, setlibraryclick] = useState(false);
   const [captionclick, setcaptionclick] = useState(false);
+  const [spellsclick, setSpellsClick] = useState(false);
   const handleLibraryClick = () => {
     setlibraryclick(!libraryclick);
     setcaptionclick(false);
     setIsMagicActionActive(false);
+    setSpellsClick(false);
   };
   const handleCaptionClick = () => {
     setcaptionclick(!captionclick);
+    setlibraryclick(false);
+    setIsMagicActionActive(false);
+    setSpellsClick(false);
+  };
+  const handleSpellsClick = () => {
+    setSpellsClick(!spellsclick);
+    setcaptionclick(false);
     setlibraryclick(false);
     setIsMagicActionActive(false);
   };
@@ -23,6 +33,7 @@ function Wpnavbar(props) {
     if (isMagicActionActive) {
       setlibraryclick(false);
       setcaptionclick(false);
+      setSpellsClick(false);
     }
   }, [isMagicActionActive]);
 
@@ -64,9 +75,20 @@ function Wpnavbar(props) {
               <div className="wpbtn">Auto Caption</div>
             </div>
           </div>
+          <div className="wpnav-item">
+            <div
+              onClick={handleSpellsClick}
+              style={{
+                backgroundColor: captionclick ? "purple" : "transparent",
+              }}
+            >
+              <div className="wpbtn">Spells</div>
+            </div>
+          </div>
         </div>
       </nav>
       {libraryclick ? <Library /> : null}
+      {spellsclick ? <Spells /> : null}
       {captionclick ? <AutoCaption /> : null}
       {isMagicActionActive ? <MagicAction /> : null}
     </React.Fragment>
