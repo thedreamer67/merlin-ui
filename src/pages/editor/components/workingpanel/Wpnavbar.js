@@ -11,6 +11,8 @@ function Wpnavbar(props) {
   const [libraryclick, setlibraryclick] = useState(false);
   const [captionclick, setcaptionclick] = useState(false);
   const [spellsclick, setSpellsClick] = useState(false);
+  const { setisSpellDragActive } = props;
+
   const handleLibraryClick = () => {
     setlibraryclick(!libraryclick);
     setcaptionclick(false);
@@ -79,7 +81,7 @@ function Wpnavbar(props) {
             <div
               onClick={handleSpellsClick}
               style={{
-                backgroundColor: captionclick ? "purple" : "transparent",
+                backgroundColor: spellsclick ? "purple" : "transparent",
               }}
             >
               <div className="wpbtn">Spells</div>
@@ -88,7 +90,7 @@ function Wpnavbar(props) {
         </div>
       </nav>
       {libraryclick ? <Library /> : null}
-      {spellsclick ? <Spells /> : null}
+      {spellsclick ? <Spells setisSpellDragActive={setisSpellDragActive} /> : null}
       {captionclick ? <AutoCaption /> : null}
       {isMagicActionActive ? <MagicAction /> : null}
     </React.Fragment>

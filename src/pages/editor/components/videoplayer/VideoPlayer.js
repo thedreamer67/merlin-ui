@@ -11,6 +11,7 @@ const VideoPlayer = (props) => {
 	const [controls, setControls] = useState(true);
 	const [isMuted, setIsMuted] = useState(false);
 	const [hasEnded, setHasEnded] = useState(false);
+	const {isSpellDragActive} = props
 
 	const ref = useRef(null);
 
@@ -135,7 +136,7 @@ const VideoPlayer = (props) => {
 
 	return (
 		<div className='video-component'>
-			<div id='video-player' className='react-player'>
+			<div id='video-player' className={isSpellDragActive? 'react-player-dropzone' : 'react-player'}>
 				<ReactPlayer
 					// className='react-player'
 					width='100%'

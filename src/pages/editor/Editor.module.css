@@ -1,14 +1,19 @@
+.editorMain{
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('../../images/woodenBg.jpg');
+	background-size: contain;
+}
+
 .topPane {
 	grid-column: 1;
 	grid-row: 1;
 	height: 60vh;
-	background-color: #929292;
+	/* background-color: #929292; */
 }
 
 .bottomPane {
 	grid-column: 1;
 	grid-row: 2;
-	background-color: #929292;
+	/* background-color: #929292; */
 	height: 36vh;
 }
 
