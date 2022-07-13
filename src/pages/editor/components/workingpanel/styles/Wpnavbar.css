@@ -1,23 +1,30 @@
 .wpnavbar {
-  background: #000000;
-  height: 3.5vh;
-  display: flex;
-  font-size: 1.8vh;
-  border-bottom: 1px solid #000000;
+	background: #000000;
+	height: 3.5vh;
+	display: flex;
+	font-size: 1.8vh;
+	border-bottom: 1px solid #000000;
 }
 
 .wpnav-menu {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.leftMenu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .wpnav-item {
-  color: #ffffff;
+	color: #ffffff;
 }
 
 .wpbtn {
-  /* font-size: 15px;
+	/* font-size: 15px;
 	color: #ffffff;
 	justify-self: center;
 	align-items: center;
@@ -26,16 +33,74 @@
 	padding-bottom: 2px;
 	padding-left: 5px;
 	padding-right: 5px; */
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* font-size: 0.95rem; */
-  padding: 0.5vh 0.5vw 0.5vh 0.5vw;
-  cursor: pointer;
+	color: #ffffff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* font-size: 0.95rem; */
+	padding: 0.5vh 0.5vw 0.5vh 0.5vw;
+	cursor: pointer;
 }
 
 .wpbtn:hover {
-  background-color: purple;
-  color: #fff;
+	background-color: purple;
+	color: #fff;
 }
+
+.searchBar {
+	box-sizing: border-box;
+	border: 0rem;
+	height: 100%;
+	max-width: 15vw;
+	position: relative;
+}
+
+.searchInput {
+	box-sizing: border-box;
+	height: 100%;
+	padding-left: 30px;
+	font-size: 0.8rem;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	width: 100%;
+	/* transition: width 0.3s ease-in-out;
+  float: right; */
+}
+
+/* .searchInput:focus {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  padding-left: 40px;
+  font-size: 1.2rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  transition: width 0.4s ease-in-out;
+} */
+
+.searchBar:before {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	font-family: FontAwesome;
+	content: '\f002';
+	padding-left: 0.4vw;
+	size: 1rem;
+}
+
+/* .searchBar:focus {
+	border: 0.1rem solid #555;
+} */
+
+.search {
+	color: white;
+}
+
+/* #inpaint-btn,
+#removeBG-btn {
+	font-size: 3vh;
+	cursor: pointer;
+	padding: 1vw 1vh;
+} */

@@ -11,6 +11,7 @@ function Spells(props) {
     const [demoImgSRC1, setDemoImgSRC1] = useState(objectBefore)
     const [demoImgSRC2, setDemoImgSRC2] = useState(objectAfter)
     const { setisSpellDragActive } = props;
+    const {setIsMagicActionActive} =props;
 
     const handleRemoveObjectHover = () => {
         setDemoImgSRC1(objectBefore)
@@ -34,16 +35,18 @@ function Spells(props) {
     return (
         <div className='SpellsPanel'>
             <div className='SpellsMenu'>
-                <div className='SpellContainer'>
-                    <Tooltip title="Drag and drop on movie to remove object" placement="top">
+                <div className='SpellContainer' id='inpaint-btn' draggable='true' onDragStart={() => {props.setIsInpainting(true);}} onDragEnd={() => {props.setIsInpainting(false); setIsMagicActionActive(true)}}>
+                {/* <div className='SpellContainer'> */}
+                    <Tooltip title="Drag and drop on movie to remove object" placement="bottom">
                         <div className="SpellBox" onMouseEnter={handleRemoveObjectHover} onMouseLeave={handleMouseLeave}>
                             <i className="fa-solid fa-wand-magic-sparkles"></i>
                             <div className="toolTitle">Magic remove object</div>
                         </div>
                     </Tooltip>
                 </div>
-                <div className='SpellContainer'>
-                    <Tooltip title="Drag and drop on movie to remove background" placement="top">
+                <div className='SpellContainer' id='removeBG-btn' draggable='true' onDragStart={() => {props.setIsRemovingBG(true);}} onDragEnd={() => {props.setIsRemovingBG(false); setIsMagicActionActive(true)}}>
+                {/* <div className='SpellContainer'> */}
+                    <Tooltip title="Drag and drop on movie to remove background" placement="bottom">
                         <div className="SpellBox" onMouseEnter={handleRemoveBgHover} onMouseLeave={handleMouseLeave}>
                             <i className="fa-solid fa-wand-magic-sparkles"></i>
                             <div className="toolTitle">Magic remove background</div>
@@ -51,7 +54,7 @@ function Spells(props) {
                     </Tooltip>
                 </div>
                 <div className='SpellContainer'>
-                    <Tooltip title="Drag and drop on movie to create caption automatically" placement="top">
+                    <Tooltip title="Drag and drop on movie to create caption automatically" placement="bottom">
                         <div className="SpellBox" onMouseEnter={autoCapHover} onMouseLeave={handleMouseLeave}>
                             <i className="fa-solid fa-wand-magic-sparkles"></i>
                             <div className="toolTitle">Magic caption</div>

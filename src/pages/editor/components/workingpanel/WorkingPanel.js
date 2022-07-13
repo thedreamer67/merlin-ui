@@ -1,15 +1,16 @@
-import React from "react";
-import Wpnavbar from "./Wpnavbar";
+import React from 'react';
+import Wpnavbar from './Wpnavbar';
 
 function WorkingPanel(props) {
-  const { isMagicActionActive } = props;
-  const { setIsMagicActionActive } = props;
   const { setisSpellDragActive } = props;
+  const { isMagicActionActive, setIsMagicActionActive } = props;
   return (
     <Wpnavbar
       isMagicActionActive={isMagicActionActive}
       setIsMagicActionActive={setIsMagicActionActive}
       setisSpellDragActive={setisSpellDragActive}
+      setIsInpainting={props.setIsInpainting}
+      setIsRemovingBG={props.setIsRemovingBG}
     />
   );
 }
