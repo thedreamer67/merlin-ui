@@ -15,140 +15,160 @@ import AutoCaption from './autocaption/AutoCaption';
 import MagicAction from './MagicAction';
 import Search from './Search';
 import { ThemeProvider } from '@emotion/react';
+import { borderRadius } from '@mui/system';
 
 function Wpnavbar(props) {
-  const { isMagicActionActive, setIsMagicActionActive } = props;
-  const [libraryclick, setlibraryclick] = useState(false);
-  const [captionclick, setcaptionclick] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+	const { isMagicActionActive, setIsMagicActionActive } = props;
+	const [libraryclick, setlibraryclick] = useState(false);
+	const [captionclick, setcaptionclick] = useState(false);
+	const [isSearching, setIsSearching] = useState(false);
+	const [searchQuery, setSearchQuery] = useState('');
 
-  const handleLibraryClick = () => {
-    setlibraryclick(!libraryclick);
-    setcaptionclick(false);
-    setIsMagicActionActive(false);
-    setIsSearching(false);
-  };
-  const handleCaptionClick = () => {
-    setcaptionclick(!captionclick);
-    setlibraryclick(false);
-    setIsMagicActionActive(false);
-    setIsSearching(false);
-  };
+	const handleLibraryClick = () => {
+		setlibraryclick(!libraryclick);
+		setcaptionclick(false);
+		setIsMagicActionActive(false);
+		setIsSearching(false);
+	};
+	const handleCaptionClick = () => {
+		setcaptionclick(!captionclick);
+		setlibraryclick(false);
+		setIsMagicActionActive(false);
+		setIsSearching(false);
+	};
 
-  useEffect(() => {
-    if (isMagicActionActive) {
-      setlibraryclick(false);
-      setcaptionclick(false);
-      setIsSearching(false);
-    }
-  }, [isMagicActionActive]);
+	useEffect(() => {
+		if (isMagicActionActive) {
+			setlibraryclick(false);
+			setcaptionclick(false);
+			setIsSearching(false);
+		}
+	}, [isMagicActionActive]);
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    setIsSearching(true);
-    setlibraryclick(false);
-    setIsMagicActionActive(false);
-    setcaptionclick(false);
+	const handleSearchSubmit = (e) => {
+		e.preventDefault();
+		console.log(e.target.value);
+		setIsSearching(true);
+		setlibraryclick(false);
+		setIsMagicActionActive(false);
+		setcaptionclick(false);
 
-    //pass in searchquery to search below
-  };
+		//pass in searchquery to search below
+	};
 
-  // useEffect(() => {
-  //   if (libraryclick){
-  //     setIsMagicActionActive(false);
-  //     setcaptionclick(false);
-  //   }
-  // }, [libraryclick]);
+	// useEffect(() => {
+	//   if (libraryclick){
+	//     setIsMagicActionActive(false);
+	//     setcaptionclick(false);
+	//   }
+	// }, [libraryclick]);
 
-  // useEffect(() => {
-  //   if (captionclick){
-  //     setIsMagicActionActive(false);
-  //     setlibraryclick(false);
-  //   }
-  // }, [captionclick]);
+	// useEffect(() => {
+	//   if (captionclick){
+	//     setIsMagicActionActive(false);
+	//     setlibraryclick(false);
+	//   }
+	// }, [captionclick]);
 
-  const handleDragStart = () => {};
+	const handleDragStart = () => {};
 
-  const handleDragEnd = () => {};
+	const handleDragEnd = () => {};
 
-  return (
-    <>
-      <nav className='wpnavbar'>
-        <div className='wpnav-menu'>
-          <div className='leftMenu'>
-            <div className='wpnav-item'>
-              <div
-                onClick={handleLibraryClick}
-                style={{
-                  backgroundColor: libraryclick ? 'purple' : 'transparent',
-                }}>
-                <div className='wpbtn'>Library</div>
-              </div>
-            </div>
-            <div className='wpnav-item'>
-              <div
-                onClick={handleCaptionClick}
-                style={{
-                  backgroundColor: captionclick ? 'purple' : 'transparent',
-                }}>
-                <div className='wpbtn'>Auto Caption</div>
-              </div>
-            </div>
-          </div>
-          <div className='searchBar'>
-            <form
-              onSubmit={handleSearchSubmit}
-              style={{ height: '100%', width: '100%' }}>
-              <input
-                className='searchInput'
-                placeholder='Search video'
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                }}></input>
-              {/* <SearchBar updateSearchQuery={setSearchQuery} /> */}
-            </form>
-          </div>
-        </div>
-      </nav>
-      {libraryclick ? <Library /> : null}
-      {captionclick ? <AutoCaption /> : null}
-      {isMagicActionActive ? <MagicAction /> : null}
-      {isSearching ? <Search query={searchQuery} /> : null}
-      <div
-        style={{
-          padding: '1vw 1vh',
-        }}>
-        <i
-          className='fa-solid fa-wand-magic-sparkles'
-          id='inpaint-btn'
-          draggable='true'
-          onDragStart={() => {
-            props.setIsInpainting(true);
-            document.getElementById('video-player').style.border =
-              'dotted purple';
-          }}
-          onDragEnd={() => {
-            props.setIsInpainting(false);
-            document.getElementById('video-player').style.border = '';
-          }}></i>
-        <i
-          className='fa-solid fa-rectangle-xmark'
-          id='removeBG-btn'
-          draggable='true'
-          onDragStart={() => {
-            document.getElementById('video-player').style.border =
-              'dotted purple';
-            props.setIsRemovingBG(true);
-          }}
-          onDragEnd={() => {
-            document.getElementById('video-player').style.border = '';
-            props.setIsRemovingBG(false);
-          }}></i>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<nav className='wpnavbar'>
+				<div className='wpnav-menu'>
+					<div className='leftMenu'>
+						<div className='wpnav-item'>
+							<div
+								onClick={handleLibraryClick}
+								style={{
+									backgroundColor: libraryclick ? 'purple' : 'transparent',
+								}}
+							>
+								<div className='wpbtn'>Library</div>
+							</div>
+						</div>
+						<div className='wpnav-item'>
+							<div
+								onClick={handleCaptionClick}
+								style={{
+									backgroundColor: captionclick ? 'purple' : 'transparent',
+								}}
+							>
+								<div className='wpbtn'>Auto Caption</div>
+							</div>
+						</div>
+					</div>
+					<div className='searchBar'>
+						<form
+							onSubmit={handleSearchSubmit}
+							style={{ height: '100%', width: '100%' }}
+						>
+							<input
+								className='searchInput'
+								placeholder='Search video'
+								onChange={(e) => {
+									setSearchQuery(e.target.value);
+								}}
+							></input>
+							{/* <SearchBar updateSearchQuery={setSearchQuery} /> */}
+						</form>
+					</div>
+				</div>
+			</nav>
+			{libraryclick ? <Library /> : null}
+			{captionclick ? <AutoCaption /> : null}
+			{isMagicActionActive ? <MagicAction /> : null}
+			{isSearching ? <Search query={searchQuery} /> : null}
+			<div
+				style={{
+					padding: '1vw 1vh',
+				}}
+			>
+				<i
+					className='fa-solid fa-wand-magic-sparkles'
+					id='inpaint-btn'
+					draggable='true'
+					onDragStart={() => {
+						props.setIsInpainting(true);
+						document.getElementById('video-player').style.border =
+							'4px solid purple';
+						document.getElementById('video-player').style.borderRadius = '7px';
+						document.getElementById('video-player').style.boxShadow =
+							'0 0 10px purple';
+						document.getElementById('video-player').style.outline = '';
+					}}
+					onDragEnd={() => {
+						props.setIsInpainting(false);
+						document.getElementById('video-player').style.border = '';
+						document.getElementById('video-player').style.borderRadius = '';
+						document.getElementById('video-player').style.boxShadow = '';
+					}}
+				></i>
+				<i
+					className='fa-solid fa-rectangle-xmark'
+					id='removeBG-btn'
+					draggable='true'
+					onDragStart={() => {
+						props.setIsRemovingBG(true);
+						document.getElementById('video-player').style.border =
+							'4px solid purple';
+						document.getElementById('video-player').style.borderRadius = '7px';
+						document.getElementById('video-player').style.boxShadow =
+							'0 0 10px purple';
+						document.getElementById('video-player').style.outline = '';
+					}}
+					onDragEnd={() => {
+						props.setIsRemovingBG(false);
+						document.getElementById('video-player').style.border = '';
+						document.getElementById('video-player').style.borderRadius = '';
+						document.getElementById('video-player').style.boxShadow = '';
+					}}
+				></i>
+			</div>
+		</>
+	);
 }
 
 // const theme = createTheme({
