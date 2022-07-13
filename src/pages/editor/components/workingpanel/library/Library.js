@@ -3,9 +3,46 @@ import axios from 'axios';
 import './styles/Library.css';
 
 import pic from '../../../../../static/000031.jpg';
+import { useEffect } from 'react';
 
 function Library() {
+	const baseURL = 'http://127.0.0.1:8000';
+	const videoURL = `${baseURL}/video`;
+	const projectURL = `${baseURL}/project`;
 	const [selectedFile, setSelectedFile] = useState(null);
+	const [projectDetails, setProjectDetails] = useState(null);
+	const [isFetchingProject, setIsFetchingProject] = useState(true);
+	const [isUploading, setIsUploading] = useState(false);
+	const [videos, setVideos] = useState([]);
+	// const [isFetchingFrames, setIsFetchingFrames] = useState(false);
+	// const [thumbnails, setThumbnails] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get(projectURL)
+			.then((res) => {
+				setProjectDetails(JSON.parse(res.data));
+				setIsFetchingProject(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+
+	useEffect(() => {
+		if (projectDetails) {
+			console.log('Getting video details');
+			projectDetails.library_video_ids.forEach((id) => {
+				axios.get(`${videoURL}/${id}/details`).then((res) => {
+					setVideos([
+						...videos,
+						{ id: id, name: JSON.parse(res.data).filename },
+					]);
+					setIsFetchingProject(false);
+				});
+			});
+		}
+	}, [projectDetails]);
 
 	// On file select (from the pop up)
 	const onFileChange = (event) => {
@@ -15,23 +52,23 @@ function Library() {
 
 	// On file upload (click the upload button)
 	const onFileUpload = () => {
-		// Create an object of formData
-		const formData = new FormData();
-		// Update the formData object
-		formData.append('myFile', selectedFile, selectedFile.name);
-		// Details of the uploaded file
-		console.log(selectedFile);
-		// Request made to the backend api
-		// Send formData object
-		// add url to post to backend
-		axios
-			.post('someurl', formData, {
-				// receive two parameter endpoint url ,form data
-			})
-			.then((res) => {
-				// then print response status
+		if (!selectedFile) {
+			alert('Please select a file to upload!');
+		} else {
+			setIsUploading(true);
+			let formData = new FormData();
+			formData.append('file', selectedFile, selectedFile.name);
+			axios.post(videoURL, formData).then((res) => {
 				console.log(res.statusText);
+
+				setIsFetchingProject(true);
+				axios.get(projectURL).then((res) => {
+					setProjectDetails(JSON.parse(res.data));
+					setIsFetchingProject(false);
+					setIsUploading(false);
+				});
 			});
+		}
 	};
 
 	// File content to be displayed after
@@ -62,6 +99,19 @@ function Library() {
 	//     })
 	// }
 
+	const File = (props) => {
+		return (
+			<div className='libraryPreview'>
+				<img
+					className='libraryImg'
+					alt='Thumbnail not found'
+					src={props.thumbnail}
+				/>
+				<div className='libraryTitle'>{props.filename}</div>
+			</div>
+		);
+	};
+
 	return (
 		<div className='libraryPanel'>
 			<div className='libraryUpload'>
@@ -73,61 +123,32 @@ function Library() {
 				<button className='uploadBtn' onClick={onFileUpload}>
 					Upload media
 				</button>
+				{isUploading && (
+					<span style={{ paddingLeft: '1rem' }}>Uploading...</span>
+				)}
 				{fileData()}
 			</div>
 			<div className='libraryGrid'>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image1' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image2' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image3' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image4' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image5' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image6' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image7' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image8' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image9' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image10' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image11' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image12' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
-				<div className='libraryPreview'>
-					<img className='libraryImg' alt='image13' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div>
+				{!isFetchingProject &&
+					projectDetails.library_video_ids.map((id) => {
+						const vidName = 'file.mp4';
+						const video = videos.filter((vid) => {
+							return vid.id === id;
+						});
+						console.log(video);
+						return (
+							<File
+								thumbnail={`${videoURL}/${id}/frame/0`}
+								filename={video.name}
+								className='file'
+							/>
+						);
+						{
+							/* } else {
+							return <div>Loading...</div>;
+						} */
+						}
+					})}
 			</div>
 		</div>
 	);
