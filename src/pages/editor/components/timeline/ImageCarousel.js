@@ -13,39 +13,41 @@ function ImageCarousel(props) {
 
   return (
     <section>
-      <section className='framesGrid' onClick={handleFrameClick}>
-        <div className='last'></div>
-        <img className='framesImg' src={pic} alt='frame1' />
-        <img className='framesImg' src={pic} alt='frame2' />
-        <img className='framesImg' src={pic} alt='frame3' />
-        <img className='framesImg' src={pic} alt='frame4' />
-        <img className='framesImg' src={pic} alt='frame5' />
-        <img className='framesImg' src={pic} alt='frame6' />
-        <img className='framesImg' src={pic} alt='frame7' />
-        <img className='framesImg' src={pic} alt='frame8' />
-        <img className='framesImg' src={pic} alt='frame9' />
-        <img className='framesImg' src={pic} alt='frame10' />
-        <img className='framesImg' src={pic} alt='frame11' />
-        <img className='framesImg' src={pic} alt='frame12' />
-        <img className='framesImg' src={pic} alt='frame13' />
-        <img className='framesImg' src={pic} alt='frame14' />
-        <img className='framesImg' src={pic} alt='frame15' />
-        <img className='framesImg' src={pic} alt='frame16' />
-        <img className='framesImg' src={pic} alt='frame17' />
-        <img className='framesImg' src={pic} alt='frame18' />
-        <img className='framesImg' src={pic} alt='frame19' />
-        <img className='framesImg' src={pic} alt='frame20' />
-        <div
-          style={(function () {
-            const timeline = document.getElementById('timeline');
-            const scrollBarWidth = timeline.offsetWidth - timeline.clientWidth;
-            let lastWidth =
-              ((timeline.offsetWidth / 2 - scrollBarWidth) /
-                timeline.offsetWidth) *
-              100;
-            return { minWidth: lastWidth + 'vw' };
-          })()}></div>
-      </section>
+      <div style={{backgroundColor: frameclick ? 'purple' : 'transparent'}}>
+        <section className='framesGrid' onClick={handleFrameClick}>
+          <div className='last'></div>
+          <img className='framesImg' src={pic} alt='frame1' />
+          <img className='framesImg' src={pic} alt='frame2' />
+          <img className='framesImg' src={pic} alt='frame3' />
+          <img className='framesImg' src={pic} alt='frame4' />
+          <img className='framesImg' src={pic} alt='frame5' />
+          <img className='framesImg' src={pic} alt='frame6' />
+          <img className='framesImg' src={pic} alt='frame7' />
+          <img className='framesImg' src={pic} alt='frame8' />
+          <img className='framesImg' src={pic} alt='frame9' />
+          <img className='framesImg' src={pic} alt='frame10' />
+          <img className='framesImg' src={pic} alt='frame11' />
+          <img className='framesImg' src={pic} alt='frame12' />
+          <img className='framesImg' src={pic} alt='frame13' />
+          <img className='framesImg' src={pic} alt='frame14' />
+          <img className='framesImg' src={pic} alt='frame15' />
+          <img className='framesImg' src={pic} alt='frame16' />
+          <img className='framesImg' src={pic} alt='frame17' />
+          <img className='framesImg' src={pic} alt='frame18' />
+          <img className='framesImg' src={pic} alt='frame19' />
+          <img className='framesImg' src={pic} alt='frame20' />
+          <div
+            style={(function () {
+              const timeline = document.getElementById('timeline');
+              const scrollBarWidth = timeline.offsetWidth - timeline.clientWidth;
+              let lastWidth =
+                ((timeline.offsetWidth / 2 - scrollBarWidth) /
+                  timeline.offsetWidth) *
+                100;
+              return { minWidth: lastWidth + 'vw' };
+            })()}></div>
+        </section>
+      </div>
       {frameclick ? (
         <FrameTools
           handleMagicActionClick={handleMagicActionClick}

@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from "react";
+import "./styles/Wpnavbar.css";
+import Library from "./library/Library";
+import AutoCaption from "./autocaption/AutoCaption";
+import MagicAction from "./MagicAction";
+import Spells from "./Spells";
 // import Box from '@mui/material/Box';
 // import Input from '@mui/material/Input';
 // import InputLabel from '@mui/material/InputLabel';
@@ -9,10 +13,6 @@ import React, { useState, useEffect } from 'react';
 // import TextField from '@mui/material/TextField';
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import './styles/Wpnavbar.css';
-
-import Library from './library/Library';
-import AutoCaption from './autocaption/AutoCaption';
-import MagicAction from './MagicAction';
 import Search from './Search';
 import { ThemeProvider } from '@emotion/react';
 import { borderRadius } from '@mui/system';
@@ -23,25 +23,38 @@ function Wpnavbar(props) {
 	const [captionclick, setcaptionclick] = useState(false);
 	const [isSearching, setIsSearching] = useState(false);
 	const [searchQuery, setSearchQuery] = useState('');
+	const [spellsclick, setSpellsClick] = useState(false);
+	const { setisSpellDragActive } = props;
 
 	const handleLibraryClick = () => {
 		setlibraryclick(!libraryclick);
 		setcaptionclick(false);
 		setIsMagicActionActive(false);
 		setIsSearching(false);
+    	setSpellsClick(false);
 	};
 	const handleCaptionClick = () => {
 		setcaptionclick(!captionclick);
 		setlibraryclick(false);
 		setIsMagicActionActive(false);
 		setIsSearching(false);
+    	setSpellsClick(false);
 	};
+
+  const handleSpellsClick = () => {
+    setSpellsClick(!spellsclick);
+    setcaptionclick(false);
+    setlibraryclick(false);
+    setIsMagicActionActive(false);
+    setIsSearching(false);
+  };
 
 	useEffect(() => {
 		if (isMagicActionActive) {
 			setlibraryclick(false);
 			setcaptionclick(false);
 			setIsSearching(false);
+      		setSpellsClick(false);
 		}
 	}, [isMagicActionActive]);
 
@@ -52,7 +65,7 @@ function Wpnavbar(props) {
 		setlibraryclick(false);
 		setIsMagicActionActive(false);
 		setcaptionclick(false);
-
+		setSpellsClick(false);
 		//pass in searchquery to search below
 	};
 
@@ -99,6 +112,16 @@ function Wpnavbar(props) {
 								<div className='wpbtn'>Auto Caption</div>
 							</div>
 						</div>
+            <div className="wpnav-item">
+            <div
+              onClick={handleSpellsClick}
+              style={{
+                backgroundColor: spellsclick ? "purple" : "transparent",
+              }}
+            >
+              <div className="wpbtn">Spells</div>
+            </div>
+          </div>
 					</div>
 					<div className='searchBar'>
 						<form
@@ -118,10 +141,11 @@ function Wpnavbar(props) {
 				</div>
 			</nav>
 			{libraryclick ? <Library /> : null}
+      		{spellsclick ? <Spells setisSpellDragActive={setisSpellDragActive} setIsInpainting={props.setIsInpainting} setIsRemovingBG={props.setIsRemovingBG} setIsMagicActionActive={setIsMagicActionActive}/> : null}
 			{captionclick ? <AutoCaption /> : null}
 			{isMagicActionActive ? <MagicAction /> : null}
 			{isSearching ? <Search query={searchQuery} /> : null}
-			<div
+			{/* <div
 				style={{
 					padding: '1vw 1vh',
 				}}
@@ -166,7 +190,7 @@ function Wpnavbar(props) {
 						document.getElementById('video-player').style.boxShadow = '';
 					}}
 				></i>
-			</div>
+			</div> */}
 		</>
 	);
 }

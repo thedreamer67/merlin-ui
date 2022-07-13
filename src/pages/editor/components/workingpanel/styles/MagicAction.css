@@ -1,0 +1,47 @@
+.magicActionContainer{
+    display: flex;
+    flex: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 56.5vh;
+}
+
+.toolbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+    background-color: #000000;
+    color: white;
+}
+
+.toolContainer:hover {
+    background-color: purple;
+}
+
+.toolContainer{
+    display: flex;
+    flex-direction: row;
+    padding: 1px 5px;
+    width: 100%;
+    align-items: center;
+}
+
+.toolTitle {
+    margin-left: 5px;
+
+}
+
+.imageContainer{
+    height: 100%;
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.maskCanvas{
+    max-width:100%;
+    max-height: 100%;}

@@ -6,11 +6,12 @@ import video from '../../../../assets/food_recipe.mp4';
 import './VideoPlayer.css';
 
 const VideoPlayer = (props) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [played, setPlayed] = useState(0);
-  const [controls, setControls] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
-  const [hasEnded, setHasEnded] = useState(false);
+	const [isPlaying, setIsPlaying] = useState(false);
+	const [played, setPlayed] = useState(0);
+	const [controls, setControls] = useState(true);
+	const [isMuted, setIsMuted] = useState(false);
+	const [hasEnded, setHasEnded] = useState(false);
+	const {isSpellDragActive} = props
 
   const ref = useRef(null);
 
@@ -163,7 +164,7 @@ const VideoPlayer = (props) => {
 
   return (
     <div className='video-component'>
-      <div id='video-player' className='react-player'>
+      <div id='video-player' className={isSpellDragActive? 'react-player-dropzone' : 'react-player'}>
         <ReactPlayer
           // className='react-player'
           width='100%'

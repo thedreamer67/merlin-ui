@@ -36,6 +36,16 @@
 .nav-item {
 	font-size: 2vh;
 	padding-right: 0.5vw;
+	color: #ffffff;
+}
+
+.nav-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.9rem;
+	padding-left: 0.4rem;
+	color: #ffffff;
 }
 
 /* .nav-links {

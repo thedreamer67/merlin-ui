@@ -15,6 +15,7 @@ function Editor(props) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isSeeking, setIsSeeking] = useState(false);
   const [isMagicActionActive, setIsMagicActionActive] = useState(false);
+  const [isSpellDragActive, setisSpellDragActive] = useState(false);
   const [isInpainting, setIsInpainting] = useState(false);
   const [isRemovingBG, setIsRemovingBG] = useState(false);
   const [frameNum, setFrameNum] = useState(null);
@@ -42,7 +43,7 @@ function Editor(props) {
   };
 
   return (
-    <div>
+    <div className={styles.editorMain}>
       <Navbar handleStart={handleStart} />
       <div className={styles.outersplitScreen}>
         <div className={styles.topPane}>
@@ -51,6 +52,7 @@ function Editor(props) {
               <Workingpanel
                 isMagicActionActive={isMagicActionActive}
                 setIsMagicActionActive={setIsMagicActionActive}
+                setisSpellDragActive ={setisSpellDragActive}
                 setIsInpainting={setIsInpainting}
                 setIsRemovingBG={setIsRemovingBG}
               />
@@ -62,6 +64,7 @@ function Editor(props) {
                 scrollPosition={scrollPosition}
                 getScrollPosition={storeScrollPosition}
                 seeking={isSeeking}
+                isSpellDragActive={isSpellDragActive}
                 isInpainting={isInpainting}
                 isRemovingBG={isRemovingBG}
                 setFrameNum={setFrameNum}
