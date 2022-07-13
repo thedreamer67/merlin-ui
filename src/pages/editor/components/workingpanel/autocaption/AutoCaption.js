@@ -12,7 +12,7 @@ function AutoCaption() {
   const [subtitles, setSubtitles] = useState(subtitle_parsed);
 
   const [generateSubtitlesClicked, setGenerateSubtitlesClicked] =
-    useState(false);
+    useState(true);
 
   const handleGenerateSubtitles = () => {
     setGenerateSubtitlesClicked(!generateSubtitlesClicked);
@@ -37,7 +37,7 @@ function AutoCaption() {
   return (
     <div>
       {/* <div className="buttonrow"> */}
-      <button
+      {/* <button
         className={
           generateSubtitlesClicked
             ? "autocaptionbtn-selected"
@@ -46,7 +46,7 @@ function AutoCaption() {
         onClick={handleGenerateSubtitles}
       >
         Generate Caption
-      </button>
+      </button> */}
       <button className="autocaptionbtn" onClick={saveSubtitles}>
         Save
       </button>

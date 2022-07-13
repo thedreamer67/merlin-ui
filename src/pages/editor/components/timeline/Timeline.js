@@ -103,11 +103,14 @@ function Timeline(props) {
               >
                 {timelineFiles.length !== 0 ? (
                   timelineFiles.map((file) => (
-                    <ImageCarousel
-                      handleMagicActionClick={handleMagicActionClick}
-                      isMagicActionActive={isMagicActionActive}
-                      setIsMagicActionActive={setIsMagicActionActive}
-                    />
+                    <div className='displayMP4'>
+                      <ImageCarousel
+                        handleMagicActionClick={handleMagicActionClick}
+                        isMagicActionActive={isMagicActionActive}
+                        setIsMagicActionActive={setIsMagicActionActive}
+                      />
+                      
+                    </div>
                   ))
                 ) : (
                   <DropzonePrompt />
@@ -120,5 +123,7 @@ function Timeline(props) {
     </>
   );
 }
+
+
 
 export default Timeline;

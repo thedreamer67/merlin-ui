@@ -43,3 +43,9 @@
   height: 100%;
   /* padding-bottom: 1vh; */
 }
+
+.displayMP4{
+  display: flex;
+  flex-direction: column;
+
+}

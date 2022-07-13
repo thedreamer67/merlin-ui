@@ -18,7 +18,10 @@ function Editor(props) {
   const [isSpellDragActive, setisSpellDragActive] = useState(false);
   const [isInpainting, setIsInpainting] = useState(false);
   const [isRemovingBG, setIsRemovingBG] = useState(false);
+  const [isAutoCap, setisAutoCap] = useState(false);
   const [frameNum, setFrameNum] = useState(null);
+  const [captionclick, setcaptionclick] = useState(false);
+  const [spellsclick, setSpellsClick] = useState(true);
 
   const storeTime = (currentTime) => {
     setCurrentPlaybackTime(currentTime);
@@ -54,7 +57,12 @@ function Editor(props) {
                 setIsMagicActionActive={setIsMagicActionActive}
                 setisSpellDragActive ={setisSpellDragActive}
                 setIsInpainting={setIsInpainting}
+                setisAutoCap={setisAutoCap}
                 setIsRemovingBG={setIsRemovingBG}
+                setcaptionclick={setcaptionclick}
+                captionclick={captionclick}
+                spellsclick={spellsclick}
+                setSpellsClick={setSpellsClick}
               />
             </div>
             <div className={styles.rightPane}>
@@ -68,6 +76,10 @@ function Editor(props) {
                 isInpainting={isInpainting}
                 isRemovingBG={isRemovingBG}
                 setFrameNum={setFrameNum}
+                isAutoCap={isAutoCap}
+                setcaptionclick={setcaptionclick}
+                setIsMagicActionActive={setIsMagicActionActive}
+                setSpellsClick={setSpellsClick}
               />
             </div>
           </div>
