@@ -53,7 +53,7 @@ function Spells(props) {
                         </div>
                     </Tooltip>
                 </div>
-                <div className='SpellContainer' id='autocap-btn' draggable='true' onDragStart={() => {props.setisAutoCap(true);}} onDragEnd={() => {props.setisAutoCap(false);  handleMouseLeave()}}>
+                <div className='SpellContainer' id='autocap-btn' draggable='true' onDragStart={() => {props.setisAutoCap(true); props.setIsRemovingBG(false); props.setIsInpainting(false);}} onDragEnd={() => {props.setisAutoCap(false);  handleMouseLeave()}}>
                     <Tooltip title="Drag and drop on movie to create caption automatically" placement="bottom">
                         <div className="SpellBox" onMouseEnter={autoCapHover} onMouseLeave={handleMouseLeave}>
                             <i className="fa-solid fa-wand-magic-sparkles"></i>

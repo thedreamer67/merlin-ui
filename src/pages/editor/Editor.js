@@ -63,6 +63,11 @@ function Editor(props) {
                 captionclick={captionclick}
                 spellsclick={spellsclick}
                 setSpellsClick={setSpellsClick}
+                getTime={storeTime}
+                getDuration={storeDuration}
+                scrollPosition={scrollPosition}
+                getScrollPosition={storeScrollPosition}
+                seeking={isSeeking}
               />
             </div>
             <div className={styles.rightPane}>
@@ -80,6 +85,10 @@ function Editor(props) {
                 setcaptionclick={setcaptionclick}
                 setIsMagicActionActive={setIsMagicActionActive}
                 setSpellsClick={setSpellsClick}
+                setisSpellDragActive ={setisSpellDragActive}
+                setIsInpainting={setIsInpainting}
+                setisAutoCap={setisAutoCap}
+                setIsRemovingBG={setIsRemovingBG}
               />
             </div>
           </div>
