@@ -7,27 +7,14 @@ import { groupProps } from 'utila/lib/object';
 function ImageCarousel(props) {
   const { handleMagicActionClick, isMagicActionActive } = props;
   const [frameclick, setFrameclick] = useState(false);
-  const [isBackgroundActive, setIsBackgroundActive] = useState(false);
   const handleFrameClick = () => {
     setFrameclick(!frameclick);
   };
 
-  const handleIsBackgroundActive = () => {
-    setIsBackgroundActive(!isBackgroundActive)
-  };
-
-  useEffect(()=>{
-    if (frameclick){
-      setIsBackgroundActive(true)
-    }
-  })
-
   return (
     <section>
-      {/* <div style={{backgroundColor: frameclick ? 'purple' : 'transparent'}}> */}
-      <div>
-      <div className='layer' hidden={!isBackgroundActive}></div>
-        <section className='framesGrid' onClick={handleFrameClick} onMouseEnter={handleIsBackgroundActive} onMouseLeave={handleIsBackgroundActive}>
+      <div style={{backgroundColor: frameclick ? 'purple' : 'transparent'}}>
+        <section className='framesGrid' onClick={handleFrameClick}>
           <div className='last'></div>
               <img className='framesImg' src={pic} alt='frame1' />
               <img className='framesImg' src={pic} alt='frame2' />
