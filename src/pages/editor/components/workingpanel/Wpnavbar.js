@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./styles/Wpnavbar.css";
-import Library from "./library/Library";
-import AutoCaption from "./autocaption/AutoCaption";
-import MagicAction from "./MagicAction";
-import Spells from "./Spells";
+import React, { useState, useEffect } from 'react';
+import './styles/Wpnavbar.css';
+import Library from './library/Library';
+import AutoCaption from './autocaption/AutoCaption';
+import MagicAction from './MagicAction';
+import Spells from './Spells';
 // import Box from '@mui/material/Box';
 // import Input from '@mui/material/Input';
 // import InputLabel from '@mui/material/InputLabel';
@@ -31,30 +31,30 @@ function Wpnavbar(props) {
 		setcaptionclick(false);
 		setIsMagicActionActive(false);
 		setIsSearching(false);
-    	setSpellsClick(false);
+		setSpellsClick(false);
 	};
 	const handleCaptionClick = () => {
 		setcaptionclick(!captionclick);
 		setlibraryclick(false);
 		setIsMagicActionActive(false);
 		setIsSearching(false);
-    	setSpellsClick(false);
+		setSpellsClick(false);
 	};
 
-  const handleSpellsClick = () => {
-    setSpellsClick(!spellsclick);
-    setcaptionclick(false);
-    setlibraryclick(false);
-    setIsMagicActionActive(false);
-    setIsSearching(false);
-  };
+	const handleSpellsClick = () => {
+		setSpellsClick(!spellsclick);
+		setcaptionclick(false);
+		setlibraryclick(false);
+		setIsMagicActionActive(false);
+		setIsSearching(false);
+	};
 
 	useEffect(() => {
 		if (isMagicActionActive) {
 			setlibraryclick(false);
 			setcaptionclick(false);
 			setIsSearching(false);
-      		setSpellsClick(false);
+			setSpellsClick(false);
 		}
 	}, [isMagicActionActive]);
 
@@ -112,16 +112,16 @@ function Wpnavbar(props) {
 								<div className='wpbtn'>Auto Caption</div>
 							</div>
 						</div>
-            <div className="wpnav-item">
-            <div
-              onClick={handleSpellsClick}
-              style={{
-                backgroundColor: spellsclick ? "purple" : "transparent",
-              }}
-            >
-              <div className="wpbtn">Spells</div>
-            </div>
-          </div>
+						<div className='wpnav-item'>
+							<div
+								onClick={handleSpellsClick}
+								style={{
+									backgroundColor: spellsclick ? 'purple' : 'transparent',
+								}}
+							>
+								<div className='wpbtn'>Spells</div>
+							</div>
+						</div>
 					</div>
 					<div className='searchBar'>
 						<form
@@ -140,8 +140,21 @@ function Wpnavbar(props) {
 					</div>
 				</div>
 			</nav>
-			{libraryclick ? <Library /> : null}
-      		{spellsclick ? <Spells setisSpellDragActive={setisSpellDragActive} setIsInpainting={props.setIsInpainting} setIsRemovingBG={props.setIsRemovingBG} setIsMagicActionActive={setIsMagicActionActive}/> : null}
+			{libraryclick ? (
+				<Library
+					setIsDraggingVid={props.setIsDraggingVid}
+					setDraggingVidID={props.setDraggingVidID}
+					fetchProject={props.fetchProject}
+				/>
+			) : null}
+			{spellsclick ? (
+				<Spells
+					setisSpellDragActive={setisSpellDragActive}
+					setIsInpainting={props.setIsInpainting}
+					setIsRemovingBG={props.setIsRemovingBG}
+					setIsMagicActionActive={setIsMagicActionActive}
+				/>
+			) : null}
 			{captionclick ? <AutoCaption /> : null}
 			{isMagicActionActive ? <MagicAction /> : null}
 			{isSearching ? <Search query={searchQuery} /> : null}
