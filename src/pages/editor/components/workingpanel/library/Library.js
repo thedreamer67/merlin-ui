@@ -18,31 +18,29 @@ function Library() {
 	// const [thumbnails, setThumbnails] = useState([]);
 
 	useEffect(() => {
-		axios
-			.get(projectURL)
-			.then((res) => {
-				setProjectDetails(JSON.parse(res.data));
-				setIsFetchingProject(false);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
+		(async function getProject() {
+			const project = await axios
+				.get(projectURL)
+				.then((res) => {
+					return res.data;
+				})
+				.catch((err) => console.log(err));
 
-	useEffect(() => {
-		if (projectDetails) {
-			console.log('Getting video details');
-			projectDetails.library_video_ids.forEach((id) => {
-				axios.get(`${videoURL}/${id}/details`).then((res) => {
-					setVideos([
-						...videos,
-						{ id: id, name: JSON.parse(res.data).filename },
-					]);
-					setIsFetchingProject(false);
-				});
-			});
-		}
-	}, [projectDetails]);
+			const updatedVideos = await Promise.all(
+				JSON.parse(project).library_video_ids.map((id) => {
+					return axios
+						.get(`${videoURL}/${id}/details`)
+						.then((response) => {
+							return { id: id, name: JSON.parse(response.data).filename };
+						})
+						.catch((err) => console.log(err));
+				})
+			);
+			setProjectDetails(JSON.parse(project));
+			setVideos(updatedVideos);
+			setIsFetchingProject(false);
+		})();
+	}, []);
 
 	// On file select (from the pop up)
 	const onFileChange = (event) => {
@@ -56,17 +54,37 @@ function Library() {
 			alert('Please select a file to upload!');
 		} else {
 			setIsUploading(true);
+
 			let formData = new FormData();
 			formData.append('file', selectedFile, selectedFile.name);
 			axios.post(videoURL, formData).then((res) => {
 				console.log(res.statusText);
 
 				setIsFetchingProject(true);
-				axios.get(projectURL).then((res) => {
-					setProjectDetails(JSON.parse(res.data));
+
+				(async function getProject() {
+					const project = await axios
+						.get(projectURL)
+						.then((res) => {
+							return res.data;
+						})
+						.catch((err) => console.log(err));
+
+					const updatedVideos = await Promise.all(
+						JSON.parse(project).library_video_ids.map((id) => {
+							return axios
+								.get(`${videoURL}/${id}/details`)
+								.then((response) => {
+									return { id: id, name: JSON.parse(response.data).filename };
+								})
+								.catch((err) => console.log(err));
+						})
+					);
+					setProjectDetails(JSON.parse(project));
+					setVideos(updatedVideos);
 					setIsFetchingProject(false);
 					setIsUploading(false);
-				});
+				})();
 			});
 		}
 	};
@@ -131,22 +149,20 @@ function Library() {
 			<div className='libraryGrid'>
 				{!isFetchingProject &&
 					projectDetails.library_video_ids.map((id) => {
-						const vidName = 'file.mp4';
 						const video = videos.filter((vid) => {
+							console.log(`vid.id = ${vid}`);
 							return vid.id === id;
 						});
-						console.log(video);
-						return (
-							<File
-								thumbnail={`${videoURL}/${id}/frame/0`}
-								filename={video.name}
-								className='file'
-							/>
-						);
-						{
-							/* } else {
-							return <div>Loading...</div>;
-						} */
+						if (video) {
+							return (
+								<File
+									thumbnail={`${videoURL}/${id}/frame/0`}
+									filename={video[0].name}
+									className='file'
+								/>
+							);
+						} else {
+							return <>Loading...</>;
 						}
 					})}
 			</div>
