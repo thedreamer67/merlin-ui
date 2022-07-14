@@ -5,10 +5,22 @@
   padding-top: 1vh;
   padding-bottom: 1vh;
   max-width: 100vw;
+  z-index: 5;
+  position: relative;
 }
 
-.framesGrid:hover{
-	background-color: purple;
+/* .framesGrid:hover{
+  background: purple; 
+} */
+
+.layer{
+  height: 15vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  width: 100vw;
+  background-color: purple;
+  position: absolute;
+  z-index: 1;
 }
 
 .framesImg {

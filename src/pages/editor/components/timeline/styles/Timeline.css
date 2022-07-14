@@ -18,10 +18,11 @@
 .Line {
   align-self: center;
   justify-content: center;
-  position: absolute;
+  position: sticky;
   width: 0.4rem;
-  height: 99%;
+  height: 98%;
   background-color: white;
+  z-index: 9;
 }
 
 .LineScroll {
@@ -29,8 +30,9 @@
   justify-content: center;
   position: absolute;
   width: 0.4rem;
-  height: 95%;
+  height: 92%;
   background-color: white;
+  z-index: 9;
 }
 
 .timelineEmpty {
