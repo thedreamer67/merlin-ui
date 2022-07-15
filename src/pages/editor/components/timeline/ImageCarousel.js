@@ -22,7 +22,7 @@ function ImageCarousel(props) {
 			const videoDetails = await axios
 				.get(`${videoURL}/${props.videoID}/details`)
 				.then((res) => {
-					console.log(res.data);
+					// console.log(res.data);
 					return JSON.parse(res.data);
 				})
 				.catch((err) => console.log(err));

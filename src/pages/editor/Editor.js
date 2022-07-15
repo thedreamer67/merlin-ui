@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Editor.module.css';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -28,7 +28,7 @@ function Editor(props) {
 	const [isDraggingVid, setIsDraggingVid] = useState(false);
 	const [draggingVidID, setDraggingVidID] = useState(null);
 	const [project, setProject] = useState(null);
-	const [mainTimeline, setMainTimeline] = useState(null);
+	const [mainTimeline, setMainTimeline] = useState(null); //timelinevideoID, NOT videoID
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -56,11 +56,17 @@ function Editor(props) {
 		const project = await axios
 			.get(projectURL)
 			.then((res) => {
+				console.log(`Project details = ${res.data}`);
 				return JSON.parse(res.data);
 			})
 			.catch((err) => console.log(err));
 		setProject(project);
+		return project;
 	};
+
+	useEffect(() => {
+		console.log(`frameNum = ${frameNum}`);
+	}, [frameNum]);
 
 	return (
 		<div className={styles.editorMain}>
@@ -88,6 +94,8 @@ function Editor(props) {
 								setIsDraggingVid={setIsDraggingVid}
 								setDraggingVidID={setDraggingVidID}
 								fetchProject={fetchProject}
+								frameNum={frameNum}
+								mainTimeline={mainTimeline}
 							/>
 						</div>
 						<div className={styles.rightPane}>

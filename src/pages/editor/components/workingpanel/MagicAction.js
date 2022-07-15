@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './styles/MagicAction.css';
 import Tooltip from '@mui/material/Tooltip';
 import pic from '../../../../static/000031.jpg';
 
-function MagicAction() {
+function MagicAction(props) {
 	const [paintclick, setpaintclick] = useState(false);
+	const [frameToMask, setFrameToMask] = useState(null);
+
 	const handlePaintClick = () => {
 		setpaintclick(!paintclick);
 		setEraserclick(false);
@@ -24,6 +27,27 @@ function MagicAction() {
 		setpaintclick(false);
 		setEraserclick(false);
 	};
+
+	// const baseURL = 'http://127.0.0.1:8000';
+	// const projectURL = `${baseURL}/project`;
+	// const videoURL = `${baseURL}/video`;
+	// const timelineVideoURL = `${projectURL}/timelinevideo`;
+
+	// useEffect(() => {
+	// 	(async function getFrame() {
+	// 		// const project = await props.fetchProject();
+	// 		const videoDetails = await axios
+	// 			.get(`${timelineVideoURL}/${props.mainTimeline}/details`)
+	// 			.then((res) => {
+	// 				console.log(res.data);
+	// 				return JSON.parse(res.data);
+	// 			})
+	// 			.catch((err) => console.log(err));
+	// 		setFrameToMask(
+	// 			`${videoURL}/${videoDetails.video_id}/frame/${props.frameNum}`
+	// 		);
+	// 	})();
+	// }, []);
 
 	return (
 		<div className='magicActionContainer'>
@@ -83,14 +107,40 @@ function MagicAction() {
 					<button className='button'>Done</button>
 				</Tooltip>
 			</div>
-			<MaskImage paintclick={paintclick} eraserclick={eraserclick} />
+			<MaskImage
+				paintclick={paintclick}
+				eraserclick={eraserclick}
+				frameToMask={frameToMask}
+				mainTimeline={props.mainTimeline}
+				frameNum={props.frameNum}
+			/>
 		</div>
 	);
 }
 
 function MaskImage(props) {
+	const [newSRC, setNewSRC] = useState(null);
 	const { paintclick, eraserclick } = props;
 	const [imgclick, setimgclick] = useState(false);
+
+	const baseURL = 'http://127.0.0.1:8000';
+	const projectURL = `${baseURL}/project`;
+	const videoURL = `${baseURL}/video`;
+	const timelineVideoURL = `${projectURL}/timelinevideo`;
+
+	useEffect(() => {
+		(async function getFrame() {
+			const videoDetails = await axios
+				.get(`${timelineVideoURL}/${props.mainTimeline}/details`)
+				.then((res) => {
+					console.log(res.data);
+					return JSON.parse(res.data);
+				})
+				.catch((err) => console.log(err));
+			setNewSRC(`${videoURL}/${videoDetails.video_id}/frame/${props.frameNum}`);
+		})();
+	}, []);
+
 	const handleImgClick = (e) => {
 		if (paintclick) {
 			console.log('Positive clicked');
@@ -111,7 +161,7 @@ function MaskImage(props) {
 	const [y, setY] = useState(0);
 
 	//set frame selected to show at start
-	const [newSRC, setNewSRC] = useState('https://picsum.photos/200/300');
+
 	useEffect(() => {
 		//update image shown each time it is clicked
 		if (imgclick) {
@@ -127,9 +177,12 @@ function MaskImage(props) {
 
 	return (
 		<div className='imageContainer'>
-			{imgclick ? null : (
+			{newSRC && (
 				<img className='maskCanvas' onClick={handleImgClick} src={newSRC}></img>
 			)}
+			{/* {imgclick ? null : (
+				<img className='maskCanvas' onClick={handleImgClick} src={newSRC}></img>
+			)} */}
 			{imgclick ? <Loading /> : null}
 		</div>
 	);

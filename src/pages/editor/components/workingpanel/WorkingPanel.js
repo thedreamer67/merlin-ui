@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Wpnavbar from './Wpnavbar';
 
 function WorkingPanel(props) {
@@ -6,6 +6,10 @@ function WorkingPanel(props) {
 	const { isMagicActionActive, setIsMagicActionActive } = props;
 	const { captionclick, setcaptionclick } = props;
 	const { spellsclick, setSpellsClick } = props;
+
+	useEffect(() => {
+		console.log(`WorkingPanel.js: ${props.frameNum}`);
+	});
 
 	return (
 		<Wpnavbar
@@ -22,6 +26,8 @@ function WorkingPanel(props) {
 			setIsDraggingVid={props.setIsDraggingVid}
 			setDraggingVidID={props.setDraggingVidID}
 			fetchProject={props.fetchProject}
+			frameNum={props.frameNum}
+			mainTimeline={props.mainTimeline}
 		/>
 	);
 }

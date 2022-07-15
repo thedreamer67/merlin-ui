@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import './styles/Spells.css';
 import original from '../../../../images/homebackground.jpg';
@@ -34,6 +34,7 @@ function Spells(props) {
 		setDemoImgSRC2(original);
 		setisSpellDragActive(false);
 	};
+
 	return (
 		<div className='SpellsPanel'>
 			<div className='SpellsMenu'>

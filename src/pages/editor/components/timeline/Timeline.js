@@ -53,6 +53,22 @@ function Timeline(props) {
 	};
 
 	useDropzone({});
+
+	useEffect(() => {
+		(async function loadTimeline() {
+			const project = await props.fetchProject();
+			setMaxFrames(project.timelines[0].video_objects[0].frame_end);
+			const timelineVids = project.timelines.map((tl) => {
+				return tl.video_objects[0].video_id;
+			});
+			setTimelineVids([...timelineVids]);
+			if (timelineVids.length > 0) {
+				props.setMainTimeline(project.timelinevideo_ids[0]);
+				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
+			}
+		})();
+	}, []);
+
 	useEffect(() => {
 		async function handleDrop() {
 			if (props.isDraggingVid) {
@@ -61,22 +77,13 @@ function Timeline(props) {
 				await axios
 					.post(`${timelineURL}/${props.draggingVidID}`)
 					.then((res) => {
-						console.log(`Posted new timelinevideo: ${res}`);
-						// if (timelineVids.length === 0) {
-						// 	props.setMainTimeline(res.data);
-						// }
+						console.log(`Posted new timelinevideo: ${res.data}`);
 					})
 					.catch((err) => console.log(err));
 
-				const project = await axios
-					.get(projectURL)
-					.then((res) => {
-						console.log(`Project details: ${res.data}`);
-						return JSON.parse(res.data);
-					})
-					.catch((err) => console.log(err));
-				props.fetchProject();
+				let project = await props.fetchProject();
 				props.setMainTimeline(project.timelinevideo_ids[0]);
+				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
 
 				if (project.audio_path === '') {
 					const videoDetails = await axios
@@ -90,10 +97,12 @@ function Timeline(props) {
 						.catch((err) => console.log(err));
 				}
 
+				project = await props.fetchProject();
+
 				console.log(
 					`end frame: ${project.timelines[0].video_objects[0].frame_end}`
 				);
-				await setMaxFrames(project.timelines[0].video_objects[0].frame_end);
+				setMaxFrames(project.timelines[0].video_objects[0].frame_end);
 				const timelineVids = project.timelines.map((tl) => {
 					return tl.video_objects[0].video_id;
 				});
