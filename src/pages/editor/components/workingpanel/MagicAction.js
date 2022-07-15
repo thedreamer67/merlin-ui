@@ -120,8 +120,11 @@ function MagicAction(props) {
 
 function MaskImage(props) {
 	const [newSRC, setNewSRC] = useState(null);
+	const [videoDetails, setVideoDetails] = useState(null);
 	const { paintclick, eraserclick } = props;
 	const [imgclick, setimgclick] = useState(false);
+	const [x, setX] = useState(0);
+	const [y, setY] = useState(0);
 
 	const baseURL = 'http://127.0.0.1:8000';
 	const projectURL = `${baseURL}/project`;
@@ -137,30 +140,45 @@ function MaskImage(props) {
 					return JSON.parse(res.data);
 				})
 				.catch((err) => console.log(err));
+			setVideoDetails(videoDetails);
 			setNewSRC(`${videoURL}/${videoDetails.video_id}/frame/${props.frameNum}`);
 		})();
 	}, []);
 
 	const handleImgClick = (e) => {
 		if (paintclick) {
-			console.log('Positive clicked');
-			setX(e.pageX - e.target.offsetLeft);
-			setY(e.pageY - e.target.offsetTop);
-			setimgclick(!imgclick);
+			const x = e.pageX - e.target.offsetLeft;
+			const y = e.pageY - e.target.offsetTop;
+			console.log(
+				`e.target.clientHeight = ${e.target.clientHeight}, e.target.clientWidth = ${e.target.clientWidth}`
+			);
+			const xActual = (x / e.target.clientWidth) * videoDetails.frame_size[0];
+			const yActual = (y / e.target.clientHeight) * videoDetails.frame_size[1];
+
+			console.log(`Positive clicked with coords = (${xActual},${yActual})`);
+			console.log('Fetching mask...');
+			(async function sendMaskCoords() {
+				await axios
+					.put(`${videoURL}/${videoDetails.video_id}/annotation?frame_num=0`, [
+						[xActual, yActual, true],
+					])
+					.then((res) => console.log(res.data))
+					.catch((err) => console.log(err));
+				setNewSRC(`${videoURL}/${videoDetails.video_id}/annotation`);
+			})();
+			// setX(e.pageX - e.target.offsetLeft);
+			// setY(e.pageY - e.target.offsetTop);
+			// setimgclick(!imgclick);
 			// console.log(x, y);
 		}
 		if (eraserclick) {
 			console.log('Negative clicked');
 			setX(e.pageX - e.target.offsetLeft);
 			setY(e.pageY - e.target.offsetTop);
-			setimgclick(!imgclick);
+			// setimgclick(!imgclick);
 			// console.log(x, y);
 		}
 	};
-	const [x, setX] = useState(0);
-	const [y, setY] = useState(0);
-
-	//set frame selected to show at start
 
 	useEffect(() => {
 		//update image shown each time it is clicked
@@ -173,7 +191,7 @@ function MaskImage(props) {
 			console.log('Mask fetched!');
 			setimgclick(false); //set to false to display image
 		}
-	}, [imgclick]);
+	}, []);
 
 	return (
 		<div className='imageContainer'>
