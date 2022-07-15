@@ -25,6 +25,11 @@ function Wpnavbar(props) {
 	const [searchQuery, setSearchQuery] = useState('');
 	const { spellsclick, setSpellsClick } = props;
 	const { setisSpellDragActive } = props;
+	const [heatmap, setHeatmap] = useState('')
+	const [probability, setProbability] = useState('')
+
+	const axios = require('axios');
+  	const baseURL = 'http://127.0.0.1:8000';
 
 	const handleLibraryClick = () => {
 		setlibraryclick(!libraryclick);
@@ -58,15 +63,61 @@ function Wpnavbar(props) {
 		}
 	}, [isMagicActionActive]);
 
+	async function QuerySearch() {
+		const video_id = '786614'
+		const searchURL = `${baseURL}/video/${video_id}/search/${searchQuery}`;
+		console.log(searchURL)
+		const payload = {video_id: video_id,
+						 search_query: searchQuery}
+		await axios
+			.post(searchURL, payload)
+			.then((res) => {
+			console.log(res.status);
+			console.log('Getting heatmap...')
+			getSearchHeatMap()
+		})
+		.catch((err) => console.log(err));
+	}
+
+	async function getSearchHeatMap() {
+		const video_id = '786614'
+		const heatmapURL = `${baseURL}/video/${video_id}/heatmap`;
+		console.log(heatmapURL)
+		const heatmap = await axios.get(heatmapURL).then((res) => {
+			console.log(res.status);
+			// console.log(res.data)
+			console.log(res.data)
+			setHeatmap(res.data)
+			console.log('Getting probability...')
+			getSearchProbability()
+		})
+		.catch((err) => console.log(err));
+	}
+	
+	async function getSearchProbability() {
+		const video_id = '786614'
+		const probabilityURL = `${baseURL}/video/${video_id}/search_probabilities`;
+		console.log(probabilityURL)
+		const probability = await axios
+			.get(probabilityURL)
+			.then((res) => {
+			// console.log(res.status);
+			console.log(res.data)
+			setProbability(res.data)
+			setIsSearching(true)
+		})
+		.catch((err) => console.log(err));
+	}
+
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
-		console.log(e.target.value);
-		setIsSearching(true);
+		// console.log(e.target.value);
 		setlibraryclick(false);
 		setIsMagicActionActive(false);
 		setcaptionclick(false);
 		setSpellsClick(false);
 		//pass in searchquery to search below
+		QuerySearch()
 	};
 
 	// useEffect(() => {
@@ -158,7 +209,7 @@ function Wpnavbar(props) {
 			) : null}
 			{captionclick ? <AutoCaption /> : null}
 			{isMagicActionActive ? <MagicAction /> : null}
-			{isSearching ? <Search query={searchQuery} /> : null}
+			{isSearching ? <Search query={searchQuery} heatmap={heatmap} probability={probability}/> : null}
 			{/* <div
 				style={{
 					padding: '1vw 1vh',

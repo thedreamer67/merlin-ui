@@ -119,11 +119,13 @@ const VideoPlayer = (props) => {
 		}
 
   async function generateCaption() {
-    // const payload = {};
-    console.log(captionURL)
-    const res = await axios.post(captionURL);
-    const data = res.data;
-    console.log(data);
+    const payload = {}
+    await axios
+      .post(captionURL, payload)
+      .then((res) => {
+        console.log(res.data);
+    })
+    .catch((err) => console.log(err));
   }
 
 	useEffect(() => {
