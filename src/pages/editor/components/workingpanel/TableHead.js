@@ -17,7 +17,7 @@ const TableHead = ({ columns, handleSorting  }) => {
       <tr>
         {columns.map(({ label, accessor }) => {
         return (
-        <th key={accessor} onClick={() => handleSortingChange(accessor)}>
+        <th key={accessor} style={{cursor:'pointer'}} onClick={() => handleSortingChange(accessor)}>
         {label}
         </th>
         );

@@ -17,7 +17,7 @@ const TableBody = ({ maxFrames, setSearchVideoSeeking, setSliderPosition, tableD
         <tr key={data.id}>
          {columns.map(({ accessor }) => {
           const tData = data[accessor] ? data[accessor] : "——";
-          return <td key={accessor} onClick={() => accessor==="frame_number" ? handleJumpToFrame({tData}): null }>{tData}</td>;
+          return <td key={accessor} style={accessor==="frame_number" ? {cursor:'pointer'}: null} onClick={() => accessor==="frame_number" ? handleJumpToFrame({tData}): null }>{tData}</td>;
          })}
         </tr>
        );
