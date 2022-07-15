@@ -53,7 +53,6 @@ function Editor(props) {
 	};
 
 	const fetchProject = async () => {
-		console.log('fetching...');
 		const project = await axios
 			.get(projectURL)
 			.then((res) => {
@@ -64,10 +63,6 @@ function Editor(props) {
 		setProject(project);
 		return project;
 	};
-
-	useEffect(() => {
-		console.log(`frameNum = ${frameNum}`);
-	}, [frameNum]);
 
 	return (
 		<div className={styles.editorMain}>

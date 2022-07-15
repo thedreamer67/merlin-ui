@@ -57,14 +57,14 @@ function Timeline(props) {
 	useEffect(() => {
 		(async function loadTimeline() {
 			const project = await props.fetchProject();
-			setMaxFrames(project.timelines[0].video_objects[0].frame_end);
 			const timelineVids = project.timelines.map((tl) => {
 				return tl.video_objects[0].video_id;
 			});
 			setTimelineVids([...timelineVids]);
 			if (timelineVids.length > 0) {
-				props.setMainTimeline(project.timelinevideo_ids[0]);
 				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
+				props.setMainTimeline(project.timelinevideo_ids[0]);
+				setMaxFrames(project.timelines[0].video_objects[0].frame_end);
 			}
 		})();
 	}, []);

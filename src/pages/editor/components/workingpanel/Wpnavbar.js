@@ -150,10 +150,6 @@ function Wpnavbar(props) {
 
 	const handleDragEnd = () => {};
 
-	useEffect(() => {
-		console.log(`Wpnavbar.js: ${props.frameNum}`);
-	});
-
 	return (
 		<>
 			<nav className='wpnavbar'>
@@ -227,8 +223,7 @@ function Wpnavbar(props) {
 			{isMagicActionActive ? (
 				<MagicAction
 					frameNum={props.frameNum}
-					// mainTimeline={props.mainTimeline}
-					mainTimeline={'495342'}
+					mainTimeline={props.mainTimeline}
 					fetchProject={props.fetchProject}
 				/>
 			) : null}

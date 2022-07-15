@@ -7,10 +7,6 @@ function WorkingPanel(props) {
 	const { captionclick, setcaptionclick } = props;
 	const { spellsclick, setSpellsClick } = props;
 
-	useEffect(() => {
-		console.log(`WorkingPanel.js: ${props.frameNum}`);
-	});
-
 	return (
 		<Wpnavbar
 			isMagicActionActive={isMagicActionActive}
