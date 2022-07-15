@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
-// import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './styles/Navbar.css';
-import Dropdown from './Dropdown';
 
 function Navbar(props) {
-  const { handleStart } = props;
-  const [click, setClick] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
+	const { handleStart } = props;
+	const [click, setClick] = useState(false);
 
-  const handleClick = () => setClick(!click);
+	const baseURL = 'http://127.0.0.1:8000';
+	const projectURL = `${baseURL}/project`;
 
-  const onMouseEnter = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(true);
-    }
-  };
+	const handleClick = () => setClick(!click);
 
-  const onMouseLeave = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(false);
-    }
-  };
+	const btnStyle = { cursor: 'pointer' };
 
-  const btnStyle = { cursor: 'pointer' };
+	const handleSave = () => {
+		(async function saveProject() {
+			await axios.put(`${projectURL}/save`);
+			console.log('saving project');
+			alert('Project saved!');
+		})();
+	};
+
+	const handleX = () => {
+		(async function reloadProject() {
+			console.log('quitting');
+			await axios.get(`${projectURL}/save`);
+		})();
+		handleStart();
+	};
 
 	return (
 		<>
 			<nav className='navbar'>
 				<div className='navbar-left-menu'>
-					<i class="fa-solid fa-hat-wizard"></i>
+					<i class='fa-solid fa-hat-wizard'></i>
 					<div className='nav-title'>MERLIN</div>
 				</div>
-				
+
 				<div className='navbar-right-menu'>
 					<div className='nav-item'>
 						<i
 							className='fa-solid fa-floppy-disk'
 							style={btnStyle}
+							onClick={handleSave}
 						></i>
 					</div>
 					<div className='nav-item'>
-						<i class="fa-solid fa-download"></i>
+						<i className='fa-solid fa-download' style={btnStyle}></i>
 					</div>
 					<div className='nav-item'>
 						<i
@@ -62,7 +63,7 @@ function Navbar(props) {
 						<i
 							className='fa-regular fa-circle-xmark'
 							style={btnStyle}
-							onClick={handleStart}
+							onClick={handleX}
 						></i>
 					</div>
 				</div>

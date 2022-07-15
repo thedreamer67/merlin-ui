@@ -13,6 +13,9 @@ const VideoPlayer = (props) => {
 	const [hasEnded, setHasEnded] = useState(false);
 	const { isSpellDragActive } = props;
 
+	const baseURL = '127.0.0.1:8000';
+	const outputVideoURL = `${baseURL}/output_video`;
+
 	const ref = useRef(null);
 
 	// useEffect(() => {

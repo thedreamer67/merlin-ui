@@ -28,6 +28,7 @@ function Editor(props) {
 	const [isDraggingVid, setIsDraggingVid] = useState(false);
 	const [draggingVidID, setDraggingVidID] = useState(null);
 	const [project, setProject] = useState(null);
+	const [mainTimeline, setMainTimeline] = useState(null);
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -61,57 +62,6 @@ function Editor(props) {
 		setProject(project);
 	};
 
-	// return (
-	// 	<div className={styles.editorMain}>
-	// 		<Navbar handleStart={handleStart} />
-	// 		<div className={styles.outersplitScreen}>
-	// 			<div className={styles.topPane}>
-	// 				<div className={styles.innersplitScreen}>
-	// 					<div className={styles.leftPane}>
-	// 						<Workingpanel
-	// 							isMagicActionActive={isMagicActionActive}
-	// 							setIsMagicActionActive={setIsMagicActionActive}
-	// 							setisSpellDragActive={setisSpellDragActive}
-	// 							setIsInpainting={setIsInpainting}
-	// 							setIsRemovingBG={setIsRemovingBG}
-	// 							setIsDraggingVid={setIsDraggingVid}
-	// 							setDraggingVidID={setDraggingVidID}
-	// 							fetchProject={fetchProject}
-	// 						/>
-	// 					</div>
-	// 					<div className={styles.rightPane}>
-	// 						<VideoPlayer
-	// 							getTime={storeTime}
-	// 							getDuration={storeDuration}
-	// 							scrollPosition={scrollPosition}
-	// 							getScrollPosition={storeScrollPosition}
-	// 							seeking={isSeeking}
-	// 							isSpellDragActive={isSpellDragActive}
-	// 							isInpainting={isInpainting}
-	// 							isRemovingBG={isRemovingBG}
-	// 							setFrameNum={setFrameNum}
-	// 							fetchProject={fetchProject}
-	// 						/>
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 			<div className={styles.bottomPane}>
-	// 				<Timeline
-	// 					currentTime={currentPlaybackTime}
-	// 					duration={duration}
-	// 					getScrollPosition={storeScrollPosition}
-	// 					getSeeking={storeIsSeeking}
-	// 					handleMagicActionClick={handleMagicActionClick}
-	// 					isMagicActionActive={isMagicActionActive}
-	// 					setIsMagicActionActive={setIsMagicActionActive}
-	// 					isDraggingVid={isDraggingVid}
-	// 					draggingVidID={draggingVidID}
-	// 					fetchProject={fetchProject}
-	// 				/>
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	// );
 	return (
 		<div className={styles.editorMain}>
 			<Navbar handleStart={handleStart} />
@@ -176,6 +126,7 @@ function Editor(props) {
 						isDraggingVid={isDraggingVid}
 						draggingVidID={draggingVidID}
 						fetchProject={fetchProject}
+						setMainTimeline={setMainTimeline}
 					/>
 				</div>
 			</div>
