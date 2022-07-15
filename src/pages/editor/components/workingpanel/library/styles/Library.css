@@ -1,66 +1,68 @@
 .libraryPanel {
-  display: grid;
-  height: 100%;
-  grid-template-rows: 10% 90%;
+	display: grid;
+	height: 100%;
+	grid-template-rows: 10% 90%;
 }
 
 .libraryUpload {
-  align-items: start;
-  padding-top: 0.5vh;
-  padding-left: 0.5vw;
-  font-size: 1.1rem;
+	align-items: start;
+	padding-top: 0.5vh;
+	padding-left: 0.5vw;
+	font-size: 0.85rem;
+	/* display: flex; */
+	/* flex-direction: row; */
 }
 
 .uploadBtn {
-  padding: 0.2vh 0.5vw;
-  outline: none;
-  border: none;
-  font-size: 1.1rem;
-  color: #fff;
-  cursor: pointer;
-  background-color: #000000;
-  margin-left: 1vw;
+	padding: 0.2vh 0.5vw;
+	outline: none;
+	border: none;
+	font-size: 0.85rem;
+	color: #fff;
+	cursor: pointer;
+	background-color: #000000;
+	margin-left: 1vw;
 }
 
 .uploadBtn:hover {
-  background-color: purple;
-  color: #ffffff;
-  font-size: 1.5vh;
-  padding: 0.5vh 0.5vw;
+	background-color: purple;
+	color: #ffffff;
+	font-size: 0.85rem;
 }
 
 .libraryGrid {
-  margin-top: 3.2vh;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  gap: 1vh 0vw;
-  overflow: auto;
-  overflow-x: hidden;
-  max-height: 47.4vh;
-  min-height: 47.4vh;
-  max-width: 100vw;
+	margin-top: 4.5vh;
+	display: grid;
+	grid-template-columns: 25% 25% 25% 25%;
+	gap: 1vh 0vw;
+	overflow: auto;
+	overflow-x: hidden;
+	max-height: 46vh;
+	min-height: 46vh;
+	max-width: 100vw;
 }
 
 .libraryPreview {
-  width: 100%;
-  text-align: center;
-  padding-bottom: 1vh;
+	width: 100%;
+	text-align: center;
+	padding-bottom: 1.5vh;
 }
 
 .libraryImg {
-  width: 90%;
-  cursor: pointer;
+	width: 90%;
+	cursor: pointer;
 }
 
 .libraryImg:hover,
 .libraryImg:active {
-  transition: all 0.3s ease-out;
-  opacity: 0.3;
+	transition: all 0.3s ease-out;
+	opacity: 0.3;
 }
 
 .libraryTitle {
+	font-size: 0.85rem;
 }
 
 .fileDetails {
-  padding-left: 0.2rem;
+	padding-left: 0.2rem;
 }
