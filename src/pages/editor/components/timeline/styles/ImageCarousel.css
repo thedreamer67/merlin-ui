@@ -26,3 +26,22 @@
   /* min-width: 48.81vw; */
   min-width: 49.1vw;
 }
+
+.framesContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.AudioBlock{
+  background-color: chartreuse;
+}
+
+.first-padding{
+  min-width: 50vw;
+  background-color: transparent;
+}
+
+.AudioContainer{
+  display: flex;
+  flex-direction: row;
+}

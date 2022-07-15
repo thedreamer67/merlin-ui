@@ -35,7 +35,7 @@ function Spells(props) {
     return (
         <div className='SpellsPanel'>
             <div className='SpellsMenu'>
-                <div className='SpellContainer' id='inpaint-btn' draggable='true' onDragStart={() => {props.setIsInpainting(true);}} onDragEnd={() => {props.setIsInpainting(false); setIsMagicActionActive(true)}}>
+                <div className='SpellContainer' id='inpaint-btn' draggable='true' onDragStart={() => {props.setIsInpainting(true);}} onDragEnd={() => {props.setIsInpainting(false); handleMouseLeave()}}>
                 {/* <div className='SpellContainer'> */}
                     <Tooltip title="Drag and drop on movie to remove object" placement="bottom">
                         <div className="SpellBox" onMouseEnter={handleRemoveObjectHover} onMouseLeave={handleMouseLeave}>
@@ -44,7 +44,7 @@ function Spells(props) {
                         </div>
                     </Tooltip>
                 </div>
-                <div className='SpellContainer' id='removeBG-btn' draggable='true' onDragStart={() => {props.setIsRemovingBG(true);}} onDragEnd={() => {props.setIsRemovingBG(false); setIsMagicActionActive(true)}}>
+                <div className='SpellContainer' id='removeBG-btn' draggable='true' onDragStart={() => {props.setIsRemovingBG(true);}} onDragEnd={() => {props.setIsRemovingBG(false); handleMouseLeave()}}>
                 {/* <div className='SpellContainer'> */}
                     <Tooltip title="Drag and drop on movie to remove background" placement="bottom">
                         <div className="SpellBox" onMouseEnter={handleRemoveBgHover} onMouseLeave={handleMouseLeave}>
@@ -53,7 +53,7 @@ function Spells(props) {
                         </div>
                     </Tooltip>
                 </div>
-                <div className='SpellContainer'>
+                <div className='SpellContainer' id='autocap-btn' draggable='true' onDragStart={() => {props.setisAutoCap(true); props.setIsRemovingBG(false); props.setIsInpainting(false);}} onDragEnd={() => {props.setisAutoCap(false);  handleMouseLeave()}}>
                     <Tooltip title="Drag and drop on movie to create caption automatically" placement="bottom">
                         <div className="SpellBox" onMouseEnter={autoCapHover} onMouseLeave={handleMouseLeave}>
                             <i className="fa-solid fa-wand-magic-sparkles"></i>

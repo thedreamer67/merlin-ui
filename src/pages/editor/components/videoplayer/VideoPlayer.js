@@ -86,6 +86,10 @@ const VideoPlayer = (props) => {
 					console.log(
 						`casting spell, isInpainting=${props.isInpainting} vs isRemovingBG=${props.isRemovingBG}, frameNum=${frameNum}`
 					);
+					props.setIsMagicActionActive(true);
+					props.setcaptionclick(false);
+					props.setSpellsClick(false);
+					props.setisSpellDragActive(false);
 				}
 			}
 		}
@@ -95,6 +99,27 @@ const VideoPlayer = (props) => {
 				document
 					.getElementById('video-player')
 					.removeEventListener('drop', getFrame);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+	});
+
+	useEffect(() => {
+		function getCap(e) {
+			if (props.isAutoCap) {
+				props.setcaptionclick(true);
+				props.setIsMagicActionActive(false);
+				props.setSpellsClick(false);
+				props.setisSpellDragActive(false);
+			}
+		}
+		document.getElementById('video-player').addEventListener('drop', getCap);
+		return () => {
+			try {
+				document
+					.getElementById('video-player')
+					.removeEventListener('drop', getCap);
 			} catch (err) {
 				console.log(err);
 			}

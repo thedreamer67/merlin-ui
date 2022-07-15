@@ -75,11 +75,21 @@ function MaskImage(props) {
     const{paintclick, eraserclick} = props
     const [imgclick, setimgclick] = useState(false);
     const handleImgClick = (e) => {
-        setimgclick(!imgclick);
-        console.log('Is this happening?')
-        setX(e.pageX - e.target.offsetLeft)
-        setY(e.pageY - e.target.offsetTop)
-        // console.log(x, y);
+        if (paintclick){
+            setimgclick(!imgclick);
+            console.log('Positive clicked')
+            setX(e.pageX - e.target.offsetLeft)
+            setY(e.pageY - e.target.offsetTop)
+            // console.log(x, y);
+        }
+        if (eraserclick){
+            setimgclick(!imgclick);
+            console.log('Negative clicked')
+            setX(e.pageX - e.target.offsetLeft)
+            setY(e.pageY - e.target.offsetTop)
+            // console.log(x, y);
+        }
+        
     };
     const [x,setX] = useState(0)
     const [y,setY] = useState(0)

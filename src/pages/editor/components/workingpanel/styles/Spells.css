@@ -32,6 +32,7 @@
 
 .SpellBox:hover{
     background-color: purple;
+    cursor: pointer
 }
 
 .demoImgContainer {

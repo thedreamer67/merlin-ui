@@ -12,7 +12,6 @@ import Timeline from './components/timeline';
 function Editor(props) {
 	const baseURL = 'http://127.0.0.1:8000';
 	const projectURL = `${baseURL}/project`;
-
 	const { handleStart } = props;
 	const [currentPlaybackTime, setCurrentPlaybackTime] = useState(0);
 	const [duration, setDuration] = useState(0);
@@ -22,9 +21,12 @@ function Editor(props) {
 	const [isSpellDragActive, setisSpellDragActive] = useState(false);
 	const [isInpainting, setIsInpainting] = useState(false);
 	const [isRemovingBG, setIsRemovingBG] = useState(false);
+	const [isAutoCap, setisAutoCap] = useState(false);
+	const [frameNum, setFrameNum] = useState(null);
+	const [captionclick, setcaptionclick] = useState(false);
+	const [spellsclick, setSpellsClick] = useState(true);
 	const [isDraggingVid, setIsDraggingVid] = useState(false);
 	const [draggingVidID, setDraggingVidID] = useState(null);
-	const [frameNum, setFrameNum] = useState(null);
 	const [project, setProject] = useState(null);
 
 	const storeTime = (currentTime) => {
@@ -59,6 +61,57 @@ function Editor(props) {
 		setProject(project);
 	};
 
+	// return (
+	// 	<div className={styles.editorMain}>
+	// 		<Navbar handleStart={handleStart} />
+	// 		<div className={styles.outersplitScreen}>
+	// 			<div className={styles.topPane}>
+	// 				<div className={styles.innersplitScreen}>
+	// 					<div className={styles.leftPane}>
+	// 						<Workingpanel
+	// 							isMagicActionActive={isMagicActionActive}
+	// 							setIsMagicActionActive={setIsMagicActionActive}
+	// 							setisSpellDragActive={setisSpellDragActive}
+	// 							setIsInpainting={setIsInpainting}
+	// 							setIsRemovingBG={setIsRemovingBG}
+	// 							setIsDraggingVid={setIsDraggingVid}
+	// 							setDraggingVidID={setDraggingVidID}
+	// 							fetchProject={fetchProject}
+	// 						/>
+	// 					</div>
+	// 					<div className={styles.rightPane}>
+	// 						<VideoPlayer
+	// 							getTime={storeTime}
+	// 							getDuration={storeDuration}
+	// 							scrollPosition={scrollPosition}
+	// 							getScrollPosition={storeScrollPosition}
+	// 							seeking={isSeeking}
+	// 							isSpellDragActive={isSpellDragActive}
+	// 							isInpainting={isInpainting}
+	// 							isRemovingBG={isRemovingBG}
+	// 							setFrameNum={setFrameNum}
+	// 							fetchProject={fetchProject}
+	// 						/>
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 			<div className={styles.bottomPane}>
+	// 				<Timeline
+	// 					currentTime={currentPlaybackTime}
+	// 					duration={duration}
+	// 					getScrollPosition={storeScrollPosition}
+	// 					getSeeking={storeIsSeeking}
+	// 					handleMagicActionClick={handleMagicActionClick}
+	// 					isMagicActionActive={isMagicActionActive}
+	// 					setIsMagicActionActive={setIsMagicActionActive}
+	// 					isDraggingVid={isDraggingVid}
+	// 					draggingVidID={draggingVidID}
+	// 					fetchProject={fetchProject}
+	// 				/>
+	// 			</div>
+	// 		</div>
+	// 	</div>
+	// );
 	return (
 		<div className={styles.editorMain}>
 			<Navbar handleStart={handleStart} />
@@ -71,7 +124,17 @@ function Editor(props) {
 								setIsMagicActionActive={setIsMagicActionActive}
 								setisSpellDragActive={setisSpellDragActive}
 								setIsInpainting={setIsInpainting}
+								setisAutoCap={setisAutoCap}
 								setIsRemovingBG={setIsRemovingBG}
+								setcaptionclick={setcaptionclick}
+								captionclick={captionclick}
+								spellsclick={spellsclick}
+								setSpellsClick={setSpellsClick}
+								getTime={storeTime}
+								getDuration={storeDuration}
+								scrollPosition={scrollPosition}
+								getScrollPosition={storeScrollPosition}
+								seeking={isSeeking}
 								setIsDraggingVid={setIsDraggingVid}
 								setDraggingVidID={setDraggingVidID}
 								fetchProject={fetchProject}
@@ -88,6 +151,14 @@ function Editor(props) {
 								isInpainting={isInpainting}
 								isRemovingBG={isRemovingBG}
 								setFrameNum={setFrameNum}
+								isAutoCap={isAutoCap}
+								setcaptionclick={setcaptionclick}
+								setIsMagicActionActive={setIsMagicActionActive}
+								setSpellsClick={setSpellsClick}
+								setisSpellDragActive={setisSpellDragActive}
+								setIsInpainting={setIsInpainting}
+								setisAutoCap={setisAutoCap}
+								setIsRemovingBG={setIsRemovingBG}
 								fetchProject={fetchProject}
 							/>
 						</div>

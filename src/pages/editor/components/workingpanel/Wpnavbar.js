@@ -20,10 +20,10 @@ import { borderRadius } from '@mui/system';
 function Wpnavbar(props) {
 	const { isMagicActionActive, setIsMagicActionActive } = props;
 	const [libraryclick, setlibraryclick] = useState(false);
-	const [captionclick, setcaptionclick] = useState(false);
+	const { captionclick, setcaptionclick } = props;
 	const [isSearching, setIsSearching] = useState(false);
 	const [searchQuery, setSearchQuery] = useState('');
-	const [spellsclick, setSpellsClick] = useState(false);
+	const { spellsclick, setSpellsClick } = props;
 	const { setisSpellDragActive } = props;
 
 	const handleLibraryClick = () => {
@@ -102,7 +102,7 @@ function Wpnavbar(props) {
 								<div className='wpbtn'>Library</div>
 							</div>
 						</div>
-						<div className='wpnav-item'>
+						{/* <div className='wpnav-item'>
 							<div
 								onClick={handleCaptionClick}
 								style={{
@@ -111,7 +111,7 @@ function Wpnavbar(props) {
 							>
 								<div className='wpbtn'>Auto Caption</div>
 							</div>
-						</div>
+						</div> */}
 						<div className='wpnav-item'>
 							<div
 								onClick={handleSpellsClick}
@@ -153,6 +153,7 @@ function Wpnavbar(props) {
 					setIsInpainting={props.setIsInpainting}
 					setIsRemovingBG={props.setIsRemovingBG}
 					setIsMagicActionActive={setIsMagicActionActive}
+					setisAutoCap={props.setisAutoCap}
 				/>
 			) : null}
 			{captionclick ? <AutoCaption /> : null}
