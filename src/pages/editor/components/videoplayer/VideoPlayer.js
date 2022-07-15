@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { findDOMNode } from 'react-dom';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
-import video from '../../../../assets/ogvideo.mp4';
+import video from '../../../../assets/dargo_interview_cut.mp4';
 import './VideoPlayer.css';
 
 const VideoPlayer = (props) => {
@@ -13,10 +13,12 @@ const VideoPlayer = (props) => {
 	const [hasEnded, setHasEnded] = useState(false);
 	const { isSpellDragActive } = props;
 
-	const baseURL = '127.0.0.1:8000';
+	const baseURL = 'http://127.0.0.1:8000';
 	const outputVideoURL = `${baseURL}/output_video`;
 
 	const ref = useRef(null);
+  const axios = require('axios');
+	const captionURL = `${baseURL}/captions`;
 
 	// useEffect(() => {
 	// 	function onFullscreenChange() {
@@ -108,6 +110,27 @@ const VideoPlayer = (props) => {
 		};
 	});
 
+  async function getCaption() {
+			const captionFile = await axios
+				.get(captionURL)
+				.then((res) => {
+					return res.data;
+				})
+				.catch((err) => console.log(err));
+      console.log(captionFile)
+		}
+
+    async function generateCaption() {
+      const payload = {}
+      const caption = await axios
+        .post(captionURL,payload)
+        .then((res) => {
+        console.log(res.status);
+        console.log(res)
+      })
+      .catch((err) => console.log(err));
+    }
+
 	useEffect(() => {
 		function getCap(e) {
 			if (props.isAutoCap) {
@@ -115,6 +138,7 @@ const VideoPlayer = (props) => {
 				props.setIsMagicActionActive(false);
 				props.setSpellsClick(false);
 				props.setisSpellDragActive(false);
+        generateCaption()
 			}
 		}
 		document.getElementById('video-player').addEventListener('drop', getCap);

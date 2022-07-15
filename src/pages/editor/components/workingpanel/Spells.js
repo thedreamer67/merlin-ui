@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import './styles/Spells.css';
 import original from '../../../../images/homebackground.jpg';
 import backgroundAfter from '../../../../images/backgroundAfter.png';
+import backgroundBefore from '../../../../images/backgroundBefore.png';
 import objectBefore from '../../../../images/objectBefore.png';
 import objectAfter from '../../../../images/objectAfter.jpg';
 import autoCap from '../../../../images/autocap.jpg';
@@ -19,7 +20,7 @@ function Spells(props) {
 		setisSpellDragActive(true);
 	};
 	const handleRemoveBgHover = () => {
-		setDemoImgSRC1(original);
+		setDemoImgSRC1(backgroundBefore);
 		setDemoImgSRC2(backgroundAfter);
 		setisSpellDragActive(true);
 	};
