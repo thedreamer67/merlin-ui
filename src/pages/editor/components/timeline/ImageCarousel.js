@@ -19,15 +19,19 @@ function ImageCarousel(props) {
 
 	useEffect(() => {
 		(async function getVideoDetails() {
-			// const videoDetails = await axios
-			// 	.get(`${videoURL}/${props.videoID}/details`)
-			// 	.then((res) => {
-			// 		console.log(res.data);
-			// 		return JSON.parse(res.data);
-			// 	})
-			// 	.catch((err) => console.log(err));
-			const frames = [...Array(props.maxFrames).keys()];
-			setFrames(frames);
+			const videoDetails = await axios
+				.get(`${videoURL}/${props.videoID}/details`)
+				.then((res) => {
+					console.log(res.data);
+					return JSON.parse(res.data);
+				})
+				.catch((err) => console.log(err));
+			// const frames = [...Array(props.maxFrames).keys()];
+			const NumOfFrames =
+				props.maxFrames < videoDetails.num_of_frames
+					? [...Array(props.maxFrames).keys()]
+					: [...Array(videoDetails.num_of_frames).keys()];
+			setFrames(NumOfFrames);
 		})();
 	}, []);
 
@@ -36,7 +40,7 @@ function ImageCarousel(props) {
 			<div style={{ backgroundColor: frameclick ? 'purple' : 'transparent' }}>
 				<section className='framesGrid' onClick={handleFrameClick}>
 					<div className='last'></div>
-					{/* {frames && <Frames />} */}
+
 					{frames &&
 						frames.map((f) => {
 							return (
