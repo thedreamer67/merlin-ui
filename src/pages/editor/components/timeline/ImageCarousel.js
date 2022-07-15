@@ -139,7 +139,7 @@ function Audio() {
 						timeline.scrollWidth -
 						timeline.clientWidth / 2 -
 						(timeline.offsetWidth / 2 - scrollBarWidth);
-					console.log(timeline.scrollWidth);
+					// console.log(timeline.scrollWidth);
 					return {
 						minWidth: width + 'px',
 						backgroundImage:
