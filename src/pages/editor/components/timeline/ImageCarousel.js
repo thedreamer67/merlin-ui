@@ -38,9 +38,12 @@ function ImageCarousel(props) {
 	return (
 		<section>
 			<div style={{ backgroundColor: frameclick ? 'purple' : 'transparent' }}>
-				<section className='framesGrid' onClick={handleFrameClick}>
+				<section
+					id='framesPlusPadding'
+					className='framesGrid'
+					onClick={handleFrameClick}
+				>
 					<div className='last'></div>
-
 					{frames &&
 						frames.map((f) => {
 							return (
@@ -136,9 +139,7 @@ function Audio() {
 						timeline.scrollWidth -
 						timeline.clientWidth / 2 -
 						(timeline.offsetWidth / 2 - scrollBarWidth);
-					{
-						console.log(timeline.scrollWidth);
-					}
+					console.log(timeline.scrollWidth);
 					return {
 						minWidth: width + 'px',
 						backgroundImage:
