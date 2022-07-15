@@ -13,7 +13,7 @@ const VideoPlayer = (props) => {
 	const [hasEnded, setHasEnded] = useState(false);
 	const { isSpellDragActive } = props;
 
-	const baseURL = '127.0.0.1:8000';
+	const baseURL = 'http://127.0.0.1:8000';
 	const outputVideoURL = `${baseURL}/output_video`;
 
 	const ref = useRef(null);
@@ -120,15 +120,16 @@ const VideoPlayer = (props) => {
       console.log(captionFile)
 		}
 
-  async function generateCaption() {
-    const payload = {}
-    await axios
-      .post(captionURL, payload)
-      .then((res) => {
-        console.log(res.data);
-    })
-    .catch((err) => console.log(err));
-  }
+    async function generateCaption() {
+      const payload = {}
+      const caption = await axios
+        .post(captionURL,payload)
+        .then((res) => {
+        console.log(res.status);
+        console.log(res)
+      })
+      .catch((err) => console.log(err));
+    }
 
 	useEffect(() => {
 		function getCap(e) {

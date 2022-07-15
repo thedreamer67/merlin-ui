@@ -63,46 +63,57 @@ function Wpnavbar(props) {
 		}
 	}, [isMagicActionActive]);
 
+	async function getVideoID() {
+		const project = await props.fetchProject()
+		// console.log(project)
+		const timelinevideo_ids = project.timelinevideo_ids[0]
+		// console.log(timelinevideo_ids)
+		const videoidURL = `${baseURL}/project/timelinevideo/${timelinevideo_ids}/details`
+		const videoid = await axios.get(videoidURL).then((res) => {
+			// console.log(res.data);
+			return(JSON.parse(res.data).video_id)
+		})
+		return videoid
+	}
+
 	async function QuerySearch() {
-		const video_id = '786614'
+		const video_id = await getVideoID()
 		const searchURL = `${baseURL}/video/${video_id}/search/${searchQuery}`;
-		console.log(searchURL)
+		// console.log(searchURL)
 		const payload = {video_id: video_id,
 						 search_query: searchQuery}
 		await axios
 			.post(searchURL, payload)
 			.then((res) => {
-			console.log(res.status);
-			console.log('Getting heatmap...')
-			getSearchHeatMap()
+			// console.log(res.status);
+			// console.log('Getting heatmap...')
+			getSearchHeatMap(video_id)
 		})
 		.catch((err) => console.log(err));
 	}
 
-	async function getSearchHeatMap() {
-		const video_id = '786614'
+	async function getSearchHeatMap(video_id) {
 		const heatmapURL = `${baseURL}/video/${video_id}/heatmap`;
-		console.log(heatmapURL)
+		// console.log(heatmapURL)
 		const heatmap = await axios.get(heatmapURL).then((res) => {
-			console.log(res.status);
+			// console.log(res.status);
 			// console.log(res.data)
-			console.log(res.data)
+			// console.log(res.data)
 			setHeatmap(res.data)
-			console.log('Getting probability...')
-			getSearchProbability()
+			// console.log('Getting probability...')
+			getSearchProbability(video_id)
 		})
 		.catch((err) => console.log(err));
 	}
 	
-	async function getSearchProbability() {
-		const video_id = '786614'
+	async function getSearchProbability(video_id) {
 		const probabilityURL = `${baseURL}/video/${video_id}/search_probabilities`;
-		console.log(probabilityURL)
+		// console.log(probabilityURL)
 		const probability = await axios
 			.get(probabilityURL)
 			.then((res) => {
 			// console.log(res.status);
-			console.log(res.data)
+			// console.log(res.data)
 			setProbability(res.data)
 			setIsSearching(true)
 		})

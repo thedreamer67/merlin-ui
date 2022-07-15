@@ -53,6 +53,7 @@ function Editor(props) {
 	};
 
 	const fetchProject = async () => {
+    console.log('fetching...')
 		const project = await axios
 			.get(projectURL)
 			.then((res) => {
@@ -60,6 +61,7 @@ function Editor(props) {
 			})
 			.catch((err) => console.log(err));
 		setProject(project);
+    return project
 	};
 
 	return (
