@@ -60,45 +60,23 @@ function Timeline(props) {
 
 				await axios
 					.post(`${timelineURL}/${props.draggingVidID}`)
-					.then((res) => {
-						console.log(`Posted new timelinevideo: ${res}`);
-						// if (timelineVids.length === 0) {
-						// 	props.setMainTimeline(res.data);
-						// }
-					})
+					.then((res) => console.log(res))
 					.catch((err) => console.log(err));
 
 				const project = await axios
 					.get(projectURL)
 					.then((res) => {
-						console.log(`Project details: ${res.data}`);
+						console.log(res.data);
 						return JSON.parse(res.data);
 					})
 					.catch((err) => console.log(err));
 				props.fetchProject();
-				props.setMainTimeline(project.timelinevideo_ids[0]);
-
-				if (project.audio_path === '') {
-					const videoDetails = await axios
-						.get(`${timelineVideoURL}/${project.timelinevideo_ids[0]}/details`)
-						.then((res) => JSON.parse(res.data))
-						.catch((err) => console.log(err));
-					console.log(`Main timeline videoID = ${videoDetails.video_id}`);
-					await axios
-						.put(`${projectURL}/settings?video_id=${videoDetails.video_id}`)
-						.then((res) => console.log(res.data))
-						.catch((err) => console.log(err));
-				}
 
 				console.log(
 					`end frame: ${project.timelines[0].video_objects[0].frame_end}`
 				);
 				await setMaxFrames(project.timelines[0].video_objects[0].frame_end);
-				const timelineVids = project.timelines.map((tl) => {
-					return tl.video_objects[0].video_id;
-				});
-				setTimelineVids([...timelineVids]);
-				// setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
+				setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
 			}
 		}
 		document
@@ -126,8 +104,14 @@ function Timeline(props) {
 
 	return (
 		<>
-			<div className='videoTime'>
-				{currentTime}/{duration}
+			<div className='timelineheader'>
+				<div></div>
+				<div className='videoTime'>
+					{currentTime}/{duration}
+				</div>
+				<div className='clearAllIcon'>
+					<i class='fa-solid fa-trash'></i>
+				</div>
 			</div>
 			<ScrollSync>
 				<div className='mainTimeline'>

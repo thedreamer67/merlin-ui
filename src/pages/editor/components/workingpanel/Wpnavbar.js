@@ -27,6 +27,7 @@ function Wpnavbar(props) {
 	const { setisSpellDragActive } = props;
 	const [heatmap, setHeatmap] = useState('')
 	const [probability, setProbability] = useState('')
+	const {subtitles, setSubtitles} = props
 
 	const axios = require('axios');
   	const baseURL = 'http://127.0.0.1:8000';
@@ -82,42 +83,52 @@ function Wpnavbar(props) {
 		// console.log(searchURL)
 		const payload = {video_id: video_id,
 						 search_query: searchQuery}
-		await axios
+		const sendSearchQuery = await axios
 			.post(searchURL, payload)
 			.then((res) => {
-			// console.log(res.status);
-			// console.log('Getting heatmap...')
-			getSearchHeatMap(video_id)
-		})
-		.catch((err) => console.log(err));
+			return(res.status)
+		}).catch((err) => console.log(err));
+		console.log(sendSearchQuery)
+		if (sendSearchQuery === 200){
+			const resheatmap = await getSearchHeatMap(video_id)
+			setHeatmap(resheatmap)
+			const resprobability = await getSearchProbability(video_id)
+			setProbability(resprobability)
+			setIsSearching(true)
+		}
+		else{
+			alert('Search is unsuccessful.')
+		}
 	}
 
 	async function getSearchHeatMap(video_id) {
 		const heatmapURL = `${baseURL}/video/${video_id}/heatmap`;
 		// console.log(heatmapURL)
-		const heatmap = await axios.get(heatmapURL).then((res) => {
+		const resheatmap = await axios.get(heatmapURL, {responseType: 'arraybuffer'}).then((res) => {
 			// console.log(res.status);
 			// console.log(res.data)
-			// console.log(res.data)
-			setHeatmap(res.data)
-			// console.log('Getting probability...')
-			getSearchProbability(video_id)
-		})
-		.catch((err) => console.log(err));
+			const base64 = btoa(
+				new Uint8Array(res.data).reduce(
+				  (data, byte) => data + String.fromCharCode(byte),
+				  ''
+				)
+			)
+			return(base64)
+		}).catch((err) => console.log(err));
+		return(resheatmap)
 	}
 	
 	async function getSearchProbability(video_id) {
 		const probabilityURL = `${baseURL}/video/${video_id}/search_probabilities`;
 		// console.log(probabilityURL)
-		const probability = await axios
+		const resprobability = await axios
 			.get(probabilityURL)
 			.then((res) => {
 			// console.log(res.status);
 			// console.log(res.data)
-			setProbability(res.data)
-			setIsSearching(true)
-		})
-		.catch((err) => console.log(err));
+			return(JSON.parse(res.data))
+		}).catch((err) => console.log(err));
+		return resprobability
 	}
 
 	const handleSearchSubmit = (e) => {
@@ -218,7 +229,7 @@ function Wpnavbar(props) {
 					setisAutoCap={props.setisAutoCap}
 				/>
 			) : null}
-			{captionclick ? <AutoCaption /> : null}
+			{captionclick ? <AutoCaption subtitles={subtitles} setSubtitles={setSubtitles}/> : null}
 			{isMagicActionActive ? <MagicAction /> : null}
 			{isSearching ? <Search query={searchQuery} heatmap={heatmap} probability={probability}/> : null}
 			{/* <div

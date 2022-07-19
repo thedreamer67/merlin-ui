@@ -29,6 +29,7 @@ function Editor(props) {
 	const [draggingVidID, setDraggingVidID] = useState(null);
 	const [project, setProject] = useState(null);
 	const [mainTimeline, setMainTimeline] = useState(null);
+  const [subtitles, setSubtitles] = useState('')
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -90,6 +91,8 @@ function Editor(props) {
 								setIsDraggingVid={setIsDraggingVid}
 								setDraggingVidID={setDraggingVidID}
 								fetchProject={fetchProject}
+                subtitles={subtitles}
+			          setSubtitles={setSubtitles}
 							/>
 						</div>
 						<div className={styles.rightPane}>
@@ -112,6 +115,8 @@ function Editor(props) {
 								setisAutoCap={setisAutoCap}
 								setIsRemovingBG={setIsRemovingBG}
 								fetchProject={fetchProject}
+                subtitles={subtitles}
+			          setSubtitles={setSubtitles}
 							/>
 						</div>
 					</div>

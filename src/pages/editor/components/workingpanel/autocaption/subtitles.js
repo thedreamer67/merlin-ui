@@ -224,7 +224,7 @@ var PF_SRT = (function () {
 
 var subtitle_parsed = PF_SRT.parse(text);
 
-export default subtitle_parsed;
+export default PF_SRT;
 
 export function convertToSRTFormat(subtitles) {
   let output = "";
