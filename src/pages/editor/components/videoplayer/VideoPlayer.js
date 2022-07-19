@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import video from '../../../../assets/ogvideo.mp4';
 import './VideoPlayer.css';
+import PF_SRT from '../workingpanel/autocaption/subtitles';
 
 const VideoPlayer = (props) => {
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -101,7 +102,11 @@ const VideoPlayer = (props) => {
 				}
 			}
 		}
-		document.getElementById('video-player').addEventListener('drop', getFrame);
+		// TODO:
+		if (!true) {
+			document.getElementById('video-player').addEventListener('drop', getFrame);
+		}
+
 		return () => {
 			try {
 				document
@@ -112,44 +117,6 @@ const VideoPlayer = (props) => {
 			}
 		};
 	});
-
-	var PF_SRT = (function () {
-		var pattern =
-			/(\d+)\n([\d:,]+)\s+-{2}\>\s+([\d:,]+)\n([\s\S]*?(?=\n{2}|=\n{2}))/gm;
-		var _regExp;
-
-		var init = function () {
-			_regExp = new RegExp(pattern);
-		};
-
-		var parse = function (f) {
-			if (typeof f != 'string') throw 'Sorry, Parser accept string only.';
-
-			var result = [];
-			if (f == null) return {};
-
-			f = f.replace(/\r\n|\r|\n/g, '\n');
-
-			let matches = 0;
-
-			while ((matches = pattern.exec(f)) != null) {
-				result.push(toLineObj(matches));
-			}
-			return result;
-		};
-		var toLineObj = function (group) {
-			return {
-				line: group[1],
-				startTime: group[2],
-				endTime: group[3],
-				text: group[4],
-			};
-		};
-		init();
-		return {
-			parse: parse,
-		};
-	})();
 
 	async function getCaption() {
 		const captionFile = await axios
@@ -196,7 +163,11 @@ const VideoPlayer = (props) => {
 				initCaption();
 			}
 		}
-		document.getElementById('video-player').addEventListener('drop', getCap);
+		
+		// TODO:
+		if (!true) {
+			document.getElementById('video-player').addEventListener('drop', getCap);
+		}
 		return () => {
 			try {
 				document
@@ -271,12 +242,14 @@ const VideoPlayer = (props) => {
 
 	return (
 		<div className='video-component'>
+			{ false ?
+			<></> :
 			<div
 				id='video-player'
 				className={isSpellDragActive ? 'react-player-dropzone' : 'react-player'}
 			>
 				<ReactPlayer
-					// className='react-player'
+					id='react-player'
 					width='100%'
 					height='100%'
 					controls={controls}
@@ -284,7 +257,7 @@ const VideoPlayer = (props) => {
 					played={played}
 					muted={isMuted}
 					progressInterval={500}
-					url={video}
+					url={props.renderedVideo}
 					ref={ref}
 					onReady={handleReady}
 					onProgress={handleProgress}
@@ -293,29 +266,7 @@ const VideoPlayer = (props) => {
 					onPause={() => setIsPlaying(false)}
 				/>
 			</div>
-
-			{/* <section className='controls'>
-				{!isMuted && (
-					<MediaButton class='fa-solid fa-volume-high' func={toggleMute} />
-				)}
-				{isMuted && (
-					<MediaButton class='fa-solid fa-volume-xmark' func={toggleMute} />
-				)}
-				<div className='media-controls'>
-					<MediaButton class='fa-solid fa-backward-step' func={handleRewind} />
-
-					{isPlaying && (
-						<MediaButton class='fa-solid fa-pause' func={handlePlayPause} />
-					)}
-					{!isPlaying && (
-						<MediaButton class='fa-solid fa-play' func={handlePlayPause} />
-					)}
-
-					<MediaButton class='fa-solid fa-forward-step' func={handleForward} />
-				</div>
-
-				<MediaButton class='fa-solid fa-expand' func={handleFullscreen} />
-			</section> */}
+			}
 		</div>
 	);
 };

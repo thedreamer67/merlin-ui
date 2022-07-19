@@ -11,6 +11,7 @@ function Timeline(props) {
 		isMagicActionActive,
 		handleMagicActionClick,
 		setIsMagicActionActive,
+		fetchRenderedVideo
 	} = props;
 
 	const baseURL = 'http://127.0.0.1:8000';
@@ -108,6 +109,7 @@ function Timeline(props) {
 				});
 				props.setTimelineVids([...timelineVids]);
 				// setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
+				fetchRenderedVideo()
 			}
 		}
 		document

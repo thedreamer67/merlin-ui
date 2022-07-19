@@ -8,10 +8,13 @@ import Workingpanel from './components/workingpanel';
 // import Library from './Library';
 import VideoPlayer from './components/videoplayer';
 import Timeline from './components/timeline';
+import { render } from '@testing-library/react';
 
 function Editor(props) {
 	const baseURL = 'http://127.0.0.1:8000';
 	const projectURL = `${baseURL}/project`;
+	const outputVideoURL = `${baseURL}/output_video`;
+
 	const { handleStart } = props;
 	const [currentPlaybackTime, setCurrentPlaybackTime] = useState(0);
 	const [duration, setDuration] = useState(0);
@@ -33,6 +36,27 @@ function Editor(props) {
 	const [removeBG, setRemoveBG] = useState(false);
 	const [timelineVids, setTimelineVids] = useState([]);
 	const [subtitles, setSubtitles] = useState('');
+
+	const [renderedVideo, setRenderedVideo] = useState("")
+	
+	const fetchRenderedVideo = () => {
+		// get backend to return the latest rendered video
+		// (async function fetchVideo() {
+		// const latestRenderedVideo = await axios
+		// 	.get(`${outputVideoURL}?changes=${false}&write_subs${false}`)
+		// 	.then((res) => {
+		// 		console.log(res.data)
+		// 	})
+		// 	.catch((err) => console.log(err))
+
+		// 	console.log(latestRenderedVideo)
+		// // update the renderedVideo instance to display on the screen
+		// })();
+		setRenderedVideo("")
+		console.log(renderedVideo)
+		setRenderedVideo(`${outputVideoURL}?changes=true&write_subs=false`)
+		console.log(renderedVideo)
+	}
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -101,6 +125,7 @@ function Editor(props) {
 								setTimelineVids={setTimelineVids}
 								subtitles={subtitles}
 								setSubtitles={setSubtitles}
+								fetchRenderedVideo={fetchRenderedVideo}
 							/>
 						</div>
 						<div className={styles.rightPane}>
@@ -127,6 +152,7 @@ function Editor(props) {
 								setRemoveBG={setRemoveBG}
 								subtitles={subtitles}
 								setSubtitles={setSubtitles}
+								renderedVideo={renderedVideo}
 							/>
 						</div>
 					</div>
@@ -146,6 +172,7 @@ function Editor(props) {
 						setMainTimeline={setMainTimeline}
 						timelineVids={timelineVids}
 						setTimelineVids={setTimelineVids}
+						fetchRenderedVideo={fetchRenderedVideo}
 					/>
 				</div>
 			</div>
