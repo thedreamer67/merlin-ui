@@ -45,6 +45,8 @@ function Spells(props) {
 					draggable='true'
 					onDragStart={() => {
 						props.setIsInpainting(true);
+						props.setisAutoCap(false);
+						props.setIsRemovingBG(false);
 					}}
 					onDragEnd={() => {
 						props.setIsInpainting(false);
@@ -72,6 +74,8 @@ function Spells(props) {
 					draggable='true'
 					onDragStart={() => {
 						props.setIsRemovingBG(true);
+						props.setisAutoCap(false);
+						props.setIsInpainting(false);
 					}}
 					onDragEnd={() => {
 						props.setIsRemovingBG(false);

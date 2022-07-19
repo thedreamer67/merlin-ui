@@ -31,7 +31,7 @@ const Search = (props) => {
 							setSearchVideoSeeking={setSearchVideoSeeking}
 						/>
 					</div>
-					<img className='demoHeatmap' src={demoHeatmap}></img>
+					<img className='demoHeatmap' src={`data:;base64,${props.heatmap}`}></img>
 					<Slider
 						id='searchscroll'
 						className='searchscroll'
@@ -49,6 +49,7 @@ const Search = (props) => {
 					setSliderPosition={setSliderPosition}
 					setSearchVideoSeeking={setSearchVideoSeeking}
 					maxFrames={maxFrames}
+					probabilityData={props.probability}
 				/>
 			</div>
 		</div>

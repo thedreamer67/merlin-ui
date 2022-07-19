@@ -147,9 +147,14 @@ function Timeline(props) {
 
 	return (
 		<>
-			<div className='videoTime'>
-				{currentTime}/{duration}
-				<i className='fa-solid fa-trash' onClick={deleteTimelines}></i>
+			<div className='timelineheader'>
+				<div></div>
+				<div className='videoTime'>
+					{currentTime}/{duration}
+				</div>
+				<div className='clearAllIcon'>
+					<i className='fa-solid fa-trash' onClick={deleteTimelines}></i>
+				</div>
 			</div>
 			<ScrollSync>
 				<div className='mainTimeline'>
