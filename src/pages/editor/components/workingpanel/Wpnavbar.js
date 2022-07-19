@@ -25,9 +25,8 @@ function Wpnavbar(props) {
 	const [searchQuery, setSearchQuery] = useState('');
 	const { spellsclick, setSpellsClick } = props;
 	const { setisSpellDragActive } = props;
-	const [heatmap, setHeatmap] = useState('')
-	const [probability, setProbability] = useState('')
-	const {subtitles, setSubtitles} = props
+	const [heatmap, setHeatmap] = useState('');
+	const [probability, setProbability] = useState('');
 
 	const axios = require('axios');
 	const baseURL = 'http://127.0.0.1:8000';
@@ -81,41 +80,43 @@ function Wpnavbar(props) {
 		const video_id = await getVideoID();
 		const searchURL = `${baseURL}/video/${video_id}/search/${searchQuery}`;
 		// console.log(searchURL)
-		const payload = {video_id: video_id,
-						 search_query: searchQuery}
+		const payload = { video_id: video_id, search_query: searchQuery };
 		const sendSearchQuery = await axios
 			.post(searchURL, payload)
 			.then((res) => {
-			return(res.status)
-		}).catch((err) => console.log(err));
-		console.log(sendSearchQuery)
-		if (sendSearchQuery === 200){
-			const resheatmap = await getSearchHeatMap(video_id)
-			setHeatmap(resheatmap)
-			const resprobability = await getSearchProbability(video_id)
-			setProbability(resprobability)
-			setIsSearching(true)
-		}
-		else{
-			alert('Search is unsuccessful.')
+				return res.status;
+			})
+			.catch((err) => console.log(err));
+		console.log(sendSearchQuery);
+		if (sendSearchQuery === 200) {
+			const resheatmap = await getSearchHeatMap(video_id);
+			setHeatmap(resheatmap);
+			const resprobability = await getSearchProbability(video_id);
+			setProbability(resprobability);
+			setIsSearching(true);
+		} else {
+			alert('Search is unsuccessful.');
 		}
 	}
 
 	async function getSearchHeatMap(video_id) {
 		const heatmapURL = `${baseURL}/video/${video_id}/heatmap`;
 		// console.log(heatmapURL)
-		const resheatmap = await axios.get(heatmapURL, {responseType: 'arraybuffer'}).then((res) => {
-			// console.log(res.status);
-			// console.log(res.data)
-			const base64 = btoa(
-				new Uint8Array(res.data).reduce(
-				  (data, byte) => data + String.fromCharCode(byte),
-				  ''
-				)
-			)
-			return(base64)
-		}).catch((err) => console.log(err));
-		return(resheatmap)
+		const resheatmap = await axios
+			.get(heatmapURL, { responseType: 'arraybuffer' })
+			.then((res) => {
+				// console.log(res.status);
+				// console.log(res.data)
+				const base64 = btoa(
+					new Uint8Array(res.data).reduce(
+						(data, byte) => data + String.fromCharCode(byte),
+						''
+					)
+				);
+				return base64;
+			})
+			.catch((err) => console.log(err));
+		return resheatmap;
 	}
 
 	async function getSearchProbability(video_id) {
@@ -124,11 +125,12 @@ function Wpnavbar(props) {
 		const resprobability = await axios
 			.get(probabilityURL)
 			.then((res) => {
-			// console.log(res.status);
-			// console.log(res.data)
-			return(JSON.parse(res.data))
-		}).catch((err) => console.log(err));
-		return resprobability
+				// console.log(res.status);
+				// console.log(res.data)
+				return JSON.parse(res.data);
+			})
+			.catch((err) => console.log(err));
+		return resprobability;
 	}
 
 	const handleSearchSubmit = (e) => {
@@ -229,12 +231,22 @@ function Wpnavbar(props) {
 					setisAutoCap={props.setisAutoCap}
 				/>
 			) : null}
-			{captionclick ? <AutoCaption subtitles={subtitles} setSubtitles={setSubtitles}/> : null}
+			{captionclick ? (
+				<AutoCaption
+					subtitles={props.subtitles}
+					setSubtitles={props.setSubtitles}
+				/>
+			) : null}
 			{isMagicActionActive ? (
 				<MagicAction
 					frameNum={props.frameNum}
 					mainTimeline={props.mainTimeline}
 					fetchProject={props.fetchProject}
+					setIsMagicActionActive={setIsMagicActionActive}
+					setSpellsClick={setSpellsClick}
+					inpaint={props.inpaint}
+					removeBG={props.removeBG}
+					setTimelineVids={props.setTimelineVids}
 				/>
 			) : null}
 			{isSearching ? (
@@ -244,91 +256,8 @@ function Wpnavbar(props) {
 					probability={probability}
 				/>
 			) : null}
-			{/* <div
-				style={{
-					padding: '1vw 1vh',
-				}}
-			>
-				<i
-					className='fa-solid fa-wand-magic-sparkles'
-					id='inpaint-btn'
-					draggable='true'
-					onDragStart={() => {
-						props.setIsInpainting(true);
-						document.getElementById('video-player').style.border =
-							'4px solid purple';
-						document.getElementById('video-player').style.borderRadius = '7px';
-						document.getElementById('video-player').style.boxShadow =
-							'0 0 10px purple';
-						document.getElementById('video-player').style.outline = '';
-					}}
-					onDragEnd={() => {
-						props.setIsInpainting(false);
-						document.getElementById('video-player').style.border = '';
-						document.getElementById('video-player').style.borderRadius = '';
-						document.getElementById('video-player').style.boxShadow = '';
-					}}
-				></i>
-				<i
-					className='fa-solid fa-rectangle-xmark'
-					id='removeBG-btn'
-					draggable='true'
-					onDragStart={() => {
-						props.setIsRemovingBG(true);
-						document.getElementById('video-player').style.border =
-							'4px solid purple';
-						document.getElementById('video-player').style.borderRadius = '7px';
-						document.getElementById('video-player').style.boxShadow =
-							'0 0 10px purple';
-						document.getElementById('video-player').style.outline = '';
-					}}
-					onDragEnd={() => {
-						props.setIsRemovingBG(false);
-						document.getElementById('video-player').style.border = '';
-						document.getElementById('video-player').style.borderRadius = '';
-						document.getElementById('video-player').style.boxShadow = '';
-					}}
-				></i>
-			</div> */}
 		</>
 	);
 }
-
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: '#e3f2fd',
-//     },
-//   },
-// });
-
-// const SearchBar = (props) => {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <Box
-//         sx={{
-//           display: 'flex',
-//           alignItems: 'flex-end',
-//           color: '#e3f2fd',
-//           maxHeight: '100%',
-//         }}
-//         autoComplete='off'>
-//         <i
-//           className='fa-solid fa-magnifying-glass'
-//           style={{ paddingRight: '0.5vw' }}></i>
-//         <TextField
-//           id='filled-basic'
-//           label='Search video'
-//           variant='outlined'
-//           color='primary'
-//           sx={{ input: { color: 'white' } }}
-//           onChange={(e) => {
-//             props.updateSearchQuery(e.target.value);
-//           }}
-//         />
-//       </Box>
-//     </ThemeProvider>
-//   );
-// };
 
 export default Wpnavbar;

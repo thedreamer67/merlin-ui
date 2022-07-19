@@ -25,7 +25,8 @@
 .toolContainer {
 	display: flex;
 	flex-direction: row;
-	padding: 1px 5px;
+	justify-content: left;
+	padding: 1px;
 	width: 100%;
 	align-items: center;
 }

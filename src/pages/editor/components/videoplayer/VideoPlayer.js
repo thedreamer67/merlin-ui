@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { findDOMNode } from 'react-dom';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
-import video from '../../../../assets/tesla.mp4';
+import video from '../../../../assets/ogvideo.mp4';
 import './VideoPlayer.css';
 
 const VideoPlayer = (props) => {
@@ -12,7 +11,7 @@ const VideoPlayer = (props) => {
 	const [isMuted, setIsMuted] = useState(false);
 	const [hasEnded, setHasEnded] = useState(false);
 	const { isSpellDragActive } = props;
-  const {subtitles, setSubtitles} = props
+	const { subtitles, setSubtitles } = props;
 
 	const baseURL = 'http://127.0.0.1:8000';
 	const outputVideoURL = `${baseURL}/output_video`;
@@ -93,6 +92,8 @@ const VideoPlayer = (props) => {
 					console.log(
 						`casting spell, isInpainting=${props.isInpainting} vs isRemovingBG=${props.isRemovingBG}, time=${currTime}, frameNum=${frameNum}`
 					);
+					props.setInpaint(props.isInpainting);
+					props.setRemoveBG(props.isRemovingBG);
 					props.setIsMagicActionActive(true);
 					props.setcaptionclick(false);
 					props.setSpellsClick(false);
@@ -112,80 +113,79 @@ const VideoPlayer = (props) => {
 		};
 	});
 
-  var PF_SRT = (function () {
-    var pattern =
-      /(\d+)\n([\d:,]+)\s+-{2}\>\s+([\d:,]+)\n([\s\S]*?(?=\n{2}|=\n{2}))/gm;
-    var _regExp;
-    
-    var init = function () {
-      _regExp = new RegExp(pattern);
-    };
-    
-    var parse = function (f) {
-      if (typeof f != "string") throw "Sorry, Parser accept string only.";
-    
-      var result = [];
-      if (f == null) return {};
-    
-      f = f.replace(/\r\n|\r|\n/g, "\n");
-    
-      let matches = 0;
-    
-      while ((matches = pattern.exec(f)) != null) {
-      result.push(toLineObj(matches));
-      }
-      return result;
-    };
-    var toLineObj = function (group) {
-      return {
-      line: group[1],
-      startTime: group[2],
-      endTime: group[3],
-      text: group[4],
-      };
-    };
-    init();
-    return {
-      parse: parse,
-    };
-    })();
-  
-    async function getCaption() {
-      const captionFile = await axios
-      .get(captionURL)
-      .then((res) => {
-        // console.log(res.data)
-        return (PF_SRT.parse(res.data));
-      })
-      .catch((err) => console.log(err));
-      return captionFile
-    }
+	var PF_SRT = (function () {
+		var pattern =
+			/(\d+)\n([\d:,]+)\s+-{2}\>\s+([\d:,]+)\n([\s\S]*?(?=\n{2}|=\n{2}))/gm;
+		var _regExp;
 
-    async function generateCaption() {
-      const payload = {}
-      const caption = await axios
-        .post(captionURL,payload)
-        .then((res) => {
-        // console.log(res.status);
-        // console.log(res)
-        return (res.status)
-      })
-      .catch((err) => console.log(err));
-      return caption
-    }
-  
-  async function initCaption(){
-    const generatingCaption = await generateCaption()
-    if (generatingCaption === 200){
-      const captionRetrieved = await getCaption()
-      console.log(captionRetrieved)
-      setSubtitles(captionRetrieved)
-      props.setcaptionclick(true);
-    }
-    else{
-      alert('Caption generation is unsuccessful.')
-    }
-  }
+		var init = function () {
+			_regExp = new RegExp(pattern);
+		};
+
+		var parse = function (f) {
+			if (typeof f != 'string') throw 'Sorry, Parser accept string only.';
+
+			var result = [];
+			if (f == null) return {};
+
+			f = f.replace(/\r\n|\r|\n/g, '\n');
+
+			let matches = 0;
+
+			while ((matches = pattern.exec(f)) != null) {
+				result.push(toLineObj(matches));
+			}
+			return result;
+		};
+		var toLineObj = function (group) {
+			return {
+				line: group[1],
+				startTime: group[2],
+				endTime: group[3],
+				text: group[4],
+			};
+		};
+		init();
+		return {
+			parse: parse,
+		};
+	})();
+
+	async function getCaption() {
+		const captionFile = await axios
+			.get(captionURL)
+			.then((res) => {
+				// console.log(res.data)
+				return PF_SRT.parse(res.data);
+			})
+			.catch((err) => console.log(err));
+		return captionFile;
+	}
+
+	async function generateCaption() {
+		const payload = {};
+		const caption = await axios
+			.post(captionURL, payload)
+			.then((res) => {
+				// console.log(res.status);
+				// console.log(res)
+				return res.status;
+			})
+			.catch((err) => console.log(err));
+		return caption;
+	}
+
+	async function initCaption() {
+		const generatingCaption = await generateCaption();
+		if (generatingCaption === 200) {
+			const captionRetrieved = await getCaption();
+			console.log(captionRetrieved);
+			setSubtitles(captionRetrieved);
+			props.setcaptionclick(true);
+		} else {
+			alert('Caption generation is unsuccessful.');
+		}
+	}
 
 	useEffect(() => {
 		function getCap(e) {
@@ -193,7 +193,7 @@ const VideoPlayer = (props) => {
 				props.setIsMagicActionActive(false);
 				props.setSpellsClick(false);
 				props.setisSpellDragActive(false);
-        initCaption()
+				initCaption();
 			}
 		}
 		document.getElementById('video-player').addEventListener('drop', getCap);

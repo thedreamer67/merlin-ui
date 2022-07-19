@@ -28,8 +28,11 @@ function Editor(props) {
 	const [isDraggingVid, setIsDraggingVid] = useState(false);
 	const [draggingVidID, setDraggingVidID] = useState(null);
 	const [project, setProject] = useState(null);
-	const [mainTimeline, setMainTimeline] = useState(null);
-  const [subtitles, setSubtitles] = useState('')
+	const [mainTimeline, setMainTimeline] = useState(null); //timelinevideoID, NOT videoID
+	const [inpaint, setInpaint] = useState(false);
+	const [removeBG, setRemoveBG] = useState(false);
+	const [timelineVids, setTimelineVids] = useState([]);
+	const [subtitles, setSubtitles] = useState('');
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -91,10 +94,13 @@ function Editor(props) {
 								setIsDraggingVid={setIsDraggingVid}
 								setDraggingVidID={setDraggingVidID}
 								fetchProject={fetchProject}
-                subtitles={subtitles}
-			          setSubtitles={setSubtitles}
 								frameNum={frameNum}
 								mainTimeline={mainTimeline}
+								inpaint={inpaint}
+								removeBG={removeBG}
+								setTimelineVids={setTimelineVids}
+								subtitles={subtitles}
+								setSubtitles={setSubtitles}
 							/>
 						</div>
 						<div className={styles.rightPane}>
@@ -117,8 +123,10 @@ function Editor(props) {
 								setisAutoCap={setisAutoCap}
 								setIsRemovingBG={setIsRemovingBG}
 								fetchProject={fetchProject}
-                subtitles={subtitles}
-			          setSubtitles={setSubtitles}
+								setInpaint={setInpaint}
+								setRemoveBG={setRemoveBG}
+								subtitles={subtitles}
+								setSubtitles={setSubtitles}
 							/>
 						</div>
 					</div>
@@ -136,6 +144,8 @@ function Editor(props) {
 						draggingVidID={draggingVidID}
 						fetchProject={fetchProject}
 						setMainTimeline={setMainTimeline}
+						timelineVids={timelineVids}
+						setTimelineVids={setTimelineVids}
 					/>
 				</div>
 			</div>

@@ -6,7 +6,6 @@ function WorkingPanel(props) {
 	const { isMagicActionActive, setIsMagicActionActive } = props;
 	const { captionclick, setcaptionclick } = props;
 	const { spellsclick, setSpellsClick } = props;
-	const {subtitles, setSubtitles} = props
 
 	return (
 		<Wpnavbar
@@ -23,10 +22,13 @@ function WorkingPanel(props) {
 			setIsDraggingVid={props.setIsDraggingVid}
 			setDraggingVidID={props.setDraggingVidID}
 			fetchProject={props.fetchProject}
-			subtitles={subtitles}
-			setSubtitles={setSubtitles}
 			frameNum={props.frameNum}
 			mainTimeline={props.mainTimeline}
+			inpaint={props.inpaint}
+			removeBG={props.removeBG}
+			setTimelineVids={props.setTimelineVids}
+			subtitles={props.subtitles}
+			setSubtitles={props.setSubtitles}
 		/>
 	);
 }

@@ -18,7 +18,7 @@ function Timeline(props) {
 	const timelineURL = `${projectURL}/timeline`;
 	const timelineVideoURL = `${projectURL}/timelinevideo`;
 
-	const [timelineVids, setTimelineVids] = useState([]);
+	// const [timelineVids, setTimelineVids] = useState([]);
 	const [maxFrames, setMaxFrames] = useState(null);
 
 	const currentTime = new Date(props.currentTime * 1000)
@@ -60,7 +60,7 @@ function Timeline(props) {
 			const timelineVids = project.timelines.map((tl) => {
 				return tl.video_objects[0].video_id;
 			});
-			setTimelineVids([...timelineVids]);
+			props.setTimelineVids([...timelineVids]);
 			if (timelineVids.length > 0) {
 				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
 				props.setMainTimeline(project.timelinevideo_ids[0]);
@@ -106,7 +106,7 @@ function Timeline(props) {
 				const timelineVids = project.timelines.map((tl) => {
 					return tl.video_objects[0].video_id;
 				});
-				setTimelineVids([...timelineVids]);
+				props.setTimelineVids([...timelineVids]);
 				// setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
 			}
 		}
@@ -133,6 +133,18 @@ function Timeline(props) {
 	// 	setFrameclick(!frameclick);
 	// };
 
+	const deleteTimelines = async () => {
+		await axios
+			.delete(`${projectURL}/timeline`)
+			.then((res) => console.log(res.data))
+			.catch((err) => console.log(err));
+		const project = await props.fetchProject();
+		const timelineVids = project.timelines.map((tl) => {
+			return tl.video_objects[0].video_id;
+		});
+		props.setTimelineVids([...timelineVids]);
+	};
+
 	return (
 		<>
 			<div className='timelineheader'>
@@ -141,13 +153,13 @@ function Timeline(props) {
 					{currentTime}/{duration}
 				</div>
 				<div className='clearAllIcon'>
-					<i class='fa-solid fa-trash'></i>
+					<i className='fa-solid fa-trash' onClick={deleteTimelines}></i>
 				</div>
 			</div>
 			<ScrollSync>
 				<div className='mainTimeline'>
 					<div
-						className={timelineVids.length !== 0 ? 'LineScroll' : 'Line'}
+						className={props.timelineVids.length !== 0 ? 'LineScroll' : 'Line'}
 					></div>
 					<div id='timelineDropZone' style={{ height: '100%' }}>
 						<ScrollSyncPane>
@@ -159,8 +171,8 @@ function Timeline(props) {
 								onMouseUp={handleMouseUp}
 								// onClick={coords}
 							>
-								{timelineVids.length !== 0 ? (
-									timelineVids.map((id) => (
+								{props.timelineVids.length !== 0 ? (
+									props.timelineVids.map((id) => (
 										<ImageCarousel
 											handleMagicActionClick={handleMagicActionClick}
 											isMagicActionActive={isMagicActionActive}
