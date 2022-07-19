@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Wpnavbar from './Wpnavbar';
 
 function WorkingPanel(props) {
@@ -25,6 +25,8 @@ function WorkingPanel(props) {
 			fetchProject={props.fetchProject}
 			subtitles={subtitles}
 			setSubtitles={setSubtitles}
+			frameNum={props.frameNum}
+			mainTimeline={props.mainTimeline}
 		/>
 	);
 }

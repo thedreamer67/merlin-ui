@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { findDOMNode } from 'react-dom';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
-import video from '../../../../assets/dargo_interview_cut.mp4';
+import video from '../../../../assets/tesla.mp4';
 import './VideoPlayer.css';
 
 const VideoPlayer = (props) => {
@@ -18,7 +18,7 @@ const VideoPlayer = (props) => {
 	const outputVideoURL = `${baseURL}/output_video`;
 
 	const ref = useRef(null);
-  const axios = require('axios');
+	const axios = require('axios');
 	const captionURL = `${baseURL}/captions`;
 
 	// useEffect(() => {
@@ -80,17 +80,18 @@ const VideoPlayer = (props) => {
 	});
 
 	useEffect(() => {
-		function getFrame(e) {
+		async function getFrame(e) {
 			if (props.isInpainting || props.isRemovingBG) {
 				if (isPlaying) {
 					alert('Please pause the video before trying to use a spell!');
 				} else {
 					const currTime = ref.current.getCurrentTime();
-					const fps = 30;
-					const frameNum = Math.ceil((1 / (1 / fps)) * currTime);
+					const project = await props.fetchProject();
+					const fps = project.project_fps;
+					const frameNum = Math.floor(fps * currTime);
 					props.setFrameNum(frameNum);
 					console.log(
-						`casting spell, isInpainting=${props.isInpainting} vs isRemovingBG=${props.isRemovingBG}, frameNum=${frameNum}`
+						`casting spell, isInpainting=${props.isInpainting} vs isRemovingBG=${props.isRemovingBG}, time=${currTime}, frameNum=${frameNum}`
 					);
 					props.setIsMagicActionActive(true);
 					props.setcaptionclick(false);
@@ -177,6 +178,7 @@ const VideoPlayer = (props) => {
     const generatingCaption = await generateCaption()
     if (generatingCaption === 200){
       const captionRetrieved = await getCaption()
+      console.log(captionRetrieved)
       setSubtitles(captionRetrieved)
       props.setcaptionclick(true);
     }

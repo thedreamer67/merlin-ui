@@ -53,6 +53,22 @@ function Timeline(props) {
 	};
 
 	useDropzone({});
+
+	useEffect(() => {
+		(async function loadTimeline() {
+			const project = await props.fetchProject();
+			const timelineVids = project.timelines.map((tl) => {
+				return tl.video_objects[0].video_id;
+			});
+			setTimelineVids([...timelineVids]);
+			if (timelineVids.length > 0) {
+				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
+				props.setMainTimeline(project.timelinevideo_ids[0]);
+				setMaxFrames(project.timelines[0].video_objects[0].frame_end);
+			}
+		})();
+	}, []);
+
 	useEffect(() => {
 		async function handleDrop() {
 			if (props.isDraggingVid) {
@@ -60,23 +76,38 @@ function Timeline(props) {
 
 				await axios
 					.post(`${timelineURL}/${props.draggingVidID}`)
-					.then((res) => console.log(res))
-					.catch((err) => console.log(err));
-
-				const project = await axios
-					.get(projectURL)
 					.then((res) => {
-						console.log(res.data);
-						return JSON.parse(res.data);
+						console.log(`Posted new timelinevideo: ${res.data}`);
 					})
 					.catch((err) => console.log(err));
-				props.fetchProject();
+
+				let project = await props.fetchProject();
+				props.setMainTimeline(project.timelinevideo_ids[0]);
+				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
+
+				if (project.audio_path === '') {
+					const videoDetails = await axios
+						.get(`${timelineVideoURL}/${project.timelinevideo_ids[0]}/details`)
+						.then((res) => JSON.parse(res.data))
+						.catch((err) => console.log(err));
+					console.log(`Main timeline videoID = ${videoDetails.video_id}`);
+					await axios
+						.put(`${projectURL}/settings?video_id=${videoDetails.video_id}`)
+						.then((res) => console.log(res.data))
+						.catch((err) => console.log(err));
+				}
+
+				project = await props.fetchProject();
 
 				console.log(
 					`end frame: ${project.timelines[0].video_objects[0].frame_end}`
 				);
-				await setMaxFrames(project.timelines[0].video_objects[0].frame_end);
-				setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
+				setMaxFrames(project.timelines[0].video_objects[0].frame_end);
+				const timelineVids = project.timelines.map((tl) => {
+					return tl.video_objects[0].video_id;
+				});
+				setTimelineVids([...timelineVids]);
+				// setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
 			}
 		}
 		document

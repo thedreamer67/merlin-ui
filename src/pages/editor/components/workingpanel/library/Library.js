@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 function Library(props) {
 	const baseURL = 'http://127.0.0.1:8000';
 	const videoURL = `${baseURL}/video`;
-	const projectURL = `${baseURL}/project`;
+	// const projectURL = `${baseURL}/project`;
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [projectDetails, setProjectDetails] = useState(null);
 	const [isFetchingProject, setIsFetchingProject] = useState(true);
@@ -19,15 +19,10 @@ function Library(props) {
 
 	useEffect(() => {
 		(async function getProject() {
-			const project = await axios
-				.get(projectURL)
-				.then((res) => {
-					return res.data;
-				})
-				.catch((err) => console.log(err));
+			const project = await props.fetchProject();
 
 			const updatedVideos = await Promise.all(
-				JSON.parse(project).library_video_ids.map((id) => {
+				project.library_video_ids.map((id) => {
 					return axios
 						.get(`${videoURL}/${id}/details`)
 						.then((response) => {
@@ -36,7 +31,7 @@ function Library(props) {
 						.catch((err) => console.log(err));
 				})
 			);
-			setProjectDetails(JSON.parse(project));
+			setProjectDetails(project);
 			setVideos(updatedVideos);
 			setIsFetchingProject(false);
 			await props.fetchProject();
@@ -64,15 +59,10 @@ function Library(props) {
 				setIsFetchingProject(true);
 
 				(async function getProject() {
-					const project = await axios
-						.get(projectURL)
-						.then((res) => {
-							return res.data;
-						})
-						.catch((err) => console.log(err));
+					const project = await props.fetchProject();
 
 					const updatedVideos = await Promise.all(
-						JSON.parse(project).library_video_ids.map((id) => {
+						project.library_video_ids.map((id) => {
 							return axios
 								.get(`${videoURL}/${id}/details`)
 								.then((response) => {
@@ -81,7 +71,7 @@ function Library(props) {
 								.catch((err) => console.log(err));
 						})
 					);
-					setProjectDetails(JSON.parse(project));
+					setProjectDetails(project);
 					setVideos(updatedVideos);
 					setIsFetchingProject(false);
 					setIsUploading(false);

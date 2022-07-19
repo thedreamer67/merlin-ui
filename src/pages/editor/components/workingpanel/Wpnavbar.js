@@ -30,7 +30,7 @@ function Wpnavbar(props) {
 	const {subtitles, setSubtitles} = props
 
 	const axios = require('axios');
-  	const baseURL = 'http://127.0.0.1:8000';
+	const baseURL = 'http://127.0.0.1:8000';
 
 	const handleLibraryClick = () => {
 		setlibraryclick(!libraryclick);
@@ -65,20 +65,20 @@ function Wpnavbar(props) {
 	}, [isMagicActionActive]);
 
 	async function getVideoID() {
-		const project = await props.fetchProject()
+		const project = await props.fetchProject();
 		// console.log(project)
-		const timelinevideo_ids = project.timelinevideo_ids[0]
+		const timelinevideo_ids = project.timelinevideo_ids[0];
 		// console.log(timelinevideo_ids)
-		const videoidURL = `${baseURL}/project/timelinevideo/${timelinevideo_ids}/details`
+		const videoidURL = `${baseURL}/project/timelinevideo/${timelinevideo_ids}/details`;
 		const videoid = await axios.get(videoidURL).then((res) => {
 			// console.log(res.data);
-			return(JSON.parse(res.data).video_id)
-		})
-		return videoid
+			return JSON.parse(res.data).video_id;
+		});
+		return videoid;
 	}
 
 	async function QuerySearch() {
-		const video_id = await getVideoID()
+		const video_id = await getVideoID();
 		const searchURL = `${baseURL}/video/${video_id}/search/${searchQuery}`;
 		// console.log(searchURL)
 		const payload = {video_id: video_id,
@@ -117,7 +117,7 @@ function Wpnavbar(props) {
 		}).catch((err) => console.log(err));
 		return(resheatmap)
 	}
-	
+
 	async function getSearchProbability(video_id) {
 		const probabilityURL = `${baseURL}/video/${video_id}/search_probabilities`;
 		// console.log(probabilityURL)
@@ -139,7 +139,7 @@ function Wpnavbar(props) {
 		setcaptionclick(false);
 		setSpellsClick(false);
 		//pass in searchquery to search below
-		QuerySearch()
+		QuerySearch();
 	};
 
 	// useEffect(() => {
@@ -230,8 +230,20 @@ function Wpnavbar(props) {
 				/>
 			) : null}
 			{captionclick ? <AutoCaption subtitles={subtitles} setSubtitles={setSubtitles}/> : null}
-			{isMagicActionActive ? <MagicAction /> : null}
-			{isSearching ? <Search query={searchQuery} heatmap={heatmap} probability={probability}/> : null}
+			{isMagicActionActive ? (
+				<MagicAction
+					frameNum={props.frameNum}
+					mainTimeline={props.mainTimeline}
+					fetchProject={props.fetchProject}
+				/>
+			) : null}
+			{isSearching ? (
+				<Search
+					query={searchQuery}
+					heatmap={heatmap}
+					probability={probability}
+				/>
+			) : null}
 			{/* <div
 				style={{
 					padding: '1vw 1vh',

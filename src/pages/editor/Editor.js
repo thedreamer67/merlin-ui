@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './Editor.module.css';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -54,15 +54,15 @@ function Editor(props) {
 	};
 
 	const fetchProject = async () => {
-    console.log('fetching...')
 		const project = await axios
 			.get(projectURL)
 			.then((res) => {
+				console.log(`Project details = ${res.data}`);
 				return JSON.parse(res.data);
 			})
 			.catch((err) => console.log(err));
 		setProject(project);
-    return project
+		return project;
 	};
 
 	return (
@@ -93,6 +93,8 @@ function Editor(props) {
 								fetchProject={fetchProject}
                 subtitles={subtitles}
 			          setSubtitles={setSubtitles}
+								frameNum={frameNum}
+								mainTimeline={mainTimeline}
 							/>
 						</div>
 						<div className={styles.rightPane}>

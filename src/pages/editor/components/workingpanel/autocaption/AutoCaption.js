@@ -91,18 +91,19 @@ function AutoCaption(props) {
     if (updateCaptionRes === 200){
       const captionRetrieved = await getCaption()
       // console.log(subtitles)
-      alert('Subtitles saved!')
+      // alert('Subtitles saved!')
     }
   }
 
 
   const saveSubtitles = () => {
-    updateCaption()
     setSubtitles([...copied_subtitle_parsed]);
+    alert('Subtitles edits saved!')
   };
 
   useEffect(() => {
     console.log(subtitles);
+    updateCaption()
     convertToSRTFormat(subtitles);
   }, [subtitles]);
 

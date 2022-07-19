@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Tooltip from '@mui/material/Tooltip'
-import "./styles/Spells.css"
-import original from '../../../../images/homebackground.jpg'
-import backgroundAfter from '../../../../images/backgroundAfter.png'
-import backgroundBefore from '../../../../images/backgroundBefore.png'
-import objectBefore from '../../../../images/objectBefore.png'
-import objectAfter from '../../../../images/objectAfter.jpg'
-import autoCap from '../../../../images/autocap.jpg'
+import Tooltip from '@mui/material/Tooltip';
+import './styles/Spells.css';
+import original from '../../../../images/homebackground.jpg';
+import backgroundAfter from '../../../../images/backgroundAfter.png';
+import backgroundBefore from '../../../../images/backgroundBefore.png';
+import objectBefore from '../../../../images/objectBefore.png';
+import objectAfter from '../../../../images/objectAfter.jpg';
+import autoCap from '../../../../images/autocap.jpg';
 
 function Spells(props) {
 	const [demoImgSRC1, setDemoImgSRC1] = useState(objectBefore);
@@ -14,27 +14,28 @@ function Spells(props) {
 	const { setisSpellDragActive } = props;
 	const { setIsMagicActionActive } = props;
 
-    const handleRemoveObjectHover = () => {
-        setDemoImgSRC1(objectBefore)
-        setDemoImgSRC2(objectAfter)
-        setisSpellDragActive(true)
-      };
-    const handleRemoveBgHover = () => {
-        setDemoImgSRC1(backgroundBefore)
-        setDemoImgSRC2(backgroundAfter)
-        setisSpellDragActive(true)
-    };
-    const autoCapHover = () => {
-        setDemoImgSRC1(original)
-        setDemoImgSRC2(autoCap)
-        setisSpellDragActive(true)
-    };
+	const handleRemoveObjectHover = () => {
+		setDemoImgSRC1(objectBefore);
+		setDemoImgSRC2(objectAfter);
+		setisSpellDragActive(true);
+	};
+	const handleRemoveBgHover = () => {
+		setDemoImgSRC1(backgroundBefore);
+		setDemoImgSRC2(backgroundAfter);
+		setisSpellDragActive(true);
+	};
+	const autoCapHover = () => {
+		setDemoImgSRC1(original);
+		setDemoImgSRC2(autoCap);
+		setisSpellDragActive(true);
+	};
 
 	const handleMouseLeave = () => {
 		setDemoImgSRC1(original);
 		setDemoImgSRC2(original);
 		setisSpellDragActive(false);
 	};
+
 	return (
 		<div className='SpellsPanel'>
 			<div className='SpellsMenu'>
@@ -44,6 +45,8 @@ function Spells(props) {
 					draggable='true'
 					onDragStart={() => {
 						props.setIsInpainting(true);
+						props.setisAutoCap(false);
+						props.setIsRemovingBG(false);
 					}}
 					onDragEnd={() => {
 						props.setIsInpainting(false);
@@ -71,6 +74,8 @@ function Spells(props) {
 					draggable='true'
 					onDragStart={() => {
 						props.setIsRemovingBG(true);
+						props.setisAutoCap(false);
+						props.setIsInpainting(false);
 					}}
 					onDragEnd={() => {
 						props.setIsRemovingBG(false);
