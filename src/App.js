@@ -16,7 +16,7 @@ function App() {
 			{!isEditor ? (
 				<Home handleStart={handleStart} />
 			) : (
-				<Editor handleStart={handleStart} />
+				<Editor handleStart={handleStart} setIsEditor={setIsEditor} />
 			)}
 		</div>
 	);

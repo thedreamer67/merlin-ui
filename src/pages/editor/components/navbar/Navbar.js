@@ -32,7 +32,10 @@ function Navbar(props) {
 	return (
 		<>
 			<nav className='navbar'>
-				<div className='navbar-left-menu'>
+				<div
+					className='navbar-left-menu'
+					onClick={() => props.setIsEditor(false)}
+				>
 					<i class='fa-solid fa-hat-wizard'></i>
 					<div className='nav-title'>MERLIN</div>
 				</div>

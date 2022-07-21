@@ -73,7 +73,7 @@ function Editor(props) {
 
 	return (
 		<div className={styles.editorMain}>
-			<Navbar handleStart={handleStart} />
+			<Navbar handleStart={handleStart} setIsEditor={props.setIsEditor} />
 			<div className={styles.outersplitScreen}>
 				<div className={styles.topPane}>
 					<div className={styles.innersplitScreen}>

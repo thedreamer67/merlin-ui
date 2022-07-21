@@ -90,14 +90,14 @@ function SearchVideo(props) {
 		// console.log(parseFloat(0.8 * SearchVideoRef.current.getDuration()));
 		setSearchVideoDuration(SearchVideoRef.current.getDuration());
 		setSearchVideoPlayed(
-			parseFloat(0.8 * SearchVideoRef.current.getDuration())
+			parseFloat((300 / 367) * SearchVideoRef.current.getDuration())
 		);
-		setSliderPosition(0.8);
+		setSliderPosition(300 / 367);
 		setCurrentSearchVideoPlaybackTime(
-			parseFloat(0.8 * SearchVideoRef.current.getDuration())
+			parseFloat((300 / 367) * SearchVideoRef.current.getDuration())
 		);
 		SearchVideoRef.current.seekTo(
-			parseFloat(0.8 * SearchVideoRef.current.getDuration())
+			parseFloat((300 / 367) * SearchVideoRef.current.getDuration())
 		);
 	};
 
