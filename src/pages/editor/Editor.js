@@ -8,6 +8,8 @@ import Workingpanel from './components/workingpanel';
 // import Library from './Library';
 import VideoPlayer from './components/videoplayer';
 import Timeline from './components/timeline';
+import empty_video from '../../images/empty_video.png'
+import og_video from '../../assets/demo.mp4'
 
 function Editor(props) {
 	const baseURL = 'http://127.0.0.1:8000';
@@ -33,6 +35,8 @@ function Editor(props) {
 	const [removeBG, setRemoveBG] = useState(false);
 	const [timelineVids, setTimelineVids] = useState([]);
 	const [subtitles, setSubtitles] = useState('');
+	const [videoURL, setVideoURL] = useState(og_video)
+	const [isFinal, setIsFinal] = useState(false)
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -101,10 +105,13 @@ function Editor(props) {
 								setTimelineVids={setTimelineVids}
 								subtitles={subtitles}
 								setSubtitles={setSubtitles}
+								setVideoURL={setVideoURL}
+								setIsFinal={setIsFinal}
+								isFinal={isFinal}
 							/>
 						</div>
 						<div className={styles.rightPane}>
-							<VideoPlayer
+							{ timelineVids.length > 0 ? <VideoPlayer
 								getTime={storeTime}
 								getDuration={storeDuration}
 								scrollPosition={scrollPosition}
@@ -127,7 +134,11 @@ function Editor(props) {
 								setRemoveBG={setRemoveBG}
 								subtitles={subtitles}
 								setSubtitles={setSubtitles}
-							/>
+								videoURL={videoURL}
+								setVideoURL={setVideoURL}
+								project={project}
+								isFinal={isFinal}
+							/>: <img className='emptyVideo' src={empty_video} /> }
 						</div>
 					</div>
 				</div>
@@ -146,6 +157,7 @@ function Editor(props) {
 						setMainTimeline={setMainTimeline}
 						timelineVids={timelineVids}
 						setTimelineVids={setTimelineVids}
+						setVideoURL={setVideoURL}
 					/>
 				</div>
 			</div>

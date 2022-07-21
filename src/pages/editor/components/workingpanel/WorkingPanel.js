@@ -29,6 +29,9 @@ function WorkingPanel(props) {
 			setTimelineVids={props.setTimelineVids}
 			subtitles={props.subtitles}
 			setSubtitles={props.setSubtitles}
+			setVideoURL={props.setVideoURL}
+			setIsFinal={props.setIsFinal}
+			isFinal={props.isFinal}
 		/>
 	);
 }

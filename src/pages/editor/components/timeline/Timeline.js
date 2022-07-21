@@ -5,6 +5,7 @@ import './styles/Timeline.css';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
+import og_video from '../../../../assets/demo.mp4'
 
 function Timeline(props) {
 	const {
@@ -143,6 +144,7 @@ function Timeline(props) {
 			return tl.video_objects[0].video_id;
 		});
 		props.setTimelineVids([...timelineVids]);
+		props.setVideoURL(og_video)
 	};
 
 	return (

@@ -235,6 +235,8 @@ function Wpnavbar(props) {
 				<AutoCaption
 					subtitles={props.subtitles}
 					setSubtitles={props.setSubtitles}
+					setIsFinal={props.setIsFinal}
+					isFinal={props.isFinal}
 				/>
 			) : null}
 			{isMagicActionActive ? (
@@ -247,6 +249,7 @@ function Wpnavbar(props) {
 					inpaint={props.inpaint}
 					removeBG={props.removeBG}
 					setTimelineVids={props.setTimelineVids}
+					setVideoURL={props.setVideoURL}
 				/>
 			) : null}
 			{isSearching ? (
