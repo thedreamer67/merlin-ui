@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
-import video from '../../../../assets/ogvideo.mp4';
+import video from '../../../../assets/demo_bgreplaced.mp4';
 import './VideoPlayer.css';
 
 const VideoPlayer = (props) => {
