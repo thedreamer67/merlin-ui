@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import './VideoPlayer.css';
-import final from '../../../../assets/final.mp4';
 import demo_bgreplaced from '../../../../assets/demo_bgreplaced.mp4';
 import empty_video from '../../../../images/empty_video.png';
 import demo_final from '../../../../assets/demo_final.mp4';
