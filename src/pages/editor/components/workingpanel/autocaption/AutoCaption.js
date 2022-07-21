@@ -108,10 +108,23 @@ function AutoCaption(props) {
   }, [subtitles]);
 
   let copied_subtitle_parsed = JSON.parse(JSON.stringify(subtitles));
+  
+  const [isAdded, setIsAdded] = useState(false)
+
+  const handleAdd = () => {
+    setIsAdded(!isAdded);
+    props.setIsFinal(!props.isFinal)
+    if (!isAdded){
+      alert('Subtitles added to video!')
+    }
+    else {
+      alert('Subtitles removed from video!')
+    }
+  };
 
   return (
     <div>
-      {/* <div className="buttonrow"> */}
+      <div className="buttonrow">
       {/* <button
         className={
           generateSubtitlesClicked
@@ -125,7 +138,8 @@ function AutoCaption(props) {
       <button className="autocaptionbtn" onClick={saveSubtitles}>
         Save
       </button>
-      {/* </div> */}
+      {isAdded? <button className="autocaptionbtn" onClick={handleAdd}>Remove from movie</button>: <button onClick={handleAdd} className="autocaptionbtn">Add to movie</button>}
+      </div>
       {generateSubtitlesClicked ? (
         <div className="subtitles">
           {subtitles.map((obj, index) => (

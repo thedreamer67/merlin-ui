@@ -4,6 +4,8 @@ import './styles/MagicAction.css';
 import Tooltip from '@mui/material/Tooltip';
 import MaskImage from './MaskImage';
 import e from 'cors';
+import demo_objectremoved from '../../../../assets/demo_objremoved.mp4'
+import bg_removed from '../../../../assets/demo_bgremoved.mp4'
 
 function MagicAction(props) {
 	const [paintclick, setpaintclick] = useState(false);
@@ -11,6 +13,7 @@ function MagicAction(props) {
 	const [maskGenerated, setMaskGenerated] = useState(false);
 	const [IsLoading, setIsLoading] = useState(false);
 	const [frameToMask, setFrameToMask] = useState(null);
+	const {setVideoURL} = props
 
 	const handlePaintClick = () => {
 		setpaintclick(!paintclick);
@@ -58,6 +61,7 @@ function MagicAction(props) {
 					})
 					.catch((err) => console.log(err));
 				setIsLoading(false);
+				setVideoURL(demo_objectremoved)
 			} else if (props.removeBG) {
 				console.log('Remove background');
 				setIsLoading(true);
@@ -69,6 +73,7 @@ function MagicAction(props) {
 					})
 					.catch((err) => console.log(err));
 				setIsLoading(false);
+				setVideoURL(bg_removed)
 			}
 
 			console.log('Change maintimeline video ID to new edited video');

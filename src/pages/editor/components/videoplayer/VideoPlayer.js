@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
-import video from '../../../../assets/ogvideo.mp4';
 import './VideoPlayer.css';
+import final from '../../../../assets/final.mp4'
+import bg_replaced from '../../../../assets/bg_replaced.mp4'
 
 const VideoPlayer = (props) => {
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -12,9 +13,11 @@ const VideoPlayer = (props) => {
 	const [hasEnded, setHasEnded] = useState(false);
 	const { isSpellDragActive } = props;
 	const { subtitles, setSubtitles } = props;
+  const {videoURL, setVideoURL} = props
+  const {project} = props
 
 	const baseURL = 'http://127.0.0.1:8000';
-	const outputVideoURL = `${baseURL}/output_video`;
+	const outputVideoURL = `${baseURL}/demo/final`;
 
 	const ref = useRef(null);
 	const axios = require('axios');
@@ -208,6 +211,27 @@ const VideoPlayer = (props) => {
 		};
 	});
 
+  useEffect(() => {
+    if (project.timelinevideo_ids.length===2){
+      if (props.isFinal){
+        setVideoURL(final)
+      }
+      else{
+        setVideoURL(bg_replaced)
+      }
+    }
+  },[project]);
+
+  useEffect(() => {
+    if (project.timelinevideo_ids.length===2){
+      if (props.isFinal){
+        setVideoURL(final)
+      }
+      else{
+        setVideoURL(bg_replaced)
+      }
+    }
+  },[props.isFinal]);
 	// const handlePlayPause = () => {
 	// 	setIsPlaying((prev) => !prev);
 	// 	if (hasEnded) {
@@ -284,7 +308,7 @@ const VideoPlayer = (props) => {
 					played={played}
 					muted={isMuted}
 					progressInterval={500}
-					url={video}
+					url={videoURL}
 					ref={ref}
 					onReady={handleReady}
 					onProgress={handleProgress}
