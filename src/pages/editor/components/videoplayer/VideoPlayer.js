@@ -3,7 +3,9 @@ import ReactPlayer from 'react-player';
 import screenfull from 'screenfull';
 import './VideoPlayer.css';
 import final from '../../../../assets/final.mp4';
-import bg_replaced from '../../../../assets/bg_replaced.mp4';
+import demo_bgreplaced from '../../../../assets/demo_bgreplaced.mp4';
+import empty_video from '../../../../images/empty_video.png';
+import demo_final from '../../../../assets/demo_final.mp4';
 
 const VideoPlayer = (props) => {
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -212,24 +214,18 @@ const VideoPlayer = (props) => {
 	});
 
 	useEffect(() => {
-		if (project.timelinevideo_ids.length === 2) {
-			if (props.isFinal) {
-				setVideoURL(final);
-			} else {
-				setVideoURL(bg_replaced);
+		(async function getVid() {
+			const project = await props.fetchProject();
+			if (project.timelinevideo_ids.length === 2) {
+				if (props.isFinal) {
+					setVideoURL(demo_final);
+				} else {
+					setVideoURL(demo_bgreplaced);
+				}
 			}
-		}
-	}, [project]);
+		})();
+	}, [props.timelineVids]);
 
-	useEffect(() => {
-		if (project.timelinevideo_ids.length === 2) {
-			if (props.isFinal) {
-				setVideoURL(final);
-			} else {
-				setVideoURL(bg_replaced);
-			}
-		}
-	}, [props.isFinal]);
 	// const handlePlayPause = () => {
 	// 	setIsPlaying((prev) => !prev);
 	// 	if (hasEnded) {
@@ -295,25 +291,31 @@ const VideoPlayer = (props) => {
 		<div className='video-component'>
 			<div
 				id='video-player'
-				className={isSpellDragActive ? 'react-player-dropzone' : 'react-player'}
+				className={
+					isSpellDragActive && props.timelineVids.length > 0
+						? 'react-player-dropzone'
+						: 'react-player'
+				}
 			>
-				<ReactPlayer
-					// className='react-player'
-					width='100%'
-					height='100%'
-					controls={controls}
-					playing={isPlaying}
-					played={played}
-					muted={isMuted}
-					progressInterval={500}
-					url={videoURL}
-					ref={ref}
-					onReady={handleReady}
-					onProgress={handleProgress}
-					onEnded={handleEnded}
-					onPlay={() => setIsPlaying(true)}
-					onPause={() => setIsPlaying(false)}
-				/>
+				{props.timelineVids.length > 0 && (
+					<ReactPlayer
+						// className='react-player'
+						width='100%'
+						height='100%'
+						controls={controls}
+						playing={isPlaying}
+						played={played}
+						muted={isMuted}
+						progressInterval={500}
+						url={videoURL}
+						ref={ref}
+						onReady={handleReady}
+						onProgress={handleProgress}
+						onEnded={handleEnded}
+						onPlay={() => setIsPlaying(true)}
+						onPause={() => setIsPlaying(false)}
+					/>
+				)}
 			</div>
 
 			{/* <section className='controls'>

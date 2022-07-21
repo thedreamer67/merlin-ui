@@ -5,19 +5,21 @@ import demoHeatmap from '../../../../images/heatmap.png';
 import Slider from './Slider';
 
 import ReactPlayer from 'react-player';
-import video from '../../../../assets/ogvideo.mp4';
+import video from '../../../../assets/demo.mp4';
 import { useRef, useEffect } from 'react';
 
 const Search = (props) => {
 	const [sliderPosition, setSliderPosition] = useState(0);
 	const [SearchVideoSeeking, setSearchVideoSeeking] = useState(0);
 	const [currentFrame, setcurrentFrame] = useState(1);
-	const [maxFrames, setMaxFrames] = useState(400);
+	const [maxFrames, setMaxFrames] = useState(367); //TODO change this so it takes in actual project fps
 
 	return (
 		<div className='SearchContainer'>
 			<div className='innerSearchContainer'>
-				<div>{`Searching: "${props.query}"`}</div>
+				<div
+					style={{ paddingLeft: '0.5rem' }}
+				>{`Searching: "${props.query}"`}</div>
 				{/* <div>XX number of results</div> */}
 				<div className='HeatmapContainer'>
 					<div className='videoSearch'>
@@ -31,7 +33,10 @@ const Search = (props) => {
 							setSearchVideoSeeking={setSearchVideoSeeking}
 						/>
 					</div>
-					<img className='demoHeatmap' src={`data:;base64,${props.heatmap}`}></img>
+					<img
+						className='demoHeatmap'
+						src={`data:;base64,${props.heatmap}`}
+					></img>
 					<Slider
 						id='searchscroll'
 						className='searchscroll'
@@ -81,9 +86,19 @@ function SearchVideo(props) {
 		}
 	};
 
-	const handleSearchVideoReady = (duration) => {
-		// console.log('onDuration', duration)
+	const handleSearchVideoReady = () => {
+		// console.log(parseFloat(0.8 * SearchVideoRef.current.getDuration()));
 		setSearchVideoDuration(SearchVideoRef.current.getDuration());
+		setSearchVideoPlayed(
+			parseFloat(0.8 * SearchVideoRef.current.getDuration())
+		);
+		setSliderPosition(0.8);
+		setCurrentSearchVideoPlaybackTime(
+			parseFloat(0.8 * SearchVideoRef.current.getDuration())
+		);
+		SearchVideoRef.current.seekTo(
+			parseFloat(0.8 * SearchVideoRef.current.getDuration())
+		);
 	};
 
 	const handleSearchVideoEnded = () => {

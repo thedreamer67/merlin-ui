@@ -76,7 +76,7 @@ function Wpnavbar(props) {
 		return videoid;
 	}
 
-	async function QuerySearch() {
+	async function querySearch() {
 		const video_id = await getVideoID();
 		const searchURL = `${baseURL}/video/${video_id}/search/${searchQuery}`;
 		// console.log(searchURL)
@@ -141,7 +141,9 @@ function Wpnavbar(props) {
 		setcaptionclick(false);
 		setSpellsClick(false);
 		//pass in searchquery to search below
-		QuerySearch();
+		querySearch();
+		const searchInput = document.getElementById('searchInput');
+		searchInput.value = '';
 	};
 
 	// useEffect(() => {
@@ -204,6 +206,7 @@ function Wpnavbar(props) {
 							style={{ height: '100%', width: '100%' }}
 						>
 							<input
+								id='searchInput'
 								className='searchInput'
 								placeholder='Search video'
 								onChange={(e) => {
