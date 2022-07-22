@@ -95,14 +95,14 @@ function SearchVideo(props) {
 
   useEffect(() => {
     setSearchVideoPlayed(
-      parseFloat((300 / 367) * SearchVideoRef.current.getDuration())
+      parseFloat((301 / 367) * SearchVideoRef.current.getDuration())
     );
-    setSliderPosition(300 / 367);
+    setSliderPosition(301 / 367);
     setCurrentSearchVideoPlaybackTime(
-      parseFloat((300 / 367) * SearchVideoRef.current.getDuration())
+      parseFloat((301 / 367) * SearchVideoRef.current.getDuration())
     );
     SearchVideoRef.current.seekTo(
-      parseFloat((300 / 367) * SearchVideoRef.current.getDuration())
+      parseFloat((301 / 367) * SearchVideoRef.current.getDuration())
     );
   }, [ready]);
 
