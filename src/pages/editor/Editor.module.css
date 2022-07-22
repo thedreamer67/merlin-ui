@@ -1,54 +1,55 @@
-.editorMain{
-	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('../../images/woodenBg.jpg');
-	background-size: contain;
+.editorMain {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../../images/woodenBg.jpg');
+  background-size: contain;
 }
 
 .topPane {
-	grid-column: 1;
-	grid-row: 1;
-	height: 60vh;
-	/* background-color: #929292; */
+  grid-column: 1;
+  grid-row: 1;
+  height: 60vh;
+  /* background-color: #929292; */
 }
 
 .bottomPane {
-	grid-column: 1;
-	grid-row: 2;
-	/* background-color: #929292; */
-	height: 36vh;
+  grid-column: 1;
+  grid-row: 2;
+  /* background-color: #929292; */
+  height: 36vh;
 }
 
 .outersplitScreen {
-	height: 96vh;
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 1fr;
+  height: 96vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
 .leftPane {
-	grid-column: 1;
-	grid-row: 1;
-	border-right: 1px solid #000000;
-	max-height: 60vh;
+  grid-column: 1;
+  grid-row: 1;
+  border-right: 0.2rem solid #000000;
+  max-height: 60vh;
 }
 
 .rightPane {
-	grid-column: 2;
-	grid-row: 1;
-	/* margin: auto; */
-	/* height: 100%; */
-	max-height: 60vh;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	box-sizing: border-box;
-	padding: 3%;
+  grid-column: 2;
+  grid-row: 1;
+  /* margin: auto; */
+  /* height: 100%; */
+  max-height: 60vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 3%;
 }
 
 .innersplitScreen {
-	height: 100%;
-	display: grid;
-	grid-template-columns: 50% 50%;
-	grid-template-rows: 1fr;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
 }
 
 /* .player-wrapper {
@@ -58,11 +59,11 @@
 } */
 
 .emptyVideo {
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
 }
