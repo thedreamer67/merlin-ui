@@ -209,6 +209,7 @@ function Wpnavbar(props) {
 								id='searchInput'
 								className='searchInput'
 								placeholder='Search video'
+								autoComplete='off'
 								onChange={(e) => {
 									setSearchQuery(e.target.value);
 								}}

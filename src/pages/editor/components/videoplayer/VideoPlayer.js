@@ -222,7 +222,7 @@ const VideoPlayer = (props) => {
         }
       }
     })();
-  }, [props.timelineVids]);
+  }, [props.timelineVids, props.isFinal]);
 
   // const handlePlayPause = () => {
   // 	setIsPlaying((prev) => !prev);
