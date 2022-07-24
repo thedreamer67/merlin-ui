@@ -146,24 +146,6 @@ function Wpnavbar(props) {
 		searchInput.value = '';
 	};
 
-	// useEffect(() => {
-	//   if (libraryclick){
-	//     setIsMagicActionActive(false);
-	//     setcaptionclick(false);
-	//   }
-	// }, [libraryclick]);
-
-	// useEffect(() => {
-	//   if (captionclick){
-	//     setIsMagicActionActive(false);
-	//     setlibraryclick(false);
-	//   }
-	// }, [captionclick]);
-
-	const handleDragStart = () => {};
-
-	const handleDragEnd = () => {};
-
 	return (
 		<>
 			<nav className='wpnavbar'>
@@ -179,16 +161,6 @@ function Wpnavbar(props) {
 								<div className='wpbtn'>Library</div>
 							</div>
 						</div>
-						{/* <div className='wpnav-item'>
-							<div
-								onClick={handleCaptionClick}
-								style={{
-									backgroundColor: captionclick ? 'purple' : 'transparent',
-								}}
-							>
-								<div className='wpbtn'>Auto Caption</div>
-							</div>
-						</div> */}
 						<div className='wpnav-item'>
 							<div
 								onClick={handleSpellsClick}
