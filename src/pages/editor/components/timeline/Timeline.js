@@ -1,26 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ImageCarousel from './ImageCarousel';
-import './styles/Timeline.css';
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync';
 import { useDropzone } from 'react-dropzone';
 import DropzonePrompt from './DropzonePrompt';
+import './styles/Timeline.css';
 import demo from '../../../../assets/demo.mp4';
 
 function Timeline(props) {
-	const {
-		isMagicActionActive,
-		handleMagicActionClick,
-		setIsMagicActionActive,
-	} = props;
+	// const [maxFrames, setMaxFrames] = useState(null);
 
 	const baseURL = 'http://127.0.0.1:8000';
 	const projectURL = `${baseURL}/project`;
 	const timelineURL = `${projectURL}/timeline`;
 	const timelineVideoURL = `${projectURL}/timelinevideo`;
-
-	// const [timelineVids, setTimelineVids] = useState([]);
-	const [maxFrames, setMaxFrames] = useState(null);
 
 	const currentTime = new Date(props.currentTime * 1000)
 		.toISOString()
@@ -33,9 +26,6 @@ function Timeline(props) {
 		const scrollPercentage = scrollBar.scrollLeft / maxScrollLeft;
 
 		props.getScrollPosition(scrollPercentage);
-		// console.log(
-		// 	`timeline: handleScroll: scrollPercentage = ${scrollPercentage}`
-		// );
 	};
 
 	const handleMouseDown = (e) => {
@@ -44,13 +34,11 @@ function Timeline(props) {
 			scrollBar.getBoundingClientRect()['top'] + scrollBar.clientHeight;
 		if (e.clientY > maxY) {
 			props.getSeeking(true);
-			// console.log(`mouseDown ${e.clientY}`);
 		}
 	};
 
 	const handleMouseUp = () => {
 		props.getSeeking(false);
-		// console.log(`mouseUp`);
 	};
 
 	useDropzone({});
@@ -65,7 +53,7 @@ function Timeline(props) {
 			if (timelineVids.length > 0) {
 				console.log(`Setting mainTimeline = ${project.timelinevideo_ids[0]}`);
 				props.setMainTimeline(project.timelinevideo_ids[0]);
-				setMaxFrames(project.timelines[0].video_objects[0].frame_end);
+				props.setMaxFrames(project.timelines[0].video_objects[0].frame_end);
 			}
 		})();
 	}, []);
@@ -103,12 +91,11 @@ function Timeline(props) {
 				console.log(
 					`end frame: ${project.timelines[0].video_objects[0].frame_end}`
 				);
-				setMaxFrames(project.timelines[0].video_objects[0].frame_end);
+				props.setMaxFrames(project.timelines[0].video_objects[0].frame_end);
 				const timelineVids = project.timelines.map((tl) => {
 					return tl.video_objects[0].video_id;
 				});
 				props.setTimelineVids([...timelineVids]);
-				// setTimelineVids((prevArray) => [...prevArray, props.draggingVidID]);
 			}
 		}
 		document
@@ -124,15 +111,6 @@ function Timeline(props) {
 			}
 		};
 	});
-
-	// const coords = (e) => {
-	// 	console.log(e.clientY);
-	// };
-
-	// const [frameclick, setFrameclick] = useState(true);
-	// const handleFrameClick = () => {
-	// 	setFrameclick(!frameclick);
-	// };
 
 	const deleteTimelines = async () => {
 		await axios
@@ -171,16 +149,15 @@ function Timeline(props) {
 								onScroll={handleScroll}
 								onMouseDown={handleMouseDown}
 								onMouseUp={handleMouseUp}
-								// onClick={coords}
 							>
 								{props.timelineVids.length !== 0 ? (
 									props.timelineVids.map((id) => (
 										<ImageCarousel
-											handleMagicActionClick={handleMagicActionClick}
-											isMagicActionActive={isMagicActionActive}
-											setIsMagicActionActive={setIsMagicActionActive}
+											handleMagicActionClick={props.handleMagicActionClick}
+											isMagicActionActive={props.isMagicActionActive}
+											setIsMagicActionActive={props.setIsMagicActionActive}
 											videoID={id}
-											maxFrames={maxFrames}
+											maxFrames={props.maxFrames}
 										/>
 									))
 								) : (

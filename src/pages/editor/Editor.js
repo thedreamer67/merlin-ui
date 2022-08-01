@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import styles from './Editor.module.css';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import Workingpanel from './components/workingpanel';
-// import SignUp from "../signup";
-// import Library from './Library';
 import VideoPlayer from './components/videoplayer';
 import Timeline from './components/timeline';
 import demo from '../../assets/demo.mp4';
@@ -13,7 +10,6 @@ import demo from '../../assets/demo.mp4';
 function Editor(props) {
 	const baseURL = 'http://127.0.0.1:8000';
 	const projectURL = `${baseURL}/project`;
-	const { handleStart } = props;
 	const [currentPlaybackTime, setCurrentPlaybackTime] = useState(0);
 	const [duration, setDuration] = useState(0);
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -36,6 +32,7 @@ function Editor(props) {
 	const [subtitles, setSubtitles] = useState('');
 	const [videoURL, setVideoURL] = useState(demo);
 	const [isFinal, setIsFinal] = useState(false);
+	const [maxFrames, setMaxFrames] = useState(null);
 
 	const storeTime = (currentTime) => {
 		setCurrentPlaybackTime(currentTime);
@@ -73,7 +70,7 @@ function Editor(props) {
 
 	return (
 		<div className={styles.editorMain}>
-			<Navbar handleStart={handleStart} setIsEditor={props.setIsEditor} />
+			<Navbar handleStart={props.handleStart} setIsEditor={props.setIsEditor} />
 			<div className={styles.outersplitScreen}>
 				<div className={styles.topPane}>
 					<div className={styles.innersplitScreen}>
@@ -107,6 +104,7 @@ function Editor(props) {
 								setVideoURL={setVideoURL}
 								setIsFinal={setIsFinal}
 								isFinal={isFinal}
+								maxFrames={maxFrames}
 							/>
 						</div>
 						<div className={styles.rightPane}>
@@ -160,6 +158,8 @@ function Editor(props) {
 						timelineVids={timelineVids}
 						setTimelineVids={setTimelineVids}
 						setVideoURL={setVideoURL}
+						maxFrames={maxFrames}
+						setMaxFrames={setMaxFrames}
 					/>
 				</div>
 			</div>

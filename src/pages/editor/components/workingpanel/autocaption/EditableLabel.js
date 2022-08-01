@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
 function EditableLabel(props) {
-	const { id, text, editSubtitles } = props;
-
 	const [isEditing, setIsEditing] = useState(false);
-	const [value, setValue] = useState(text);
+	const [value, setValue] = useState(props.text);
 
 	const exitInput = () => {
 		setIsEditing(false);
-		editSubtitles(id, value);
+		props.editSubtitles(props.id, value);
 	};
 
 	return (
@@ -17,7 +15,7 @@ function EditableLabel(props) {
 				<label onClick={() => setIsEditing(true)}>{value}</label>
 			) : (
 				<input
-					id={id}
+					id={props.id}
 					onBlur={exitInput}
 					type='text'
 					autoComplete='off'

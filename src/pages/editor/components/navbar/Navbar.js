@@ -3,7 +3,6 @@ import axios from 'axios';
 import './styles/Navbar.css';
 
 function Navbar(props) {
-	const { handleStart } = props;
 	const [click, setClick] = useState(false);
 
 	const baseURL = 'http://127.0.0.1:8000';
@@ -26,7 +25,7 @@ function Navbar(props) {
 			console.log('quitting');
 			await axios.get(`${projectURL}/save`);
 		})();
-		handleStart();
+		props.handleStart();
 	};
 
 	return (
@@ -76,5 +75,3 @@ function Navbar(props) {
 }
 
 export default Navbar;
-
-//https://github.com/briancodex/react-navbar-dropdown/blob/master/src/components/Navbar.js

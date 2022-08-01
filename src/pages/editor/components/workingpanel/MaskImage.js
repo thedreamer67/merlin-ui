@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import pic from '../../../../static/000031.jpg';
-
 const MaskImage = (props) => {
-	const [newSRC, setNewSRC] = useState(null);
-	const { paintclick, eraserclick } = props;
-	const [imgclick, setimgclick] = useState(false);
-	const [x, setX] = useState(0);
-	const [y, setY] = useState(0);
-
 	const baseURL = 'http://127.0.0.1:8000';
 	const projectURL = `${baseURL}/project`;
 	const videoURL = `${baseURL}/video`;
 	const timelineVideoURL = `${projectURL}/timelinevideo`;
+
+	const [newSRC, setNewSRC] = useState(null);
 
 	useEffect(() => {
 		(async function getFrame() {
@@ -30,7 +24,7 @@ const MaskImage = (props) => {
 	}, []);
 
 	const handleImgClick = (e) => {
-		if (paintclick) {
+		if (props.paintclick) {
 			const x = e.pageX - e.target.offsetLeft;
 			const y = e.pageY - e.target.offsetTop;
 			console.log(
@@ -55,35 +49,21 @@ const MaskImage = (props) => {
 				props.setMaskGenerated(true);
 			})();
 		}
-		if (eraserclick) {
+		if (props.eraserclick) {
 			console.log('Negative clicked');
-			setX(e.pageX - e.target.offsetLeft);
-			setY(e.pageY - e.target.offsetTop);
-			// setimgclick(!imgclick);
-			// console.log(x, y);
 		}
 	};
-
-	// useEffect(() => {
-	// 	//update image shown each time it is clicked
-	// 	if (imgclick) {
-	// 		console.log(x, y);
-	// 		console.log('Fetching mask...');
-	// 		setNewSRC(pic);
-	// 		console.log('Mask fetched!');
-	// 		setimgclick(false); //set to false to display image
-	// 	}
-	// }, []);
 
 	return (
 		<div className='imageContainer'>
 			{newSRC && (
-				<img className='maskCanvas' onClick={handleImgClick} src={newSRC}></img>
+				<img
+					className='maskCanvas'
+					onClick={handleImgClick}
+					src={newSRC}
+					alt='No frame found'
+				></img>
 			)}
-			{/* {imgclick ? null : (
-				<img className='maskCanvas' onClick={handleImgClick} src={newSRC}></img>
-			)} */}
-			{/* {imgclick ? <Loading /> : null} */}
 		</div>
 	);
 };

@@ -1,27 +1,21 @@
+import React from 'react';
 import './styles/Table.css';
 
-const TableBody = ({
-	maxFrames,
-	setSearchVideoSeeking,
-	setSliderPosition,
-	tableData,
-	columns,
-}) => {
+const TableBody = (props) => {
 	const handleJumpToFrame = (value) => {
-		// console.log('onDuration', duration)
-		console.log(value);
-		setSearchVideoSeeking(true);
-		const newSliderPosition = Number((value.tData / maxFrames).toFixed(4));
-		console.log(newSliderPosition);
-		setSliderPosition(newSliderPosition);
+		props.setSearchVideoSeeking(true);
+		const newSliderPosition = Number(
+			(value.tData / props.maxFrames).toFixed(4)
+		);
+		props.setSliderPosition(newSliderPosition);
 	};
 
 	return (
 		<tbody>
-			{tableData.map((data) => {
+			{props.tableData.map((data) => {
 				return (
 					<tr key={data.id}>
-						{columns.map(({ accessor }) => {
+						{props.columns.map(({ accessor }) => {
 							const tData = data[accessor] ? data[accessor] : '——';
 							return (
 								<td

@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './styles/Library.css';
-
-import pic from '../../../../../static/000031.jpg';
-import { useEffect } from 'react';
 
 function Library(props) {
 	const baseURL = 'http://127.0.0.1:8000';
 	const videoURL = `${baseURL}/video`;
-	// const projectURL = `${baseURL}/project`;
+
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [projectDetails, setProjectDetails] = useState(null);
 	const [isFetchingProject, setIsFetchingProject] = useState(true);
 	const [isUploading, setIsUploading] = useState(false);
 	const [videos, setVideos] = useState([]);
-	// const [isFetchingFrames, setIsFetchingFrames] = useState(false);
-	// const [thumbnails, setThumbnails] = useState([]);
 
 	useEffect(() => {
 		(async function getProject() {
@@ -87,8 +82,7 @@ function Library(props) {
 		console.log(`dragging video with id = ${id}`);
 	};
 
-	// File content to be displayed after
-	// file upload is complete
+	// File content to be displayed after file upload is complete
 	const fileData = () => {
 		if (selectedFile) {
 			return (
@@ -105,15 +99,6 @@ function Library(props) {
 			);
 		}
 	};
-
-	// const getmedia = () => {
-	//     //add url here to get from backend
-	//     axios.get(`somemediaurl`)
-	//     .then(res => {
-	//         const users = res.data;
-	//         this.setState({ users });
-	//     })
-	// }
 
 	const File = (props) => {
 		return (
@@ -145,10 +130,6 @@ function Library(props) {
 				{fileData()}
 			</div>
 			<div className='libraryGrid'>
-				{/* <div className='libraryPreview'>
-					<img className='libraryImg' alt='image1' src={pic} />
-					<div className='libraryTitle'>file title.mp4</div>
-				</div> */}
 				{!isFetchingProject &&
 					projectDetails.library_video_ids.map((id) => {
 						const video = videos.filter((vid) => {

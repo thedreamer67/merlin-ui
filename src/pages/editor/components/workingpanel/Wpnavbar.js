@@ -1,30 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './styles/Wpnavbar.css';
 import Library from './library/Library';
 import AutoCaption from './autocaption/AutoCaption';
 import MagicAction from './MagicAction';
 import Spells from './Spells';
-// import Box from '@mui/material/Box';
-// import Input from '@mui/material/Input';
-// import InputLabel from '@mui/material/InputLabel';
-// import InputAdornment from '@mui/material/InputAdornment';
-// import FormControl from '@mui/material/FormControl';
-// import { createTheme } from '@mui/material/styles';
-// import TextField from '@mui/material/TextField';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
-import './styles/Wpnavbar.css';
 import Search from './Search';
-import { ThemeProvider } from '@emotion/react';
-import { borderRadius } from '@mui/system';
+import './styles/Wpnavbar.css';
 
 function Wpnavbar(props) {
-	const { isMagicActionActive, setIsMagicActionActive } = props;
 	const [libraryclick, setlibraryclick] = useState(false);
-	const { captionclick, setcaptionclick } = props;
 	const [isSearching, setIsSearching] = useState(false);
 	const [searchQuery, setSearchQuery] = useState('');
-	const { spellsclick, setSpellsClick } = props;
-	const { setisSpellDragActive } = props;
 	const [heatmap, setHeatmap] = useState('');
 	const [probability, setProbability] = useState('');
 
@@ -33,53 +18,70 @@ function Wpnavbar(props) {
 
 	const handleLibraryClick = () => {
 		setlibraryclick(!libraryclick);
-		setcaptionclick(false);
-		setIsMagicActionActive(false);
+		props.setcaptionclick(false);
+		props.setIsMagicActionActive(false);
 		setIsSearching(false);
-		setSpellsClick(false);
-	};
-	const handleCaptionClick = () => {
-		setcaptionclick(!captionclick);
-		setlibraryclick(false);
-		setIsMagicActionActive(false);
-		setIsSearching(false);
-		setSpellsClick(false);
+		props.setSpellsClick(false);
 	};
 
 	const handleSpellsClick = () => {
-		setSpellsClick(!spellsclick);
-		setcaptionclick(false);
+		props.setSpellsClick(!props.spellsclick);
+		props.setcaptionclick(false);
 		setlibraryclick(false);
-		setIsMagicActionActive(false);
+		props.setIsMagicActionActive(false);
 		setIsSearching(false);
 	};
 
 	useEffect(() => {
-		if (isMagicActionActive) {
+		if (props.isMagicActionActive) {
 			setlibraryclick(false);
-			setcaptionclick(false);
+			props.setcaptionclick(false);
 			setIsSearching(false);
-			setSpellsClick(false);
+			props.setSpellsClick(false);
 		}
-	}, [isMagicActionActive]);
+	}, [props.isMagicActionActive]);
 
-	async function getVideoID() {
+	const getVideoID = async () => {
 		const project = await props.fetchProject();
-		// console.log(project)
 		const timelinevideo_ids = project.timelinevideo_ids[0];
-		// console.log(timelinevideo_ids)
 		const videoidURL = `${baseURL}/project/timelinevideo/${timelinevideo_ids}/details`;
 		const videoid = await axios.get(videoidURL).then((res) => {
-			// console.log(res.data);
 			return JSON.parse(res.data).video_id;
 		});
 		return videoid;
-	}
+	};
 
-	async function querySearch() {
+	const getSearchHeatMap = async (video_id) => {
+		const heatmapURL = `${baseURL}/video/${video_id}/heatmap`;
+		const resheatmap = await axios
+			.get(heatmapURL, { responseType: 'arraybuffer' })
+			.then((res) => {
+				const base64 = btoa(
+					new Uint8Array(res.data).reduce(
+						(data, byte) => data + String.fromCharCode(byte),
+						''
+					)
+				);
+				return base64;
+			})
+			.catch((err) => console.log(err));
+		return resheatmap;
+	};
+
+	const getSearchProbability = async (video_id) => {
+		const probabilityURL = `${baseURL}/video/${video_id}/search_probabilities`;
+		const resprobability = await axios
+			.get(probabilityURL)
+			.then((res) => {
+				return JSON.parse(res.data);
+			})
+			.catch((err) => console.log(err));
+		return resprobability;
+	};
+
+	const querySearch = async () => {
 		const video_id = await getVideoID();
 		const searchURL = `${baseURL}/video/${video_id}/search/${searchQuery}`;
-		// console.log(searchURL)
 		const payload = { video_id: video_id, search_query: searchQuery };
 		const sendSearchQuery = await axios
 			.post(searchURL, payload)
@@ -97,50 +99,14 @@ function Wpnavbar(props) {
 		} else {
 			alert('Search is unsuccessful.');
 		}
-	}
-
-	async function getSearchHeatMap(video_id) {
-		const heatmapURL = `${baseURL}/video/${video_id}/heatmap`;
-		// console.log(heatmapURL)
-		const resheatmap = await axios
-			.get(heatmapURL, { responseType: 'arraybuffer' })
-			.then((res) => {
-				// console.log(res.status);
-				// console.log(res.data)
-				const base64 = btoa(
-					new Uint8Array(res.data).reduce(
-						(data, byte) => data + String.fromCharCode(byte),
-						''
-					)
-				);
-				return base64;
-			})
-			.catch((err) => console.log(err));
-		return resheatmap;
-	}
-
-	async function getSearchProbability(video_id) {
-		const probabilityURL = `${baseURL}/video/${video_id}/search_probabilities`;
-		// console.log(probabilityURL)
-		const resprobability = await axios
-			.get(probabilityURL)
-			.then((res) => {
-				// console.log(res.status);
-				// console.log(res.data)
-				return JSON.parse(res.data);
-			})
-			.catch((err) => console.log(err));
-		return resprobability;
-	}
+	};
 
 	const handleSearchSubmit = (e) => {
 		e.preventDefault();
-		// console.log(e.target.value);
 		setlibraryclick(false);
-		setIsMagicActionActive(false);
-		setcaptionclick(false);
-		setSpellsClick(false);
-		//pass in searchquery to search below
+		props.setIsMagicActionActive(false);
+		props.setcaptionclick(false);
+		props.setSpellsClick(false);
 		querySearch();
 		const searchInput = document.getElementById('searchInput');
 		searchInput.value = '';
@@ -165,7 +131,7 @@ function Wpnavbar(props) {
 							<div
 								onClick={handleSpellsClick}
 								style={{
-									backgroundColor: spellsclick ? 'purple' : 'transparent',
+									backgroundColor: props.spellsclick ? 'purple' : 'transparent',
 								}}
 							>
 								<div className='wpbtn'>Spells</div>
@@ -186,7 +152,6 @@ function Wpnavbar(props) {
 									setSearchQuery(e.target.value);
 								}}
 							></input>
-							{/* <SearchBar updateSearchQuery={setSearchQuery} /> */}
 						</form>
 					</div>
 				</div>
@@ -198,16 +163,16 @@ function Wpnavbar(props) {
 					fetchProject={props.fetchProject}
 				/>
 			) : null}
-			{spellsclick ? (
+			{props.spellsclick ? (
 				<Spells
-					setisSpellDragActive={setisSpellDragActive}
+					setisSpellDragActive={props.setisSpellDragActive}
 					setIsInpainting={props.setIsInpainting}
 					setIsRemovingBG={props.setIsRemovingBG}
-					setIsMagicActionActive={setIsMagicActionActive}
+					setIsMagicActionActive={props.setIsMagicActionActive}
 					setisAutoCap={props.setisAutoCap}
 				/>
 			) : null}
-			{captionclick ? (
+			{props.captionclick ? (
 				<AutoCaption
 					subtitles={props.subtitles}
 					setSubtitles={props.setSubtitles}
@@ -215,13 +180,13 @@ function Wpnavbar(props) {
 					isFinal={props.isFinal}
 				/>
 			) : null}
-			{isMagicActionActive ? (
+			{props.isMagicActionActive ? (
 				<MagicAction
 					frameNum={props.frameNum}
 					mainTimeline={props.mainTimeline}
 					fetchProject={props.fetchProject}
-					setIsMagicActionActive={setIsMagicActionActive}
-					setSpellsClick={setSpellsClick}
+					setIsMagicActionActive={props.setIsMagicActionActive}
+					setSpellsClick={props.setSpellsClick}
 					inpaint={props.inpaint}
 					removeBG={props.removeBG}
 					setTimelineVids={props.setTimelineVids}
@@ -233,6 +198,8 @@ function Wpnavbar(props) {
 					query={searchQuery}
 					heatmap={heatmap}
 					probability={probability}
+					fetchProject={props.fetchProject}
+					maxFrames={props.maxFrames}
 				/>
 			) : null}
 		</>

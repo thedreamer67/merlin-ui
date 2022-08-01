@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TableHead = ({ columns, handleSorting }) => {
+const TableHead = (props) => {
 	const [sortField, setSortField] = useState('');
 	const [order, setOrder] = useState('asc');
 
@@ -9,13 +9,13 @@ const TableHead = ({ columns, handleSorting }) => {
 			accessor === sortField && order === 'asc' ? 'desc' : 'asc';
 		setSortField(accessor);
 		setOrder(sortOrder);
-		handleSorting(accessor, sortOrder);
+		props.handleSorting(accessor, sortOrder);
 	};
 
 	return (
 		<thead>
 			<tr>
-				{columns.map(({ label, accessor }) => {
+				{props.columns.map(({ label, accessor }) => {
 					return (
 						<th
 							key={accessor}

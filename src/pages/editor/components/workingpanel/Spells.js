@@ -11,29 +11,27 @@ import autoCap from '../../../../images/autocap.jpg';
 function Spells(props) {
 	const [demoImgSRC1, setDemoImgSRC1] = useState(objectBefore);
 	const [demoImgSRC2, setDemoImgSRC2] = useState(objectAfter);
-	const { setisSpellDragActive } = props;
-	const { setIsMagicActionActive } = props;
 
 	const handleRemoveObjectHover = () => {
 		setDemoImgSRC1(objectBefore);
 		setDemoImgSRC2(objectAfter);
-		setisSpellDragActive(true);
+		props.setisSpellDragActive(true);
 	};
 	const handleRemoveBgHover = () => {
 		setDemoImgSRC1(backgroundBefore);
 		setDemoImgSRC2(backgroundAfter);
-		setisSpellDragActive(true);
+		props.setisSpellDragActive(true);
 	};
 	const autoCapHover = () => {
 		setDemoImgSRC1(original);
 		setDemoImgSRC2(autoCap);
-		setisSpellDragActive(true);
+		props.setisSpellDragActive(true);
 	};
 
 	const handleMouseLeave = () => {
 		setDemoImgSRC1(original);
 		setDemoImgSRC2(original);
-		setisSpellDragActive(false);
+		props.setisSpellDragActive(false);
 	};
 
 	return (
@@ -53,7 +51,6 @@ function Spells(props) {
 						handleMouseLeave();
 					}}
 				>
-					{/* <div className='SpellContainer'> */}
 					<Tooltip
 						title='Drag and drop on movie to remove object'
 						placement='bottom'
@@ -82,7 +79,6 @@ function Spells(props) {
 						handleMouseLeave();
 					}}
 				>
-					{/* <div className='SpellContainer'> */}
 					<Tooltip
 						title='Drag and drop on movie to remove background'
 						placement='bottom'

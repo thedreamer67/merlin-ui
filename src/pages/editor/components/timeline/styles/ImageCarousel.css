@@ -1,47 +1,23 @@
 .framesGrid {
-  display: flex;
-  flex-direction: row;
-  height: 15vh;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
-  max-width: 100vw;
+	display: flex;
+	flex-direction: row;
+	height: 15vh;
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	max-width: 100vw;
 }
 
-.framesGrid:hover{
+.framesGrid:hover {
 	background-color: purple;
 }
 
 .framesImg {
-  padding-left: 3px;
-  padding-right: 3px;
-  width: 100%;
-  height: 100%;
+	padding-left: 3px;
+	padding-right: 3px;
+	width: 100%;
+	height: 100%;
 }
 
-.last {
-  min-width: 50vw;
-}
-
-.lastMany {
-  /* min-width: 48.81vw; */
-  min-width: 49.1vw;
-}
-
-.framesContainer{
-  display: flex;
-  flex-direction: row;
-}
-
-.AudioBlock{
-  background-color: chartreuse;
-}
-
-.first-padding{
-  min-width: 50vw;
-  background-color: transparent;
-}
-
-.AudioContainer{
-  display: flex;
-  flex-direction: row;
+.firstPad {
+	min-width: 50vw;
 }

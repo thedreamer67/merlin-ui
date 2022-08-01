@@ -1,49 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactSlider from 'react-slider';
 import './styles/Slider.css';
 
 const Slider = (props) => {
-  const { maxFrames } = props;
-  const { currentFrame, setcurrentFrame } = props;
-  const { sliderPosition, setSliderPosition } = props;
-  const { setSearchVideoSeeking } = props;
+	const handleCurrentFrameChange = (value) => {
+		props.setCurrentFrame(value);
+		const sliderPercentage = value / props.maxFrames;
+		props.setSliderPosition(sliderPercentage);
+		props.setSearchVideoSeeking(true);
+	};
 
-  const handleCurrentFrameChange = (value) => {
-    setcurrentFrame(value);
-    const sliderPercentage = value / maxFrames;
-    setSliderPosition(sliderPercentage);
-    setSearchVideoSeeking(true);
-  };
+	const handleMouseDown = (e) => {
+		props.setSearchVideoSeeking(true);
+	};
 
-  // const handleSliderPositionChange = () => {
-  //   const currentFrameIndex = parseInt(sliderPosition * maxFrames);
-  //   console.log('Frame index changed');
-  //   console.log(currentFrameIndex);
-  //   setcurrentFrame(currentFrameIndex);
-  // };
+	const handleMouseUp = () => {
+		props.setSearchVideoSeeking(false);
+	};
 
-  const handleMouseDown = (e) => {
-    setSearchVideoSeeking(true);
-  };
-
-  const handleMouseUp = () => {
-    setSearchVideoSeeking(false);
-  };
-
-  return (
-    <ReactSlider
-      className='horizontal-slider'
-      thumbClassName='example-thumb'
-      trackClassName='example-track'
-      max={maxFrames}
-      id='slider'
-      min='1'
-      onChange={(value) => handleCurrentFrameChange(value)}
-      value={currentFrame}
-      renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-    />
-  );
+	return (
+		<ReactSlider
+			className='horizontal-slider'
+			thumbClassName='example-thumb'
+			trackClassName='example-track'
+			max={props.maxFrames}
+			id='slider'
+			min='1'
+			onChange={(value) => handleCurrentFrameChange(value)}
+			value={props.currentFrame}
+			renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+			onMouseDown={handleMouseDown}
+			onMouseUp={handleMouseUp}
+		/>
+	);
 };
+
 export default Slider;
