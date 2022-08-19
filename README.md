@@ -1,5 +1,7 @@
 # MERLIN UI
 
+This is the repository for the frontend portion of a a full-stack, web-based, artificial intelligence-powered video editing tool called MERLIN, developed as part of our internship project at DSO. It was built using react and API calls to our backend AI models (on another repository) were done using Axios.
+
 ## Available Scripts
 
 In the project directory, you can run:
